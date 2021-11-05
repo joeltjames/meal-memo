@@ -9,8 +9,10 @@
         "lint": "ng lint",
         "cy:open": "cypress open",
         "cy:run": "cypress run",
+        "cy:run-ci": "cypress run --config video=false",
         "e2e": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && npm run cy:run\" --kill-others --success first",
-        "e2e-gui": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && npm run cy:open\" --kill-others --success first"
+        "e2e-gui": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && npm run cy:open\" --kill-others --success first",
+        "e2e-ci": "concurrently \"npm run start\" \"wait-on http-get://localhost:4200 && npm run cy:run-ci\" --kill-others --success first",
     },
     "private": true,
     "dependencies": {

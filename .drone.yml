@@ -8,4 +8,4 @@ steps:
   commands:
     - cd meal-memo-ui
     - npm install --quiet
-    - npm run e2e
+    - npm run e2e-ci
