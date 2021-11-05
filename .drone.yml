@@ -5,8 +5,17 @@ name: default
 steps:
 - name: Run Cypress Tests
   image: cypress/browsers:node12.18.3-chrome89-ff86
+  volumes:
+  - name: cache
+    path: /opt/pnpm-store
   commands:
     - cd meal-memo-ui
-    - npx pnpm add -g pnpm 
+    - npx pnpm add -g pnpm
+    - pnpm config set store-dir /opt/pnpm-store
     - pnpm install --quiet
     - pnpm run e2e-ci
+
+volumes:
+- name: cache
+  host:
+    path: /opt/pnpm-store
