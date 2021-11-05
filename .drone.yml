@@ -4,8 +4,8 @@ name: default
 
 steps:
 - name: Run Cypress Tests
-  image: cypress/browsers:node16.5.0-chrome94-ff93
+  image: cypress/browsers:node12.18.3-chrome89-ff86
   commands:
     - cd meal-memo-ui
     - npm install --quiet
-    - ./node_modules/.bin/cypress run --headless --browser chrome --spec 'cypress/integration/**/*spec*.ts'
+    - npm run e2e
