@@ -7,5 +7,6 @@ steps:
   image: cypress/browsers:node12.18.3-chrome89-ff86
   commands:
     - cd meal-memo-ui
-    - npm install --quiet
-    - npm run e2e-ci
+    - npx pnpm add -g pnpm 
+    - pnpm install --quiet
+    - pnpm run e2e-ci
