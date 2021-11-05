@@ -11,7 +11,7 @@ steps:
   commands:
     - cd meal-memo-ui
     - npx pnpm add -g pnpm
-    - pnpm config set store-dir /opt/pnpm-store
+    # - pnpm config set store-dir /opt/pnpm-store
     - pnpm install --quiet
     - pnpm run e2e-ci
 
