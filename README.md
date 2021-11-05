@@ -1,1 +1,2 @@
 # meal-memo
+[![Build Status](https://drone.joeltjames.com/api/badges/joeltjames/{{ repository.name }}/status.svg?ref=refs/heads/{{ current.branch }})](https://drone.joeltjames.com/joeltjames/{{ repository.name }})
