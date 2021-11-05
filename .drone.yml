@@ -8,4 +8,4 @@ steps:
   commands:
     - cd meal-memo-ui
     - npm install
-    - ./node_modules/.bin/cypress run --headless --browser chrome --spec 'cypress/integration/UI/**/*spec*.js'
+    - ./node_modules/.bin/cypress run --headless --browser chrome --spec 'cypress/integration/UI/**/*spec*.ts'
