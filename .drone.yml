@@ -7,5 +7,5 @@ steps:
   image: cypress/browsers:node16.5.0-chrome94-ff93
   commands:
     - cd meal-memo-ui
-    - npm install
-    - ./node_modules/.bin/cypress run --headless --browser chrome --spec 'cypress/integration/UI/**/*spec*.ts'
+    - npm install --quiet
+    - ./node_modules/.bin/cypress run --headless --browser chrome --spec 'cypress/integration/**/*spec*.ts'
