@@ -25,7 +25,6 @@ export class MealPlanComponent implements OnInit {
         this.activeRecipes = this.allRecipes;
 
         this.recipeSearch.valueChanges.pipe(debounceTime(1000)).subscribe((filterValue) => {
-          console.log(filterValue);
           this.activeRecipes = this.allRecipes.filter(recipe =>
             recipe.name.includes(filterValue)
           );

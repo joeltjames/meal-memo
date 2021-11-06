@@ -20,8 +20,6 @@ const internalMealPlanReducer = createReducer(
             mutableState[dateKey][val.meal.id] = [];
         }
         mutableState[dateKey][val.meal.id].push(val.recipe);
-        console.log(mutableState);
-        console.log(val);
         return mutableState;
     })
 );

@@ -53,7 +53,6 @@ export class MealPlanCalendarDailyModalComponent implements OnInit {
 
     public onSave() {
         this.toAdd.forEach((toAdd) => {
-            console.log(toAdd);
             this.store.dispatch(addRecipeToMeal({ meal: toAdd.meal, recipe: toAdd.recipe, date: new Date() }));
         });
 
