@@ -9,6 +9,7 @@ describe('Meal Plan Page', () => {
             .then((val) => {
                 if (val) {
                     cy.get('.month > :nth-child(2) > :nth-child(1)').trigger('dndDrop', {
+                        dataTransfer: new DataTransfer(),
                         data: val,
                     });
                 }
