@@ -16,7 +16,7 @@ export class MealPlanCalendarComponent implements OnInit {
     ngOnInit(): void {}
 
     onDrop(day: any, event: any) {
-        const modal = this.modalService.open(MealPlanCalendarDailyModalComponent);
+        const modal = this.modalService.open(MealPlanCalendarDailyModalComponent, {size: 'lg'});
         modal.componentInstance.day = day;
         modal.componentInstance.recipe = event.data ? JSON.parse(event.data) : {};
     }

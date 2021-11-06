@@ -12,6 +12,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { mealPlanReducer } from './meal-plan/store/meal-plan.reducer';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,7 @@ import { StoreModule } from '@ngrx/store';
         NgbModule,
         FontAwesomeModule,
         ReactiveFormsModule,
-        StoreModule.forRoot({}, {}),
+        StoreModule.forRoot({ mealPlan: mealPlanReducer }, {}),
     ],
     providers: [],
     bootstrap: [AppComponent],
