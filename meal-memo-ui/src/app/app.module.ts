@@ -29,7 +29,7 @@ import { mealPlanReducer } from './meal-plan/store/meal-plan.reducer';
         NgbModule,
         FontAwesomeModule,
         ReactiveFormsModule,
-        StoreModule.forRoot({ mealPlan: mealPlanReducer }, {}),
+        StoreModule.forRoot({ 'mealPlan': mealPlanReducer }, {}),
     ],
     providers: [],
     bootstrap: [AppComponent],

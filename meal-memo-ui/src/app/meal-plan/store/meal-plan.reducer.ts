@@ -1,12 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
+import { Recipe } from 'src/app/interfaces/recipe';
+import { convertDate } from 'src/app/utils';
 import { addRecipeToMeal } from './meal-plan.actions';
 
-export const initialState = {};
+export type MealPlanState = { [date: string]: { [mealId: number]: Recipe } };
 
-const convertDate = (date: Date) => {
-    const pad = (s: number) => (s < 10 ? '0' + s : s);
-    return [pad(date.getDate()), pad(date.getMonth() + 1), date.getFullYear()].join('/');
-};
+export const initialState: MealPlanState = {};
+
 
 const internalMealPlanReducer = createReducer(
     initialState,
