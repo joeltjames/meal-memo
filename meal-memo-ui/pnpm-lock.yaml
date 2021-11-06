@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@4tw/cypress-drag-drop': ^2.0.0
   '@angular-devkit/architect': ^0.1001.7
   '@angular-devkit/build-angular': ~0.1101.1
   '@angular-eslint/builder': 1.2.0
@@ -48,6 +49,8 @@ specifiers:
   karma-jasmine: ~4.0.0
   karma-jasmine-html-reporter: ^1.5.0
   lint-staged: ^11.2.6
+  ng2-dragula: ^2.1.1
+  ngx-drag-drop: ^2.0.0
   pnpm: ^6.20.3
   prettier: 2.4.1
   protractor: ~7.0.0
@@ -75,11 +78,14 @@ dependencies:
   '@fortawesome/free-solid-svg-icons': 5.15.4
   '@ng-bootstrap/ng-bootstrap': 9.1.3_1fbf14165814a919cce33e2319099170
   bootstrap: 4.6.1
+  ng2-dragula: 2.1.1_@angular+core@11.1.2+rxjs@6.6.7
+  ngx-drag-drop: 2.0.0
   rxjs: 6.6.7
   tslib: 2.3.1
   zone.js: 0.11.4
 
 devDependencies:
+  '@4tw/cypress-drag-drop': 2.0.0_cypress@8.7.0
   '@angular-devkit/architect': 0.1001.7
   '@angular-devkit/build-angular': 0.1101.4_06be9ca91e99605023fab454edb4cdc4
   '@angular-eslint/builder': 1.2.0_641bdf185f93357572ca9660bcda85ac
@@ -119,6 +125,14 @@ devDependencies:
   wait-on: 6.0.0
 
 packages:
+
+  /@4tw/cypress-drag-drop/2.0.0_cypress@8.7.0:
+    resolution: {integrity: sha512-6/MFdYCjRivTR2m5MZVo/FZrQ+QEkt6mEXYJSYXVcYdgpz5OhH/6kfKX3Xuqlx42zLN66j9HbH+r+6pavg7pdg==}
+    peerDependencies:
+      cypress: ^2.1.0 || ^3.1.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
+    dependencies:
+      cypress: 8.7.0
+    dev: true
 
   /@angular-devkit/architect/0.1001.7:
     resolution: {integrity: sha512-uFYIvMdewU44GbIyRfsUHNMLkx+C0kokpnj7eH5NbJfbyFpCfd3ijBHh+voPdPsDRWs9lLgjbxfHpswSPj4D8w==}
@@ -1987,6 +2001,10 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
+  /@types/dragula/2.1.36:
+    resolution: {integrity: sha512-K1GIMqdiviBIvUsLJPO1xkjpDFS308nU2l57zmV7LEO+znF3gtZGnWQ+c/ef78r6Ngb0cniQk8pnNkObeNlXQQ==}
+    dev: false
+
   /@types/glob/7.2.0:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
@@ -2701,6 +2719,10 @@ packages:
     resolution: {integrity: sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==}
     engines: {node: '>= 4.0.0'}
     dev: true
+
+  /atoa/1.0.0:
+    resolution: {integrity: sha1-DMDpGkgOc4+SPrwQNnZHF3mzSkk=}
+    dev: false
 
   /atob/2.1.2:
     resolution: {integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==}
@@ -3670,6 +3692,13 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
+  /contra/1.9.4:
+    resolution: {integrity: sha1-9TveQtfltZhcrk2ZqNYQUm3o8o0=}
+    dependencies:
+      atoa: 1.0.0
+      ticky: 1.0.1
+    dev: false
+
   /convert-source-map/0.3.5:
     resolution: {integrity: sha1-8dgClQr33SYxof6+BZZVDIarMZA=}
     dev: true
@@ -3844,6 +3873,12 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
+
+  /crossvent/1.5.5:
+    resolution: {integrity: sha1-rSCHjkkh6b5z2daXb4suzQ9xoLE=}
+    dependencies:
+      custom-event: 1.0.1
+    dev: false
 
   /crypto-browserify/3.12.0:
     resolution: {integrity: sha512-fz4spIh+znjO2VjL+IdhEpRJ3YN6sMzITSBijk6FK2UvTqruSQW+/cCZTSNsMiZNvUeq0CqurF+dAbyiGOY6Wg==}
@@ -4054,7 +4089,6 @@ packages:
 
   /custom-event/1.0.1:
     resolution: {integrity: sha1-XQKkaFCt8bSjF5RqOSj8y1v9BCU=}
-    dev: true
 
   /cyclist/1.0.1:
     resolution: {integrity: sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=}
@@ -4447,6 +4481,13 @@ packages:
     dependencies:
       is-obj: 2.0.0
     dev: true
+
+  /dragula/3.7.3:
+    resolution: {integrity: sha512-/rRg4zRhcpf81TyDhaHLtXt6sEywdfpv1cRUMeFFy7DuypH2U0WUL0GTdyAQvXegviT4PJK4KuMmOaIDpICseQ==}
+    dependencies:
+      contra: 1.9.4
+      crossvent: 1.5.5
+    dev: false
 
   /duplexify/3.7.1:
     resolution: {integrity: sha512-07z8uv2wMyS51kKhD1KsdXJg5WQ6t93RneqRxUHnskXVtlYYkLqM0gqStQZ3pj073g687jPCHrqNfCzawLYh5g==}
@@ -7541,6 +7582,25 @@ packages:
     resolution: {integrity: sha1-yobR/ogoFpsBICCOPchCS524NCw=}
     dev: true
 
+  /ng2-dragula/2.1.1_@angular+core@11.1.2+rxjs@6.6.7:
+    resolution: {integrity: sha512-PSo6N2Ja894KDogVLLBI0Hzpylikay7L1hWqp+qQmW+qsNsNT9J/6J2Qim9XwGzK4VQZjAwBJaJjgJ/TijRkLQ==}
+    peerDependencies:
+      '@angular/core': '>=6.0.0'
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@angular/core': 11.1.2_rxjs@6.6.7+zone.js@0.11.4
+      '@types/dragula': 2.1.36
+      dragula: 3.7.3
+      rxjs: 6.6.7
+    dev: false
+
+  /ngx-drag-drop/2.0.0:
+    resolution: {integrity: sha512-t+4/eiC8zaXKqU1ruNfFEfGs1GpMNwpffD0baopvZFKjQHCb5rhNqFilJ54wO4T0OwGp4/RnsVhlcxe1mX6UJg==}
+    engines: {node: '>=8.9.0'}
+    dependencies:
+      tslib: 1.14.1
+    dev: false
+
   /nice-try/1.0.5:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
     dev: true
@@ -10284,6 +10344,10 @@ packages:
   /thunky/1.1.0:
     resolution: {integrity: sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==}
     dev: true
+
+  /ticky/1.0.1:
+    resolution: {integrity: sha1-t8+nHnaPHJAAxJe5FRswlHxQ5G0=}
+    dev: false
 
   /timers-browserify/2.0.12:
     resolution: {integrity: sha512-9phl76Cqm6FhSX9Xe1ZUAMLtm1BLkKj2Qd5ApyWkXzsMRaA7dgr81kf4wJmQf/hAvg8EEyJxDo3du/0KlhPiKQ==}

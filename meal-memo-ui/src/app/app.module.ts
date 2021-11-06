@@ -12,10 +12,34 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AppSettingsComponent } from './app-settings/app-settings.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MealPlanCalendarComponent } from './meal-plan-calendar/meal-plan-calendar.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DragulaModule } from 'ng2-dragula';
+import { DndModule } from 'ngx-drag-drop';
+import { MealPlanCalendarDropComponent } from './meal-plan-calendar-drop/meal-plan-calendar-drop.component';
 
 @NgModule({
-    declarations: [AppComponent, NavbarComponent, MealPlanComponent, DashboardComponent, RecipesComponent, ShoppingListComponent, AppSettingsComponent, UserProfileComponent],
-    imports: [BrowserModule, AppRoutingModule, NgbModule, FontAwesomeModule],
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        MealPlanComponent,
+        DashboardComponent,
+        RecipesComponent,
+        ShoppingListComponent,
+        AppSettingsComponent,
+        UserProfileComponent,
+        MealPlanCalendarComponent,
+        MealPlanCalendarDropComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        FontAwesomeModule,
+        ReactiveFormsModule,
+        DragulaModule.forRoot(),
+        DndModule,
+    ],
     providers: [],
     bootstrap: [AppComponent],
 })
