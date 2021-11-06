@@ -1,0 +1,58 @@
+<div ngbDropdown class="d-inline-block">
+    <button class="btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>Toggle dropdown</button>
+    <div ngbDropdownMenu container="body" placement="bottom">
+        <div class="p-2">
+            <select class="custom-select" [formControl]="selectedYear" aria-label="Default select example">
+                <option *ngFor="let year of years" [value]="year">
+                    {{ year }}
+                </option>
+            </select>
+        </div>
+        <div class="container p-4">
+            <div class="row">
+                <button type="button" (click)="emitValue(0)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 0 }">
+                    JAN
+                </button>
+                <button type="button" (click)="emitValue(1)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 1 }">
+                    FEB
+                </button>
+                <button type="button" (click)="emitValue(2)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 2 }">
+                    MAR
+                </button>
+            </div>
+            <div class="row">
+                <button type="button" (click)="emitValue(3)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 3 }">
+                    APR
+                </button>
+                <button type="button" (click)="emitValue(4)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 4 }">
+                    MAY
+                </button>
+                <button type="button" (click)="emitValue(5)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 5 }">
+                    JUN
+                </button>
+            </div>
+            <div class="row">
+                <button type="button" (click)="emitValue(6)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 6 }">
+                    JUL
+                </button>
+                <button type="button" (click)="emitValue(7)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 7 }">
+                    AUG
+                </button>
+                <button type="button" (click)="emitValue(8)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 8 }">
+                    SEPT
+                </button>
+            </div>
+            <div class="row">
+                <button type="button" (click)="emitValue(9)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 9 }">
+                    OCT
+                </button>
+                <button type="button" (click)="emitValue(10)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 10 }">
+                    NOV
+                </button>
+                <button type="button" (click)="emitValue(11)" class="btn btn-outline-primary col-4" [ngClass]="{ 'btn-primary': selectedMonth == 11 }">
+                    DEC
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

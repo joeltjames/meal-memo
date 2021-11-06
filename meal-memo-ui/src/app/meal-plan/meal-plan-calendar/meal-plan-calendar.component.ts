@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject } from 'rxjs';
 import { MealPlanCalendarDailyModalComponent } from '../meal-plan-calendar-daily-modal/meal-plan-calendar-daily-modal.component';
 import { Store } from '@ngrx/store';
-import { mealPlanSelector, mealPlanSelectorGenerator, MealPlanState } from '../store';
-import * as moment from 'moment';
+import { mealPlanSelectorGenerator, MealPlanState } from '../store';
+import * as dayjs from 'dayjs';
+import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
     selector: 'app-meal-plan-calendar',
     templateUrl: './meal-plan-calendar.component.html',
@@ -14,10 +16,10 @@ export class MealPlanCalendarComponent implements OnInit {
     openModalSubject = new Subject<any>();
     mealPlan$: Observable<any>;
 
-    public startOfMonth = moment().startOf('month');
-    public endOfMonth = moment().endOf('month');
+    public startOfMonth = dayjs().startOf('month');
+    public endOfMonth = dayjs().endOf('month');
 
-    constructor(private modalService: NgbModal, store: Store<{ mealPlan: MealPlanState }>) {
+    constructor(private modalService: NgbModal, store: Store<{ mealPlan: MealPlanState }>, private domSanitizer: DomSanitizer) {
         this.mealPlan$ = store.select(
             mealPlanSelectorGenerator(
                 this.startOfMonth.format('YYYY-MM-DD'),
@@ -31,6 +33,10 @@ export class MealPlanCalendarComponent implements OnInit {
     }
 
     ngOnInit(): void {}
+
+    getCellHtml(date: string) {
+        return this.domSanitizer.bypassSecurityTrustHtml(`<small>${date}</small>`);
+    }
 
     onDrop(day: any, event: any) {
         const modal = this.modalService.open(MealPlanCalendarDailyModalComponent, { size: 'lg' });

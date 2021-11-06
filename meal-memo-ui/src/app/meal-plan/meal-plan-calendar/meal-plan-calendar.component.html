@@ -1,52 +1,7 @@
-<div class="month">
-    <!-- <div class="week">
-        <div class="day">Sunday</div>
-        <div class="day">Monday</div>
-        <div class="day">Tuesday</div>
-        <div class="day">Wednesday</div>
-        <div class="day">Thursday</div>
-        <div class="day">Friday</div>
-        <div class="day">Saturday</div>
-    </div> -->
-    <div class="week">
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(1, $event)">1</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(2, $event)">2</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(3, $event)">3</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(4, $event)">4</div>
-    </div>
-    <div class="week">
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(5, $event)">5</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(6, $event)">6</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(7, $event)">7</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(8, $event)">8</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(9, $event)">9</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(10, $event)">10</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(11, $event)">11</div>
-    </div>
-    <div class="week">
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(12, $event)">12</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(13, $event)">13</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(14, $event)">14</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(15, $event)">15</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(16, $event)">16</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(17, $event)">17</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(18, $event)">18</div>
-    </div>
-    <div class="week">
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(19, $event)">19</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(20, $event)">20</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(21, $event)">21</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(22, $event)">22</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(23, $event)">23</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(24, $event)">24</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(25, $event)">25</div>
-    </div>
-    <div class="week">
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(26, $event)">26</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(27, $event)">27</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(28, $event)">28</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(29, $event)">29</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(30, $event)">30</div>
-        <div class="day" [dndDropzone]="[]" (dndDrop)="onDrop(31, $event)">31</div>
-    </div>
-</div>
+<app-calendar>
+    <ng-template let-date #cell>
+        <div [dndDropzone]="[]" (dndDrop)="onDrop(1, $event)" style="height: 100%; width: 100%" [innerHtml]="getCellHtml(date.date)">
+
+        </div>
+    </ng-template>
+</app-calendar>

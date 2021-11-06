@@ -7,9 +7,10 @@ import { MealPlanCalendarComponent } from './meal-plan-calendar/meal-plan-calend
 import { MealPlanComponent } from './meal-plan.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MealPlanCalendarDailyModalComponent } from './meal-plan-calendar-daily-modal/meal-plan-calendar-daily-modal.component';
+import { UtilityModule } from '../utility/utility.module';
 
 @NgModule({
     declarations: [MealPlanComponent, MealPlanCalendarComponent, MealPlanCalendarDailyModalComponent],
-    imports: [CommonModule, MealPlanRoutingModule, ReactiveFormsModule, DndModule, FontAwesomeModule],
+    imports: [CommonModule, UtilityModule, MealPlanRoutingModule, ReactiveFormsModule, DndModule, FontAwesomeModule],
 })
 export class MealPlanModule {}

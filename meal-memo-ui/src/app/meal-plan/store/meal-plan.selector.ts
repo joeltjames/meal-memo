@@ -3,13 +3,10 @@ import { convertDate } from 'src/app/utils';
 import { MealPlanState } from './meal-plan.reducer';
 
 const filterObjectBetweenDates = (startDate: string, endDate: string, toFilter: { [key: string]: any }) => {
-    console.log(startDate);
-    console.log(endDate);
     const start = new Date(Date.parse(startDate));
     const end = new Date(Date.parse(endDate));
     const filtered: { [key: string]: any } = {};
 
-    console.log(toFilter);
 
     let loop = new Date(start);
     while (loop <= end) {
@@ -19,7 +16,6 @@ const filterObjectBetweenDates = (startDate: string, endDate: string, toFilter: 
         if (dateStr in toFilter) {
             filtered[dateStr] = toFilter[dateStr];
         }
-        console.log(dateStr);
     }
 
     return filtered;

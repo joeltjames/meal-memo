@@ -1,0 +1,23 @@
+<div class="calendar-month">
+    <section class="calendar-month-header">
+        <div id="selected-month" class="calendar-month-header-selected-month">{{ displayMonth }} {{ currentYear }}</div>
+
+        <div>
+            <button type="button" class="btn btn-outline-primary" (click)="changeMonth(-1)"><</button>
+            <app-month-date-picker [formControl]="yearMonthForm"></app-month-date-picker>
+            <button type="button" class="btn btn-outline-primary" (click)="changeMonth(1)">></button>
+        </div>
+    </section>
+
+    <ol id="days-of-week" class="day-of-week">
+        <li *ngFor="let weekday of weekdays">{{ weekday }}</li>
+    </ol>
+
+    <ol id="calendar-days" class="days-grid">
+        <li *ngFor="let day of days" [ngClass]="{ 'calendar-day--not-current': !day.isCurrentMonth, 'calendar-day': day.isCurrentMonth }">
+            <span>{{ day.dayOfMonth }}</span>
+            <ng-container *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate" [ngTemplateOutletContext]="{ $implicit: day }">
+            </ng-container>
+        </li>
+    </ol>
+</div>

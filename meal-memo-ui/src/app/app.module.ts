@@ -13,6 +13,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { mealPlanReducer } from './meal-plan/store/meal-plan.reducer';
+import { UtilityModule } from './utility/utility.module';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { mealPlanReducer } from './meal-plan/store/meal-plan.reducer';
         NgbModule,
         FontAwesomeModule,
         ReactiveFormsModule,
-        StoreModule.forRoot({ 'mealPlan': mealPlanReducer }, {}),
+        StoreModule.forRoot({ mealPlan: mealPlanReducer }, {}),
+        UtilityModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
