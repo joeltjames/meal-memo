@@ -15,10 +15,10 @@ import * as dayjs from 'dayjs';
 import * as weekday from 'dayjs/plugin/weekday';
 import * as weekOfYear from 'dayjs/plugin/weekOfYear';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
-import { DayCellContentDirective } from './day-cell-content.directive';
 
 dayjs.extend(weekday);
 dayjs.extend(weekOfYear);
+dayjs.extend(customParseFormat);
 
 @Component({
     selector: 'app-calendar',
@@ -42,7 +42,8 @@ export class CalendarComponent {
 
     constructor() {
         this.yearMonthForm.valueChanges.subscribe((val) => {
-            this.currentDate = dayjs(`${val.year}-${val.month + 1}-01`, 'YYYY-MM-DD');
+            const dateStr = `${val.year}-${(val.month + 1).toString().padStart(2, '0')}-01`;
+            this.currentDate = dayjs(dateStr, 'YYYY-MM-DD');
         });
     }
 

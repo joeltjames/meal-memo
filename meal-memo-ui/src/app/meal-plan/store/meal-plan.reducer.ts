@@ -3,7 +3,7 @@ import { Recipe } from 'src/app/interfaces/recipe';
 import { convertDate } from 'src/app/utils';
 import { addRecipeToMeal } from './meal-plan.actions';
 
-export type MealPlanState = { [date: string]: { [mealId: number]: Recipe } };
+export type MealPlanState = { [date: string]: { [mealId: number]: Recipe[] } };
 
 export const initialState: MealPlanState = {};
 

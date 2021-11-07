@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { addRecipeToMeal } from '../store/meal-plan.actions';
 import { Meal } from 'src/app/interfaces/meal';
+import * as dayjs from 'dayjs';
 @Component({
     selector: 'app-meal-plan-calendar-daily-modal',
     templateUrl: './meal-plan-calendar-daily-modal.component.html',
@@ -13,9 +14,9 @@ import { Meal } from 'src/app/interfaces/meal';
 })
 export class MealPlanCalendarDailyModalComponent implements OnInit {
     @Input()
-    public day: number | null = null;
+    public date: dayjs.Dayjs;
     @Input()
-    public recipe: Recipe | null = null;
+    public recipe: Recipe;
     public plusCircle = faPlusCircle;
 
     mealOptions = [
@@ -53,7 +54,7 @@ export class MealPlanCalendarDailyModalComponent implements OnInit {
 
     public onSave() {
         this.toAdd.forEach((toAdd) => {
-            this.store.dispatch(addRecipeToMeal({ meal: toAdd.meal, recipe: toAdd.recipe, date: new Date() }));
+            this.store.dispatch(addRecipeToMeal({ meal: toAdd.meal, recipe: toAdd.recipe, date: this.date.toDate() }));
         });
 
         this.activeModal.close('save');

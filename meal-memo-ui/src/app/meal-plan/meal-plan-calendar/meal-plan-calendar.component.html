@@ -1,7 +1,5 @@
 <app-calendar>
     <ng-template let-date #cell>
-        <div [dndDropzone]="[]" (dndDrop)="onDrop(1, $event)" style="height: 100%; width: 100%" [innerHtml]="getCellHtml(date.date)">
-
-        </div>
+        <div [dndDropzone]="[]" (dndDrop)="onDrop(date.date, $event)" style="height: 100%; width: 100%" [innerHtml]="getCellHtml(date.date)"></div>
     </ng-template>
 </app-calendar>

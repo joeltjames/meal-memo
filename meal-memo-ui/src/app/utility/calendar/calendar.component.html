@@ -14,10 +14,12 @@
     </ol>
 
     <ol id="calendar-days" class="days-grid">
-        <li *ngFor="let day of days" [ngClass]="{ 'calendar-day--not-current': !day.isCurrentMonth, 'calendar-day': day.isCurrentMonth }">
-            <span>{{ day.dayOfMonth }}</span>
-            <ng-container *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate" [ngTemplateOutletContext]="{ $implicit: day }">
-            </ng-container>
+        <li *ngFor="let day of days" class="overflow-auto" [ngClass]="{ 'calendar-day--not-current': !day.isCurrentMonth, 'calendar-day': day.isCurrentMonth }">
+            <div style="height: 20%;">{{ day.dayOfMonth }}</div>
+            <div style="height: 80%;">
+                <ng-container *ngIf="cellTemplate" [ngTemplateOutlet]="cellTemplate" [ngTemplateOutletContext]="{ $implicit: day }">
+                </ng-container>
+            </div>
         </li>
     </ol>
 </div>

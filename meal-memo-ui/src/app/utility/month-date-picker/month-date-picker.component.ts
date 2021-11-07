@@ -18,6 +18,8 @@ export class MonthDatePickerComponent implements ControlValueAccessor {
     public selectedYear = new FormControl(dayjs().format('YYYY'));
     public selectedMonth = dayjs().get('month');
 
+    private months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
     constructor() {
         for (let i = 2020; i < 2030; i++) {
             this.years.push(i);
@@ -25,6 +27,13 @@ export class MonthDatePickerComponent implements ControlValueAccessor {
         this.selectedYear.valueChanges.subscribe((val) => {
             this.onTouch(val);
         });
+    }
+
+    get display() {
+        let display = '';
+        display += this.months[this.selectedMonth];
+        display += ' ' + this.selectedYear.value;
+        return display;
     }
 
     writeValue(value: MonthYear): void {
@@ -49,6 +58,6 @@ export class MonthDatePickerComponent implements ControlValueAccessor {
         this.onChange(value);
     }
 
-    private onChange = (value: MonthYear) => {};
-    private onTouch = (value: MonthYear) => {};
+    private onChange = (_: MonthYear) => {};
+    private onTouch = (_: MonthYear) => {};
 }
