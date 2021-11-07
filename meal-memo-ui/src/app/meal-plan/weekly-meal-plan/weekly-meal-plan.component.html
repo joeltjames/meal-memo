@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6 border"></div>
+        <div class="col-6 text-center border">11/06/2021</div>
+    </div>
+    <div class="row" *ngFor="let meal of meal$ | async">
+        <div class="col-6 meal-header border" [style.background]="meal.color">{{ meal.name }}</div>
+        <div class="col-6 border">
+            <ul>
+                <li>Recipe 0</li>
+                <li>Recipe 1</li>
+                <li>Recipe 2</li>
+                <li>Recipe 3</li>
+            </ul>
+        </div>
+    </div>
+</div>
