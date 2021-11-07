@@ -2,11 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Recipe } from 'src/app/interfaces/recipe';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { addRecipeToMeal } from '../store/meal-plan.actions';
+import { addRecipeToMeal, removeRecipeFromMeal } from '../store/meal-plan.actions';
 import { Meal } from 'src/app/interfaces/meal';
 import * as dayjs from 'dayjs';
+import { mealPlanSelectorGenerator, MealPlanState, mealSelector, MealState } from '../store';
+import { map } from 'rxjs/operators';
 @Component({
     selector: 'app-meal-plan-calendar-daily-modal',
     templateUrl: './meal-plan-calendar-daily-modal.component.html',
@@ -17,39 +20,61 @@ export class MealPlanCalendarDailyModalComponent implements OnInit {
     public date: dayjs.Dayjs;
     @Input()
     public recipe: Recipe;
+    @Input()
+    public meals: { [key: string]: Recipe[] } = {};
+
     public plusCircle = faPlusCircle;
+    public timesCircle = faTimesCircle;
+    mealPlan$: Observable<MealPlanState>;
 
-    mealOptions = [
-        { id: 0, color: '#264653', name: 'Breakfast' },
-        { id: 1, color: '#2a9d8f', name: 'Morning Snack' },
-        { id: 2, color: '#e9c46a', name: 'Lunch' },
-        { id: 3, color: '#f4a261', name: 'Afternoon Snack' },
-        { id: 4, color: '#e76f51', name: 'Dinner' },
-    ];
+    meal$: Observable<MealState>;
 
-    meals: { [num: number]: Recipe[] } = {
-        0: [],
-        1: [],
-        2: [],
-        3: [],
-        4: [],
-    };
+    private dateStr: string;
 
     private toAdd: { meal: Meal; recipe: Recipe }[] = [];
 
-    constructor(public activeModal: NgbActiveModal, private store: Store) {}
+    constructor(
+        public activeModal: NgbActiveModal,
+        private store: Store<{ mealPlan: MealPlanState; meal: MealState }>
+    ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.mealPlan$ = this.store.select(
+            mealPlanSelectorGenerator(this.date.format('YYYY-MM-DD'), this.date.add(1, 'd').format('YYYY-MM-DD'))
+        );
 
-    public getMealOptions(meal: any): any[] {
-        return this.meals[meal.id] || [];
+        this.mealPlan$.subscribe((mp) => {
+            console.log(mp);
+        });
+
+        this.meal$ = this.store.select('meal');
+
+        this.dateStr = this.date.format('YYYY-MM-DD');
     }
 
-    public addRecipe(meal: any) {
+    public getMealRecipes(meal: Meal): Recipe[] {
+        return this.meals && meal.key in this.meals ? this.meals[meal.key] : [];
+    }
+
+    public getMealObs(meal: Meal): Observable<Recipe[]> {
+        return this.mealPlan$.pipe(
+            map((data) => {
+                if (this.dateStr in data && meal.key in data[this.dateStr]) {
+                    return data[this.dateStr][meal.key];
+                }
+                return [];
+            })
+        );
+    }
+
+    public addRecipe(meal: Meal) {
         if (this.recipe) {
-            this.meals[meal.id].push(this.recipe);
-            this.toAdd.push({ meal, recipe: this.recipe });
+            this.store.dispatch(addRecipeToMeal({ meal, recipe: this.recipe, date: this.date.toDate() }));
         }
+    }
+
+    public removeRecipe(meal: Meal, recipe: Recipe) {
+        this.store.dispatch(removeRecipeFromMeal({ meal, recipe, date: this.date.toDate() }));
     }
 
     public onSave() {

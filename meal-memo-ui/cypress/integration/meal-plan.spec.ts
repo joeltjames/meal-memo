@@ -27,7 +27,7 @@ describe('Meal Plan Page', () => {
             .invoke('attr', 'ng-reflect-dnd-draggable')
             .then((val) => {
                 if (val) {
-                    cy.get('#calendar-days > :nth-child(27)').trigger('dndDrop', {
+                    cy.get(':nth-child(1) > [style="height: 90%;"] > div').trigger('dndDrop', {
                         dataTransfer: new DataTransfer(),
                         data: val,
                     });
@@ -38,6 +38,6 @@ describe('Meal Plan Page', () => {
             cy.get(`:nth-child(${i}) > .card > .card-footer > div`).click();
         }
 
-        cy.get('.modal-footer > .btn-outline-primary').click();
+        // cy.get('.modal-footer > .btn-outline-primary').click();
     });
 });

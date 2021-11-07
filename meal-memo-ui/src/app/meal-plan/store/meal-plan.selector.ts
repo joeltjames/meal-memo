@@ -1,12 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { convertDate } from 'src/app/utils';
+import { MealState } from '.';
 import { MealPlanState } from './meal-plan.reducer';
 
 const filterObjectBetweenDates = (startDate: string, endDate: string, toFilter: { [key: string]: any }) => {
     const start = new Date(Date.parse(startDate));
     const end = new Date(Date.parse(endDate));
     const filtered: { [key: string]: any } = {};
-
 
     let loop = new Date(start);
     while (loop <= end) {
@@ -25,3 +25,5 @@ export const mealPlanSelector = createFeatureSelector<{ mealPlan: MealPlanState 
 
 export const mealPlanSelectorGenerator = (startDate: string, endDate: string) =>
     createSelector(mealPlanSelector, (mealPlan) => filterObjectBetweenDates(startDate, endDate, mealPlan));
+
+export const mealSelector = createFeatureSelector<{ meal: MealState }>('meal');

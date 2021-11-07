@@ -12,7 +12,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { mealPlanReducer } from './meal-plan/store/meal-plan.reducer';
+import { mealPlanReducer, mealReducer } from './meal-plan/store/meal-plan.reducer';
 import { UtilityModule } from './utility/utility.module';
 
 @NgModule({
@@ -30,7 +30,7 @@ import { UtilityModule } from './utility/utility.module';
         NgbModule,
         FontAwesomeModule,
         ReactiveFormsModule,
-        StoreModule.forRoot({ mealPlan: mealPlanReducer }, {}),
+        StoreModule.forRoot({ mealPlan: mealPlanReducer, meal: mealReducer }, {}),
         UtilityModule,
     ],
     providers: [],

@@ -19,7 +19,7 @@ export class MealPlanComponent implements OnInit {
 
     constructor() {
         for (let i = 0; i < 100; i++) {
-            this.allRecipes.push({ name: `Recipe ${i}` });
+            this.allRecipes.push({ id: i, name: `Recipe ${i}` });
         }
 
         this.activeRecipes = this.allRecipes;

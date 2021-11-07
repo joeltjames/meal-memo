@@ -1,27 +1,28 @@
 <div>
     <div class="modal-header">
-        <h4 class="modal-title">Hi there!</h4>
+        <h4 class="modal-title">Meals Planned for {{ date.format('MM/DD/YYYY') }}</h4>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body overflow-auto" style="max-height: 70vh; overflow-y: auto">
         <div class="row">
-            <div class="col-sm-6 col-md-4 p-2 recipe-card" *ngFor="let meal of mealOptions">
+            <div class="col-sm-6 col-md-4 p-2 recipe-card" *ngFor="let meal of meal$ | async">
                 <div class="card h-100">
                     <div class="card-header" [style.background]="meal.color">
                         <div class="recipe-card-header">{{ meal.name }}</div>
                     </div>
                     <div class="card-body">
                         <ul>
-                            <li *ngFor="let recipe of getMealOptions(meal)">
+                            <li *ngFor="let recipe of getMealObs(meal) | async">
                                 {{ recipe.name }}
+                                <fa-icon [icon]="timesCircle" class="text-danger clickable" (click)="removeRecipe(meal, recipe)"></fa-icon>
                             </li>
                         </ul>
                     </div>
-                    <div class="card-footer">
-                        <div style="font-size: 0.85em" (click)="addRecipe(meal)">
-                            <fa-icon [icon]="plusCircle"></fa-icon> Add Recipe
+                    <div class="card-footer" *ngIf="recipe">
+                        <div style="font-size: 0.85em" (click)="addRecipe(meal)" class="text-success">
+                            <fa-icon [icon]="plusCircle"></fa-icon> Add Selected Recipe
                         </div>
                     </div>
                 </div>
@@ -29,7 +30,6 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger" (click)="activeModal.close('exit')">Exit</button>
-        <button type="button" class="btn btn-outline-primary" (click)="onSave()">Save and Exit</button>
+        <button type="button " class="btn btn-outline-primary" (click)="activeModal.close('close')">Close</button>
     </div>
 </div>
