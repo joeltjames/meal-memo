@@ -27,7 +27,7 @@ describe('Meal Plan Page', () => {
             .invoke('attr', 'ng-reflect-dnd-draggable')
             .then((val) => {
                 if (val) {
-                    cy.get('#calendar-days > :nth-child(1)').trigger('dndDrop', {
+                    cy.get('#calendar-days > :nth-child(27)').trigger('dndDrop', {
                         dataTransfer: new DataTransfer(),
                         data: val,
                     });
