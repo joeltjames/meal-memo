@@ -1,0 +1,17 @@
+<div>
+    <label class="sr-only" for="inlineFormInputGroup">Search</label>
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <fa-icon [icon]="search" size="lg"></fa-icon>
+            </div>
+        </div>
+        <input type="text" class="form-control" [formControl]="recipeSearch" placeholder="Search..." data-cy="recipe-search" />
+    </div>
+</div>
+<div class="list-group">
+    <div class="list-group-item" *ngFor="let recipe of recipes$ | async" data-cy="recipe-data" [dndDraggable]="stringify(recipe)" (click)="recipeSelected.emit(recipe)">
+        <div class="mb-1">{{ recipe.name }}</div>
+        <small>Donec id elit non mi porta.</small>
+    </div>
+</div>

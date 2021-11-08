@@ -1,9 +1,17 @@
+<ng-template #content let-modal #recipe let-recipe>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Search For Recipe</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body overflow-auto" style="height: 80vh">
+        <app-recipe-search (recipeSelected)="modal.close($event)"></app-recipe-search>
+    </div>
+    <div class="modal-footer"></div>
+</ng-template>
 <div>
     <div class="modal-header">
         <h4 class="modal-title">Meals Planned for {{ date.format('MM/DD/YYYY') }}</h4>
-        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body overflow-auto" style="max-height: 70vh; overflow-y: auto">
         <div class="row">
@@ -20,9 +28,9 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="card-footer" *ngIf="recipe">
-                        <div style="font-size: 0.85em" (click)="addRecipe(meal)" class="text-success">
-                            <fa-icon [icon]="plusCircle"></fa-icon> Add Selected Recipe
+                    <div class="card-footer">
+                        <div style="font-size: 0.85em" (click)="addRecipe(meal, content)" class="text-success">
+                            <fa-icon [icon]="plusCircle"></fa-icon> Add <span *ngIf="recipe">Selected</span> Recipe
                         </div>
                     </div>
                 </div>

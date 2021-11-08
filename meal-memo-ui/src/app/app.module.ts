@@ -15,12 +15,12 @@ import { StoreModule } from '@ngrx/store';
 import { mealPlanReducer, mealReducer } from './meal-plan/store/meal-plan.reducer';
 import { UtilityModule } from './utility/utility.module';
 import { LayoutModule } from '@angular/cdk/layout';
+import { recipeReducer } from './recipes/store/recipe.reducer';
 @NgModule({
     declarations: [
         AppComponent,
         NavbarComponent,
         DashboardComponent,
-        RecipesComponent,
         ShoppingListComponent,
         UserProfileComponent,
     ],
@@ -30,7 +30,7 @@ import { LayoutModule } from '@angular/cdk/layout';
         NgbModule,
         FontAwesomeModule,
         ReactiveFormsModule,
-        StoreModule.forRoot({ mealPlan: mealPlanReducer, meal: mealReducer }, {}),
+        StoreModule.forRoot({ mealPlan: mealPlanReducer, meal: mealReducer, recipe: recipeReducer }, {}),
         UtilityModule,
         LayoutModule,
     ],

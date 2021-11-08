@@ -6,17 +6,19 @@ import { DndModule } from 'ngx-drag-drop';
 import { MealPlanCalendarComponent } from './meal-plan-calendar/meal-plan-calendar.component';
 import { MealPlanComponent } from './meal-plan.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MealPlanCalendarDailyModalComponent } from './meal-plan-calendar-daily-modal/meal-plan-calendar-daily-modal.component';
+import { EditDailyMealPlanModalComponent } from './edit-daily-meal-plan-modal/edit-daily-meal-plan-modal.component';
 import { UtilityModule } from '../utility/utility.module';
 import { WeeklyMealPlanComponent } from './weekly-meal-plan/weekly-meal-plan.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RecipeSearchComponent } from '../recipes/recipe-search/recipe-search.component';
+import { RecipesModule } from '../recipes/recipes.module';
 
 @NgModule({
     declarations: [
         MealPlanComponent,
         MealPlanCalendarComponent,
-        MealPlanCalendarDailyModalComponent,
+        EditDailyMealPlanModalComponent,
         WeeklyMealPlanComponent,
     ],
     imports: [
@@ -28,6 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         ReactiveFormsModule,
         DndModule,
         FontAwesomeModule,
+        RecipesModule,
     ],
 })
 export class MealPlanModule {}

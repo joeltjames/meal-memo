@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject } from 'rxjs';
-import { MealPlanCalendarDailyModalComponent } from '../meal-plan-calendar-daily-modal/meal-plan-calendar-daily-modal.component';
+import { EditDailyMealPlanModalComponent } from '../edit-daily-meal-plan-modal/edit-daily-meal-plan-modal.component';
 import { Store } from '@ngrx/store';
 import { mealPlanSelectorGenerator, MealPlanState, MealState } from '../store';
 import * as dayjs from 'dayjs';
@@ -92,13 +92,13 @@ export class MealPlanCalendarComponent implements OnInit, OnDestroy {
     }
 
     onDrop(date: string, event: any) {
-        const modal = this.modalService.open(MealPlanCalendarDailyModalComponent, { size: 'lg' });
+        const modal = this.modalService.open(EditDailyMealPlanModalComponent, { size: 'lg' });
         modal.componentInstance.date = dayjs(date, 'YYYY-MM-DD');
         modal.componentInstance.recipe = event.data ? JSON.parse(event.data) : {};
     }
 
     editMealPlan(date: string) {
-        const modal = this.modalService.open(MealPlanCalendarDailyModalComponent, { size: 'lg' });
+        const modal = this.modalService.open(EditDailyMealPlanModalComponent, { size: 'lg' });
         const dateObj = dayjs(date, 'YYYY-MM-DD');
         modal.componentInstance.date = dateObj;
         modal.componentInstance.meals = this.meals[date];

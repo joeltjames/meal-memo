@@ -31,9 +31,9 @@
             </div>
 
             <ng-container *ngIf="mealPlan$ | async as mealPlan">
-                <div [ngClass]="getColClass()" class="border" *ngIf="mealsToDisplay > 1" [innerHtml]="getCellHtml(meal, mealPlan, date.subtract(1, 'd'))"></div>
-                <div [ngClass]="getColClass()" class="border" [innerHtml]="getCellHtml(meal, mealPlan, date)"></div>
-                <div [ngClass]="getColClass()" class="border" *ngIf="mealsToDisplay > 2" [innerHtml]="getCellHtml(meal, mealPlan, date.add(1, 'd'))"></div>
+                <div (click)="editMealPlan(date.subtract(1, 'd'), mealPlan)" [ngClass]="getColClass()" class="border" *ngIf="mealsToDisplay > 1" [innerHtml]="getCellHtml(meal, mealPlan, date.subtract(1, 'd'))"></div>
+                <div (click)="editMealPlan(date, mealPlan)" [ngClass]="getColClass()" class="border" [innerHtml]="getCellHtml(meal, mealPlan, date)"></div>
+                <div (click)="editMealPlan(date.add(1, 'd'), mealPlan)" [ngClass]="getColClass()" class="border" *ngIf="mealsToDisplay > 2" [innerHtml]="getCellHtml(meal, mealPlan, date.add(1, 'd'))"></div>
             </ng-container>
         </div>
     </ng-container>

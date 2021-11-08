@@ -1,10 +1,12 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import * as dayjs from 'dayjs';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Meal } from 'src/app/interfaces/meal';
+import { EditDailyMealPlanModalComponent } from '../edit-daily-meal-plan-modal/edit-daily-meal-plan-modal.component';
 import { MealState, MealPlanState, mealPlanSelectorGenerator } from '../store';
 
 @Component({
@@ -22,6 +24,7 @@ export class WeeklyMealPlanComponent implements OnInit {
 
     constructor(
         private domSanitizer: DomSanitizer,
+        private modalService: NgbModal,
         store: Store<{ mealPlan: MealPlanState; meal: MealState }>,
         breakpointObserver: BreakpointObserver
     ) {
@@ -76,13 +79,19 @@ export class WeeklyMealPlanComponent implements OnInit {
         const theseMeals = mealPlan[date.format('YYYY-MM-DD')];
         if (theseMeals) {
             let html = '<ul>';
-            theseMeals[meal.key].forEach((recipe: any) => {
+            theseMeals[meal.key]?.forEach((recipe: any) => {
                 html += `<li>${recipe.name}</li>`;
             });
             html += '</ul>';
             return this.domSanitizer.bypassSecurityTrustHtml(html);
         }
         return '';
+    }
+
+    editMealPlan(dateObj: dayjs.Dayjs, mealPlan: { [key: string]: any }) {
+        const modal = this.modalService.open(EditDailyMealPlanModalComponent, { size: 'lg' });
+        modal.componentInstance.date = dateObj;
+        modal.componentInstance.meals = mealPlan[dateObj.format('YYYY-MM-DD')];
     }
 
     getRowHeight(mealCount: number) {

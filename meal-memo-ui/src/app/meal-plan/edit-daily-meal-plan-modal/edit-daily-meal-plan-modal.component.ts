@@ -1,21 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Recipe } from 'src/app/interfaces/recipe';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { addRecipeToMeal, removeRecipeFromMeal } from '../store/meal-plan.actions';
 import { Meal } from 'src/app/interfaces/meal';
 import * as dayjs from 'dayjs';
 import { mealPlanSelectorGenerator, MealPlanState, mealSelector, MealState } from '../store';
 import { map } from 'rxjs/operators';
 @Component({
-    selector: 'app-meal-plan-calendar-daily-modal',
-    templateUrl: './meal-plan-calendar-daily-modal.component.html',
-    styleUrls: ['./meal-plan-calendar-daily-modal.component.scss'],
+    selector: 'app-edit-daily-meal-plan-modal',
+    templateUrl: './edit-daily-meal-plan-modal.component.html',
+    styleUrls: ['./edit-daily-meal-plan-modal.component.scss'],
 })
-export class MealPlanCalendarDailyModalComponent implements OnInit {
+export class EditDailyMealPlanModalComponent implements OnInit {
     @Input()
     public date: dayjs.Dayjs;
     @Input()
@@ -35,6 +35,7 @@ export class MealPlanCalendarDailyModalComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
+        public modalService: NgbModal,
         private store: Store<{ mealPlan: MealPlanState; meal: MealState }>
     ) {}
 
@@ -42,10 +43,6 @@ export class MealPlanCalendarDailyModalComponent implements OnInit {
         this.mealPlan$ = this.store.select(
             mealPlanSelectorGenerator(this.date.format('YYYY-MM-DD'), this.date.add(1, 'd').format('YYYY-MM-DD'))
         );
-
-        this.mealPlan$.subscribe((mp) => {
-            console.log(mp);
-        });
 
         this.meal$ = this.store.select('meal');
 
@@ -67,10 +64,19 @@ export class MealPlanCalendarDailyModalComponent implements OnInit {
         );
     }
 
-    public addRecipe(meal: Meal) {
+    public addRecipe(meal: Meal, modalContent: any) {
+        let obs;
         if (this.recipe) {
-            this.store.dispatch(addRecipeToMeal({ meal, recipe: this.recipe, date: this.date.toDate() }));
+            obs = of(this.recipe);
         }
+        if (!this.recipe) {
+            obs = this.modalService.open(modalContent, { size: 'lg' }).closed;
+        }
+        obs?.subscribe((recipe) => {
+            if (recipe) {
+                this.store.dispatch(addRecipeToMeal({ meal, recipe, date: this.date.toDate() }));
+            }
+        });
     }
 
     public removeRecipe(meal: Meal, recipe: Recipe) {
