@@ -17,7 +17,7 @@
     <ng-container *ngIf="dates$ | async as dates">
         <div class="row" style="max-height: 5%">
             <div [ngClass]="getColClass()"></div>
-            <div *ngFor="let date of dates" [ngClass]="getColClass()" class="text-center border">
+            <div *ngFor="let date of dates" [ngClass]="getColClass(true)" class="text-center border">
                 {{ date.format('MM/DD/YYYY') }}
             </div>
         </div>
@@ -28,7 +28,7 @@
                 </div>
 
                 <ng-container *ngIf="mealPlan$ | async as mealPlan">
-                    <div *ngFor="let date of dates" (click)="editMealPlan(date, mealPlan)" [ngClass]="getColClass()" class="border" [innerHtml]="getCellHtml(meal, mealPlan, date)"></div>
+                    <div *ngFor="let date of dates" [dndDropzone]="[]" (dndDrop)="onDrop(meal, date, $event)" (click)="editMealPlan(date, mealPlan)" [ngClass]="getColClass(true)" class="border" [innerHtml]="getCellHtml(meal, mealPlan, date)"></div>
                 </ng-container>
             </div>
         </ng-container>

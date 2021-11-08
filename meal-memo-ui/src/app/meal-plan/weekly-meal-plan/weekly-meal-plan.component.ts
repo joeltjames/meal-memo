@@ -1,4 +1,4 @@
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -7,8 +7,9 @@ import * as dayjs from 'dayjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Meal } from 'src/app/interfaces/meal';
+import { Recipe } from 'src/app/interfaces/recipe';
 import { EditDailyMealPlanModalComponent } from '../edit-daily-meal-plan-modal/edit-daily-meal-plan-modal.component';
-import { MealState, MealPlanState, mealPlanSelectorGenerator } from '../store';
+import { MealState, MealPlanState, mealPlanSelectorGenerator, addRecipeToMeal } from '../store';
 
 @Component({
     selector: 'app-weekly-meal-plan',
@@ -26,7 +27,7 @@ export class WeeklyMealPlanComponent {
     constructor(
         private domSanitizer: DomSanitizer,
         private modalService: NgbModal,
-        store: Store<{ mealPlan: MealPlanState; meal: MealState }>,
+        private store: Store<{ mealPlan: MealPlanState; meal: MealState }>,
         breakpointObserver: BreakpointObserver
     ) {
         this.meal$ = store.select('meal');
@@ -41,16 +42,29 @@ export class WeeklyMealPlanComponent {
                 )
             )
         );
-
+        const breakpointMap: { [breakpoint: string]: number } = {
+            '(min-width: 400px)': 1,
+            '(min-width: 500px)': 2,
+            '(min-width: 700px)': 3,
+            '(min-width: 900px)': 4,
+            '(min-width: 1100px)': 5,
+            '(min-width: 1300px)': 7,
+        };
+        const breakpoints = Object.keys(breakpointMap);
         breakpointObserver
-            .observe(['(min-width: 475px)', '(min-width: 600px)'])
+            .observe(breakpoints)
             // .pipe(takeUntil(this.destroyed))
             .subscribe((state: BreakpointState) => {
-                if (state.breakpoints['(min-width: 600px)']) {
-                    this.mealsToDisplay = 3;
-                } else if (state.breakpoints['(min-width: 475px)']) {
-                    this.mealsToDisplay = 2;
-                } else {
+                let found = false;
+                for (let i = breakpoints.length - 1; i >= 0; i--) {
+                    const breakpoint = breakpoints[i];
+                    if (state.breakpoints[breakpoint]) {
+                        this.mealsToDisplay = breakpointMap[breakpoint];
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
                     this.mealsToDisplay = 1;
                 }
             });
@@ -82,19 +96,31 @@ export class WeeklyMealPlanComponent {
         return dayjs();
     }
 
-    setDateTo(date: dayjs.Dayjs) {
+    setDateTo(date = dayjs()) {
         this.date$.next(date);
     }
 
-    getColClass() {
-        if (this.mealsToDisplay === 1) {
-            return 'col-6';
-        } else if (this.mealsToDisplay === 2) {
-            return 'col-4';
-        } else if (this.mealsToDisplay === 3) {
-            return 'col-3';
+    onDrop(meal: Meal, date: dayjs.Dayjs, event: { data?: string }) {
+        if (event.data) {
+            const recipe = JSON.parse(event.data);
+            this.store.dispatch(addRecipeToMeal({ meal, recipe, date: date.toDate() }));
         }
-        return 'col';
+    }
+
+    getColClass(def = false) {
+        // if (this.mealsToDisplay === 1) {
+        //     return 'col';
+        // } else if (this.mealsToDisplay === 2) {
+        //     return 'col-4';
+        // } else if (this.mealsToDisplay === 3) {
+        //     return 'col-3';
+        // }
+        const ceil = Math.ceil(12 / (this.mealsToDisplay + 1));
+        const floor = Math.floor(12 / (this.mealsToDisplay + 1));
+        if (ceil !== floor && def) {
+            return `col`;
+        }
+        return `col-${ceil}`;
     }
 
     getCellHtml(meal: Meal, mealPlan: { [key: string]: any }, date: dayjs.Dayjs) {
