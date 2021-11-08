@@ -10,6 +10,7 @@ specifiers:
   '@angular-eslint/schematics': 1.2.0
   '@angular-eslint/template-parser': 1.2.0
   '@angular/animations': ~11.1.0
+  '@angular/cdk': ~11.1.0
   '@angular/cli': ~11.1.1
   '@angular/common': ~11.1.0
   '@angular/compiler': ~11.1.0
@@ -66,6 +67,7 @@ specifiers:
 
 dependencies:
   '@angular/animations': 11.1.2_@angular+core@11.1.2
+  '@angular/cdk': 11.1.2_d1935859c607dd70773339e960c525be
   '@angular/common': 11.1.2_@angular+core@11.1.2+rxjs@6.6.7
   '@angular/compiler': 11.1.2
   '@angular/core': 11.1.2_rxjs@6.6.7+zone.js@0.11.4
@@ -409,6 +411,19 @@ packages:
     dependencies:
       '@angular/core': 11.1.2_rxjs@6.6.7+zone.js@0.11.4
       tslib: 2.3.1
+    dev: false
+
+  /@angular/cdk/11.1.2_d1935859c607dd70773339e960c525be:
+    resolution: {integrity: sha512-RnKvMWAIcWbWoUdBfAoOs4pQl6t5O+1OuPlBNK5aL2FYqoLv5U0fP88Rf7OhjPlD0ASsPGLG45t+dA5sUVZ46Q==}
+    peerDependencies:
+      '@angular/common': ^11.0.0 || ^12.0.0-0
+      '@angular/core': ^11.0.0 || ^12.0.0-0
+    dependencies:
+      '@angular/common': 11.1.2_@angular+core@11.1.2+rxjs@6.6.7
+      '@angular/core': 11.1.2_rxjs@6.6.7+zone.js@0.11.4
+      tslib: 2.3.1
+    optionalDependencies:
+      parse5: 5.1.1
     dev: false
 
   /@angular/cli/11.1.4:
@@ -8176,6 +8191,12 @@ packages:
     dependencies:
       parse5: 6.0.1
     dev: true
+
+  /parse5/5.1.1:
+    resolution: {integrity: sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==}
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /parse5/6.0.1:
     resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}

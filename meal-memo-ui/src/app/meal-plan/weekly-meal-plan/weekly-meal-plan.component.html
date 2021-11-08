@@ -1,17 +1,40 @@
-<div class="container">
-    <div class="row">
-        <div class="col-6 border"></div>
-        <div class="col-6 text-center border">11/06/2021</div>
+<div class="container h-100 w-100 m-0 mw-100 overflow-auto" *ngIf="date$ | async as date">
+    <div class="row text-center pb-2" style="max-height: 10%">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <button (click)="setDateTo(date.subtract(1, 'd'))" type="button" class="btn btn-outline-primary btn-sm">
+                <
+            </button>
+            <button (click)="setDateTo(getNewDate())" type="button" class="btn btn-outline-primary btn-sm">
+                TODAY
+            </button>
+            <button (click)="setDateTo(date.add(1, 'd'))" type="button" class="btn btn-outline-primary btn-sm">
+                >
+            </button>
+        </div>
+        <div class="col-3"></div>
     </div>
-    <div class="row" *ngFor="let meal of meal$ | async">
-        <div class="col-6 meal-header border" [style.background]="meal.color">{{ meal.name }}</div>
-        <div class="col-6 border">
-            <ul>
-                <li>Recipe 0</li>
-                <li>Recipe 1</li>
-                <li>Recipe 2</li>
-                <li>Recipe 3</li>
-            </ul>
+    <div class="row" style="max-height: 5%">
+        <div [ngClass]="getColClass()"></div>
+        <div [ngClass]="getColClass()" class="text-center border" *ngIf="mealsToDisplay > 1">
+            {{ date.subtract(1, 'd').format('MM/DD/YYYY') }}
+        </div>
+        <div [ngClass]="getColClass()" class="text-center border">{{ date.format('MM/DD/YYYY') }}</div>
+        <div [ngClass]="getColClass()" class="text-center border" *ngIf="mealsToDisplay > 2">
+            {{ date.add(1, 'd').format('MM/DD/YYYY') }}
         </div>
     </div>
+    <ng-container *ngIf="meal$ | async as meals">
+        <div class="row" *ngFor="let meal of meals" [style.height]="getRowHeight(meals.length)">
+            <div [ngClass]="getColClass()" class="meal-header border" [style.background]="meal.color">
+                {{ meal.name }}
+            </div>
+
+            <ng-container *ngIf="mealPlan$ | async as mealPlan">
+                <div [ngClass]="getColClass()" class="border" *ngIf="mealsToDisplay > 1" [innerHtml]="getCellHtml(meal, mealPlan, date.subtract(1, 'd'))"></div>
+                <div [ngClass]="getColClass()" class="border" [innerHtml]="getCellHtml(meal, mealPlan, date)"></div>
+                <div [ngClass]="getColClass()" class="border" *ngIf="mealsToDisplay > 2" [innerHtml]="getCellHtml(meal, mealPlan, date.add(1, 'd'))"></div>
+            </ng-container>
+        </div>
+    </ng-container>
 </div>

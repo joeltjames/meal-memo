@@ -9,6 +9,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MealPlanCalendarDailyModalComponent } from './meal-plan-calendar-daily-modal/meal-plan-calendar-daily-modal.component';
 import { UtilityModule } from '../utility/utility.module';
 import { WeeklyMealPlanComponent } from './weekly-meal-plan/weekly-meal-plan.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
@@ -17,6 +19,15 @@ import { WeeklyMealPlanComponent } from './weekly-meal-plan/weekly-meal-plan.com
         MealPlanCalendarDailyModalComponent,
         WeeklyMealPlanComponent,
     ],
-    imports: [CommonModule, UtilityModule, MealPlanRoutingModule, ReactiveFormsModule, DndModule, FontAwesomeModule],
+    imports: [
+        NgbModule,
+        CommonModule,
+        LayoutModule,
+        UtilityModule,
+        MealPlanRoutingModule,
+        ReactiveFormsModule,
+        DndModule,
+        FontAwesomeModule,
+    ],
 })
 export class MealPlanModule {}

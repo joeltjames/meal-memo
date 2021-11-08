@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { mealPlanReducer, mealReducer } from './meal-plan/store/meal-plan.reducer';
 import { UtilityModule } from './utility/utility.module';
-
+import { LayoutModule } from '@angular/cdk/layout';
 @NgModule({
     declarations: [
         AppComponent,
@@ -32,6 +32,7 @@ import { UtilityModule } from './utility/utility.module';
         ReactiveFormsModule,
         StoreModule.forRoot({ mealPlan: mealPlanReducer, meal: mealReducer }, {}),
         UtilityModule,
+        LayoutModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
