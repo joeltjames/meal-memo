@@ -14,27 +14,23 @@
         </div>
         <div class="col-3"></div>
     </div>
-    <div class="row" style="max-height: 5%">
-        <div [ngClass]="getColClass()"></div>
-        <div [ngClass]="getColClass()" class="text-center border" *ngIf="mealsToDisplay > 1">
-            {{ date.subtract(1, 'd').format('MM/DD/YYYY') }}
-        </div>
-        <div [ngClass]="getColClass()" class="text-center border">{{ date.format('MM/DD/YYYY') }}</div>
-        <div [ngClass]="getColClass()" class="text-center border" *ngIf="mealsToDisplay > 2">
-            {{ date.add(1, 'd').format('MM/DD/YYYY') }}
-        </div>
-    </div>
-    <ng-container *ngIf="meal$ | async as meals">
-        <div class="row" *ngFor="let meal of meals" [style.height]="getRowHeight(meals.length)">
-            <div [ngClass]="getColClass()" class="meal-header border" [style.background]="meal.color">
-                {{ meal.name }}
+    <ng-container *ngIf="dates$ | async as dates">
+        <div class="row" style="max-height: 5%">
+            <div [ngClass]="getColClass()"></div>
+            <div *ngFor="let date of dates" [ngClass]="getColClass()" class="text-center border">
+                {{ date.format('MM/DD/YYYY') }}
             </div>
-
-            <ng-container *ngIf="mealPlan$ | async as mealPlan">
-                <div (click)="editMealPlan(date.subtract(1, 'd'), mealPlan)" [ngClass]="getColClass()" class="border" *ngIf="mealsToDisplay > 1" [innerHtml]="getCellHtml(meal, mealPlan, date.subtract(1, 'd'))"></div>
-                <div (click)="editMealPlan(date, mealPlan)" [ngClass]="getColClass()" class="border" [innerHtml]="getCellHtml(meal, mealPlan, date)"></div>
-                <div (click)="editMealPlan(date.add(1, 'd'), mealPlan)" [ngClass]="getColClass()" class="border" *ngIf="mealsToDisplay > 2" [innerHtml]="getCellHtml(meal, mealPlan, date.add(1, 'd'))"></div>
-            </ng-container>
         </div>
+        <ng-container *ngIf="meal$ | async as meals">
+            <div class="row" *ngFor="let meal of meals" [style.height]="getRowHeight(meals.length)">
+                <div [ngClass]="getColClass()" class="meal-header border" [style.background]="meal.color">
+                    {{ meal.name }}
+                </div>
+
+                <ng-container *ngIf="mealPlan$ | async as mealPlan">
+                    <div *ngFor="let date of dates" (click)="editMealPlan(date, mealPlan)" [ngClass]="getColClass()" class="border" [innerHtml]="getCellHtml(meal, mealPlan, date)"></div>
+                </ng-container>
+            </div>
+        </ng-container>
     </ng-container>
 </div>

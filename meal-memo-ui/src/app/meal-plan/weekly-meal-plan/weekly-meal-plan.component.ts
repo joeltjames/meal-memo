@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import * as dayjs from 'dayjs';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { Meal } from 'src/app/interfaces/meal';
 import { EditDailyMealPlanModalComponent } from '../edit-daily-meal-plan-modal/edit-daily-meal-plan-modal.component';
 import { MealState, MealPlanState, mealPlanSelectorGenerator } from '../store';
@@ -14,7 +15,7 @@ import { MealState, MealPlanState, mealPlanSelectorGenerator } from '../store';
     templateUrl: './weekly-meal-plan.component.html',
     styleUrls: ['./weekly-meal-plan.component.scss'],
 })
-export class WeeklyMealPlanComponent implements OnInit {
+export class WeeklyMealPlanComponent {
     public meal$: Observable<MealState>;
     public mealPlan$: Observable<{ [key: string]: any }>;
 
@@ -30,18 +31,19 @@ export class WeeklyMealPlanComponent implements OnInit {
     ) {
         this.meal$ = store.select('meal');
 
-        this.date$.subscribe((date) => {
-            this.mealPlan$ = store.select(
-                mealPlanSelectorGenerator(
-                    date.subtract(1, 'd').format('YYYY-MM-DD'),
-                    date.add(2, 'd').format('YYYY-MM-DD')
+        this.mealPlan$ = this.date$.pipe(
+            switchMap((date) =>
+                store.select(
+                    mealPlanSelectorGenerator(
+                        date.subtract(10, 'd').format('YYYY-MM-DD'),
+                        date.add(10, 'd').format('YYYY-MM-DD')
+                    )
                 )
-            );
-        });
+            )
+        );
 
         breakpointObserver
             .observe(['(min-width: 475px)', '(min-width: 600px)'])
-            // TODO: handle destroying
             // .pipe(takeUntil(this.destroyed))
             .subscribe((state: BreakpointState) => {
                 if (state.breakpoints['(min-width: 600px)']) {
@@ -54,7 +56,27 @@ export class WeeklyMealPlanComponent implements OnInit {
             });
     }
 
-    ngOnInit(): void {}
+    public get dates$() {
+        return this.date$.pipe(
+            map((date) => {
+                const days = [];
+
+                const priorDayTotal = Math.ceil((this.mealsToDisplay - 1.0) / 2.0);
+                for (let i = priorDayTotal; i > 0; i--) {
+                    days.push(date.subtract(i, 'd'));
+                }
+
+                days.push(date);
+
+                const postDayTotal = Math.floor((this.mealsToDisplay - 1.0) / 2.0);
+                for (let i = 1; i <= postDayTotal; i++) {
+                    days.push(date.add(i, 'd'));
+                }
+
+                return days;
+            })
+        );
+    }
 
     getNewDate() {
         return dayjs();
@@ -77,15 +99,15 @@ export class WeeklyMealPlanComponent implements OnInit {
 
     getCellHtml(meal: Meal, mealPlan: { [key: string]: any }, date: dayjs.Dayjs) {
         const theseMeals = mealPlan[date.format('YYYY-MM-DD')];
+        let html = ``;
         if (theseMeals) {
-            let html = '<ul>';
+            html += '<ul>';
             theseMeals[meal.key]?.forEach((recipe: any) => {
                 html += `<li>${recipe.name}</li>`;
             });
             html += '</ul>';
-            return this.domSanitizer.bypassSecurityTrustHtml(html);
         }
-        return '';
+        return this.domSanitizer.bypassSecurityTrustHtml(html);
     }
 
     editMealPlan(dateObj: dayjs.Dayjs, mealPlan: { [key: string]: any }) {
@@ -95,6 +117,9 @@ export class WeeklyMealPlanComponent implements OnInit {
     }
 
     getRowHeight(mealCount: number) {
-        return `${85.0 / mealCount}%`;
+        if (mealCount <= 6) {
+            return `${85.0 / mealCount}%`;
+        }
+        return null;
     }
 }
