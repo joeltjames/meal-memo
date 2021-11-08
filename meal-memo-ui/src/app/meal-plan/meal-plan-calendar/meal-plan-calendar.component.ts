@@ -2,9 +2,11 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { takeUntil } from 'rxjs/operators';
+import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
+import { faCalendarWeek } from '@fortawesome/free-solid-svg-icons';
 
 enum CalendarType {
-    daily = 1,
+    weekly = 1,
     monthly,
 }
 
@@ -16,9 +18,13 @@ enum CalendarType {
 export class MealPlanCalendarComponent implements OnDestroy {
     destroyed = new Subject<void>();
 
-    calendarType = CalendarType.monthly;
+    monthlyIcon = faCalendarAlt;
+    weeklyIcon = faCalendarWeek;
 
-    calendarTypes = CalendarType;
+    canShowMonthly = false;
+
+    calendaryTypes = CalendarType;
+    calendarType: CalendarType;
 
     constructor(breakpointObserver: BreakpointObserver) {
         breakpointObserver
@@ -27,8 +33,10 @@ export class MealPlanCalendarComponent implements OnDestroy {
             .subscribe((state: BreakpointState) => {
                 if (state.matches) {
                     this.calendarType = CalendarType.monthly;
+                    this.canShowMonthly = true;
                 } else {
-                    this.calendarType = CalendarType.daily;
+                    this.calendarType = CalendarType.weekly;
+                    this.canShowMonthly = false;
                 }
             });
     }
@@ -36,5 +44,15 @@ export class MealPlanCalendarComponent implements OnDestroy {
     ngOnDestroy() {
         this.destroyed.next();
         this.destroyed.complete();
+    }
+
+    public showWeekly() {
+        this.calendarType = CalendarType.weekly;
+    }
+
+    public showMonthly() {
+        if (this.canShowMonthly) {
+            this.calendarType = CalendarType.monthly;
+        }
     }
 }

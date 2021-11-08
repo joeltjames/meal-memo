@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
@@ -12,6 +12,7 @@ import { mealPlanSelectorGenerator, MealPlanState, MealState } from '../store';
     selector: 'app-monthly-meal-plan',
     templateUrl: './monthly-meal-plan.component.html',
     styleUrls: ['./monthly-meal-plan.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class MonthlyMealPlanComponent implements OnInit {
     mealPlan$: Observable<MealPlanState>;

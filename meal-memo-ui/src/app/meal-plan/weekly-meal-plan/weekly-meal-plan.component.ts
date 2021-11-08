@@ -43,11 +43,11 @@ export class WeeklyMealPlanComponent {
             )
         );
         const breakpointMap: { [breakpoint: string]: number } = {
-            '(min-width: 400px)': 1,
-            '(min-width: 500px)': 2,
-            '(min-width: 700px)': 3,
-            '(min-width: 900px)': 4,
-            '(min-width: 1100px)': 5,
+            '(min-width: 375px)': 2,
+            '(min-width: 500px)': 3,
+            '(min-width: 700px)': 4,
+            '(min-width: 900px)': 5,
+            '(min-width: 1100px)': 6,
             '(min-width: 1300px)': 7,
         };
         const breakpoints = Object.keys(breakpointMap);
