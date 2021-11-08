@@ -11,11 +11,12 @@ import { UtilityModule } from '../utility/utility.module';
 import { WeeklyMealPlanComponent } from './weekly-meal-plan/weekly-meal-plan.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RecipeSearchComponent } from '../recipes/recipe-search/recipe-search.component';
 import { RecipesModule } from '../recipes/recipes.module';
+import { MonthlyMealPlanComponent } from './monthly-meal-plan/monthly-meal-plan.component';
 
 @NgModule({
     declarations: [
+        MonthlyMealPlanComponent,
         MealPlanComponent,
         MealPlanCalendarComponent,
         EditDailyMealPlanModalComponent,

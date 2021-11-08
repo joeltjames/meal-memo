@@ -1,7 +1,3 @@
-<app-calendar *ngIf="calendarType === calendarTypes.monthly">
-    <ng-template let-date #cell>
-        <div (click)="editMealPlan(date.date)" [dndDropzone]="[]" (dndDrop)="onDrop(date.date, $event)" style="height: 100%; width: 100%" [innerHtml]="getCellHtml(date.date)"></div>
-    </ng-template>
-</app-calendar>
+<app-monthly-meal-plan *ngIf="calendarType === calendarTypes.monthly"> </app-monthly-meal-plan>
 
 <app-weekly-meal-plan *ngIf="calendarType === calendarTypes.daily"></app-weekly-meal-plan>
