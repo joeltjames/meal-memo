@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <ul>
                             <li *ngFor="let recipe of getMealObs(meal) | async">
-                                {{ recipe.name }}
+                                {{ recipe.title }}
                                 <fa-icon [icon]="timesCircle" class="text-danger clickable" (click)="removeRecipe(meal, recipe)"></fa-icon>
                             </li>
                         </ul>

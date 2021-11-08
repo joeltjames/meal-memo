@@ -16,16 +16,14 @@ import { mealPlanReducer, mealReducer } from './meal-plan/store/meal-plan.reduce
 import { UtilityModule } from './utility/utility.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { recipeReducer } from './recipes/store/recipe.reducer';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RecipesModule } from './recipes/recipes.module';
+import { MealPlanModule } from './meal-plan/meal-plan.module';
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavbarComponent,
-        DashboardComponent,
-        ShoppingListComponent,
-        UserProfileComponent,
-    ],
+    declarations: [AppComponent, NavbarComponent, DashboardComponent, ShoppingListComponent, UserProfileComponent],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         NgbModule,
         FontAwesomeModule,
@@ -33,6 +31,8 @@ import { recipeReducer } from './recipes/store/recipe.reducer';
         StoreModule.forRoot({ mealPlan: mealPlanReducer, meal: mealReducer, recipe: recipeReducer }, {}),
         UtilityModule,
         LayoutModule,
+        RecipesModule,
+        MealPlanModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

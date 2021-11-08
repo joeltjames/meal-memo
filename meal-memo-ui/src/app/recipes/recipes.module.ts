@@ -10,12 +10,15 @@ import { MealPlanRoutingModule } from '../meal-plan/meal-plan-routing.module';
 import { UtilityModule } from '../utility/utility.module';
 import { RecipesComponent } from './recipes.component';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
+import { NgxMasonryModule } from 'ngx-masonry';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { RecipePrintComponent } from './recipe-print/recipe-print.component';
 
 @NgModule({
-    declarations: [RecipesComponent, RecipeSearchComponent],
+    declarations: [RecipesComponent, RecipeSearchComponent, RecipeDetailComponent, RecipePrintComponent],
     imports: [
         CommonModule,
-        RecipeRoutingModule,
         NgbModule,
         LayoutModule,
         UtilityModule,
@@ -23,6 +26,7 @@ import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
         ReactiveFormsModule,
         DndModule,
         FontAwesomeModule,
+        NgxMasonryModule,
     ],
     exports: [RecipeSearchComponent],
 })

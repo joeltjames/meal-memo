@@ -30,7 +30,7 @@ export class RecipeSearchComponent implements OnInit {
         this.recipeSearch.valueChanges.pipe(debounceTime(1000)).subscribe((filterValue) => {
             this.recipes$ = store
                 .select('recipe')
-                .pipe(map((recipes) => recipes.filter((r) => r.name.includes(filterValue))));
+                .pipe(map((recipes) => recipes.filter((r) => r.title.includes(filterValue))));
         });
     }
 

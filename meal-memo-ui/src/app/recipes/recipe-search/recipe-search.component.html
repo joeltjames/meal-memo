@@ -11,7 +11,7 @@
 </div>
 <div class="list-group">
     <div class="list-group-item" *ngFor="let recipe of recipes$ | async" data-cy="recipe-data" [dndDraggable]="stringify(recipe)" (click)="recipeSelected.emit(recipe)">
-        <div class="mb-1">{{ recipe.name }}</div>
+        <div class="mb-1">{{ recipe.title }}</div>
         <small>Donec id elit non mi porta.</small>
     </div>
 </div>

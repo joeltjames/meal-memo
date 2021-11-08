@@ -1,5 +1,7 @@
 <app-calendar>
     <ng-template let-date #cell>
-        <div (click)="editMealPlan(date.date)" [dndDropzone]="[]" (dndDrop)="onDrop(date.date, $event)" style="height: 100%; width: 100%" [innerHtml]="getCellHtml(date.date)"></div>
+        <ng-container *ngIf="meals$ | async as meals">
+            <div (click)="editMealPlan(date.date)" [dndDropzone]="[]" (dndDrop)="onDrop(date.date, $event)" style="height: 100%; width: 100%" [innerHtml]="getCellHtml(meals, date.date)"></div>
+        </ng-container>
     </ng-template>
 </app-calendar>

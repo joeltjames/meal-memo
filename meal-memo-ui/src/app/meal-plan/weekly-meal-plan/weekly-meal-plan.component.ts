@@ -127,11 +127,11 @@ export class WeeklyMealPlanComponent {
         const theseMeals = mealPlan[date.format('YYYY-MM-DD')];
         let html = ``;
         if (theseMeals) {
-            html += '<ul>';
+            html += '';
             theseMeals[meal.key]?.forEach((recipe: any) => {
-                html += `<li>${recipe.name}</li>`;
+                html += `<div class="badge meal-badge text-wrap bg-secondary">${recipe.title}</div>`;
             });
-            html += '</ul>';
+            html += '';
         }
         return this.domSanitizer.bypassSecurityTrustHtml(html);
     }
@@ -140,12 +140,5 @@ export class WeeklyMealPlanComponent {
         const modal = this.modalService.open(EditDailyMealPlanModalComponent, { size: 'lg' });
         modal.componentInstance.date = dateObj;
         modal.componentInstance.meals = mealPlan[dateObj.format('YYYY-MM-DD')];
-    }
-
-    getRowHeight(mealCount: number) {
-        if (mealCount <= 6) {
-            return `${85.0 / mealCount}%`;
-        }
-        return null;
     }
 }

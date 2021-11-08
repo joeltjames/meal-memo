@@ -22,7 +22,7 @@
             </div>
         </div>
         <ng-container *ngIf="meal$ | async as meals">
-            <div class="row" *ngFor="let meal of meals" [style.height]="getRowHeight(meals.length)">
+            <div class="row" *ngFor="let meal of meals">
                 <div [ngClass]="getColClass()" class="meal-header border" [style.background]="meal.color">
                     {{ meal.name }}
                 </div>

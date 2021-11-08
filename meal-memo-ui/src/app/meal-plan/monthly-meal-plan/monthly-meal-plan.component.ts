@@ -22,9 +22,7 @@ export class MonthlyMealPlanComponent implements OnInit {
 
     public meals: MealPlanState;
 
-    meal$: Observable<MealState>;
-
-    mealOptions: Meal[];
+    meals$: Observable<MealState>;
 
     constructor(
         private modalService: NgbModal,
@@ -42,9 +40,7 @@ export class MonthlyMealPlanComponent implements OnInit {
             this.meals = mp;
         });
 
-        store.select('meal').subscribe((meals) => {
-            this.mealOptions = meals;
-        });
+        this.meals$ = store.select('meal');
     }
 
     ngOnInit(): void {}
@@ -62,18 +58,20 @@ export class MonthlyMealPlanComponent implements OnInit {
         modal.componentInstance.meals = this.meals[date];
     }
 
-    getCellHtml(date: string) {
+    getCellHtml(meals: MealState, date: string) {
         const theseMeals = this.meals[date];
         if (theseMeals) {
             let html = '';
-            Object.keys(theseMeals).forEach((key) => {
-                const meal = this.mealOptions.filter((mo) => mo.key === key);
-                if (meal && meal.length > 0) {
-                    theseMeals[key].forEach((recipe) => {
-                        html += `<div class="badge meal-badge" style="background: ${meal[0].color}">${recipe.name}</div>`;
-                    });
-                }
-            });
+            Object.keys(theseMeals)
+                .map((key) => meals.find((meal) => meal.key === key))
+                .sort((mealA, mealB) => (mealA?.order || 0) - (mealB?.order || 0))
+                .forEach((meal) => {
+                    if (meal) {
+                        theseMeals[meal.key].forEach((recipe) => {
+                            html += `<div class="badge meal-badge text-wrap" style="background: ${meal.color}">${recipe.title}</div>`;
+                        });
+                    }
+                });
             return this.domSanitizer.bypassSecurityTrustHtml(html);
         }
         return '';
