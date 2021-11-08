@@ -29,6 +29,8 @@
 
 ### Other
 - User Auth
+- Cypress Tests
+- Front End Tests?
 
 ## Backend
 All of it
