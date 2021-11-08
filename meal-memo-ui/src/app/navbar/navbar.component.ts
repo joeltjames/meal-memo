@@ -10,6 +10,8 @@ import { faTools } from '@fortawesome/free-solid-svg-icons';
 export class NavbarComponent implements OnInit {
   userCircle = faUserCircle;
   tools = faTools;
+  
+  public isMenuCollapsed = true;
 
   constructor() { }
 
