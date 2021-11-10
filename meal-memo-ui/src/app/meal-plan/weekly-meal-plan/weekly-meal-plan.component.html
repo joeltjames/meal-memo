@@ -21,7 +21,7 @@
                 {{ date.format('MM/DD/YYYY') }}
             </div>
         </div>
-        <ng-container *ngIf="meal$ | async as meals">
+        <ng-container *ngIf="meals$ | async as meals">
             <div class="row" *ngFor="let meal of meals">
                 <div [ngClass]="getColClass()" class="meal-header border" [style.background]="meal.color">
                     {{ meal.name }}

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { takeUntil } from 'rxjs/operators';
+import { distinct, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 import { faCalendarWeek, faPrint } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -46,7 +46,7 @@ export class MealPlanCalendarComponent implements OnInit, OnDestroy {
     ) {
         activatedRoute.queryParams.subscribe((params) => {
             if ('type' in params && params.type !== this.calendarType) {
-                this.calendarType = params.types;
+                this.calendarType = params.type;
             } else if (!('type' in params)){
                 this.calendarType = this.canShowMonthly ? CalendarType.monthly : CalendarType.weekly;
             }
@@ -69,7 +69,6 @@ export class MealPlanCalendarComponent implements OnInit, OnDestroy {
     }
 
     public set calendarType(type: CalendarType) {
-        console.log(type);
         this.router.navigate([], {
             relativeTo: this.activatedRoute,
             queryParams: { type },
@@ -80,7 +79,6 @@ export class MealPlanCalendarComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.startDate$.subscribe((date) => {
-            console.log(date.format('YYYY-MM-DD'));
             this.router.navigate([], {
                 relativeTo: this.activatedRoute,
                 queryParams: { startDate: date.format('YYYY-MM-DD') },

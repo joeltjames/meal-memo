@@ -36,6 +36,7 @@
 </app-monthly-meal-plan>
 
 <app-weekly-meal-plan
+    [startDate]="startDate"
     (startDateUpdated)="startDate$.next($event)"
     (endDateUpdated)="endDate$.next($event)"
     *ngIf="calendarType === calendarTypes.weekly"></app-weekly-meal-plan>
