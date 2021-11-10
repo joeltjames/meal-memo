@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { Recipe } from 'src/app/interfaces/recipe';
 import { RecipeState } from '../store/recipe.reducer';
 import { recipeBySlugSelector } from '../store/recipe.selector';
+import { faPrint } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-recipe-detail',
@@ -14,11 +15,21 @@ import { recipeBySlugSelector } from '../store/recipe.selector';
     styleUrls: ['./recipe-detail.component.scss'],
 })
 export class RecipeDetailComponent implements OnInit {
+    printIcon = faPrint;
+
     recipe$: Observable<Recipe | undefined>;
 
-    constructor(private domSanitizer: DomSanitizer, route: ActivatedRoute, store: Store<{ recipe: RecipeState }>) {
+    private slug: string;
+
+    constructor(
+        private domSanitizer: DomSanitizer,
+        private router: Router,
+        private route: ActivatedRoute,
+        store: Store<{ recipe: RecipeState }>
+    ) {
         this.recipe$ = route.params.pipe(
             map((params) => params.slug),
+            tap((slug) => (this.slug = slug)),
             switchMap((slug) => store.select(recipeBySlugSelector(slug)))
         );
     }
@@ -53,5 +64,11 @@ export class RecipeDetailComponent implements OnInit {
         html += '</p>';
 
         return this.domSanitizer.bypassSecurityTrustHtml(html);
+    }
+
+    public print() {
+        this.router.navigate([{ outlets: { print: ['recipes', this.slug, 'print'] } }]).then(() => {
+            setTimeout(() => window.print());
+        });
     }
 }

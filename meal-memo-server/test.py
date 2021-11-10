@@ -18,6 +18,7 @@ recipes.append({
     "image": scraper.image(),
     "host": scraper.host(),
     "nutrients": scraper.nutrients(),
+    "url": scraper.canonical_url()
 })
 id += 1
 
@@ -34,6 +35,7 @@ recipes.append({
     "image": scraper.image(),
     "host": scraper.host(),
     "nutrients": scraper.nutrients(),
+    "url": scraper.canonical_url()
 })
 id += 1
 
@@ -50,6 +52,7 @@ recipes.append({
     "image": scraper.image(),
     "host": scraper.host(),
     "nutrients": scraper.nutrients(),
+    "url": scraper.canonical_url()
 })
 id += 1
 
@@ -66,6 +69,7 @@ recipes.append({
     "image": scraper.image(),
     "host": scraper.host(),
     "nutrients": scraper.nutrients(),
+    "url": scraper.canonical_url()
 })
 id += 1
 
@@ -82,6 +86,7 @@ recipes.append({
     "image": scraper.image(),
     "host": scraper.host(),
     "nutrients": scraper.nutrients(),
+    "url": scraper.canonical_url()
 })
 id += 1
 

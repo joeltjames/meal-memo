@@ -1,3 +1,25 @@
 <ng-container *ngIf="recipe$ | async as recipe">
-    <h1>{{ recipe.title }}</h1>
+    <div class="float-end m-5">
+        <div style="width: 40vw; height: auto">
+            <img class="rounded img-fluid" [src]="recipe.image" />
+        </div>
+        <div class="w-100 text-center" [innerHtml]="getServingInfo(recipe)"></div>
+        <div class="w-100 text-center">Yields: {{ recipe.yields }}</div>
+    </div>
+    <h4>{{ recipe.title }}</h4>
+    <h5>Ingredients</h5>
+    <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+    </ul>
+    <h5>Instructions</h5>
+    <ol>
+        <li *ngFor="let step of recipe.instructions">{{ step }}</li>
+    </ol>
+    <p></p>
+    <p>
+        <small>Recipe originally from {{ recipe.url }}</small>
+    </p>
+    <p>
+        <small>Can also be found at {{ getUrl(recipe) }}</small>
+    </p>
 </ng-container>

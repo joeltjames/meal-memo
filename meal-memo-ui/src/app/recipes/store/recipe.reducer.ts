@@ -60,6 +60,7 @@ let sampleRecipes: Recipe[] = [
             fiberContent: '9 g',
             sugarContent: '2 g',
         },
+        url: 'https://www.skinnytaste.com/chicken-and-white-bean-enchiladas-with/',
     },
     {
         id: 1,
@@ -86,6 +87,7 @@ let sampleRecipes: Recipe[] = [
         image: 'https://www.skinnytaste.com/wp-content/uploads/2009/11/turkey-cuban-sandwich2.jpg',
         host: 'skinnytaste.com',
         nutrients: { servingSize: '1 sandwich', calories: '321 kcal' },
+        url: 'https://www.skinnytaste.com/skinny-turkey-cuban-sandwich/',
     },
     {
         id: 2,
@@ -117,6 +119,7 @@ let sampleRecipes: Recipe[] = [
             sodiumContent: '266.1 mg',
             sugarContent: '0.9 g',
         },
+        url: 'https://www.allrecipes.com/recipe/158968/spinach-and-feta-turkey-burgers/',
     },
     {
         id: 3,
@@ -159,6 +162,7 @@ let sampleRecipes: Recipe[] = [
             fiberContent: '1 g',
             sugarContent: '2 g',
         },
+        url: 'https://www.skinnytaste.com/skinny-queso-dip/',
     },
     {
         id: 4,
@@ -170,8 +174,8 @@ let sampleRecipes: Recipe[] = [
             '1/4 cup sugar',
             '2 tsp vanilla extract',
             '1 large egg',
-            `1 cup all purpose flour (Bob's Red Mill)`,
-            `1 cup white whole wheat flour (Bob's Red Mill)`,
+            "1 cup all purpose flour (Bob's Red Mill)",
+            "1 cup white whole wheat flour (Bob's Red Mill)",
             '1 tbsp baking powder',
             '1/2 tsp salt',
             '3 tbsp chilled butter (must be cold cut into small pieces)',
@@ -206,6 +210,7 @@ let sampleRecipes: Recipe[] = [
             fiberContent: '2.5 g',
             sugarContent: '13 g',
         },
+        url: 'https://www.skinnytaste.com/skinny-chocolate-chip-buttermilk-scones/',
     },
 ];
 sampleRecipes = sampleRecipes.map((r) => {

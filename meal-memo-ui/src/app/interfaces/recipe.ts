@@ -10,6 +10,7 @@ export interface Recipe {
     image: string;
     host: string;
     nutrients: Nutrients;
+    url: string;
 }
 export interface Nutrients {
     servingSize?: string | null;
