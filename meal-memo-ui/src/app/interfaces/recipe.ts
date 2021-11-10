@@ -1,14 +1,25 @@
 export interface Recipe {
-    id?: number;
+    id: number;
+    info?: string;
     title: string;
     slug: string;
+    yields: string;
     tags?: string[];
-    totalTime?: any;
-    yields?: any;
-    ingredients?: any;
-    instructions?: any;
-    image?: any;
-    host?: any;
-    nutrients?: any;
-    info?: any;
+    ingredients?: string[] | null;
+    instructions?: string[] | null;
+    image: string;
+    host: string;
+    nutrients: Nutrients;
+}
+export interface Nutrients {
+    servingSize?: string | null;
+    calories: string;
+    carbohydrateContent?: string | null;
+    proteinContent?: string | null;
+    fatContent?: string | null;
+    cholesterolContent?: string | null;
+    sodiumContent?: string | null;
+    fiberContent?: string | null;
+    sugarContent?: string | null;
+    saturatedFatContent?: string | null;
 }
