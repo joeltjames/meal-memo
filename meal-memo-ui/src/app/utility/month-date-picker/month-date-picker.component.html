@@ -2,7 +2,7 @@
     <button class="btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>{{display}}</button>
     <div ngbDropdownMenu container="body" placement="bottom">
         <div class="p-2">
-            <select class="custom-select" [formControl]="selectedYear" aria-label="Default select example">
+            <select class="form-select" [formControl]="selectedYear" aria-label="Default select example">
                 <option *ngFor="let year of years" [value]="year">
                     {{ year }}
                 </option>

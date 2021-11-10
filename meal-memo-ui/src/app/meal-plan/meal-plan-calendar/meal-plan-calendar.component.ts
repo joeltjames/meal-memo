@@ -1,13 +1,16 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { takeUntil } from 'rxjs/operators';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
-import { faCalendarWeek } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarWeek, faPrint } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as dayjs from 'dayjs';
+import { MonthlyMealPlanComponent } from '../monthly-meal-plan/monthly-meal-plan.component';
 
-enum CalendarType {
-    weekly = 1,
-    monthly,
+export enum CalendarType {
+    weekly = 'WEEKLY',
+    monthly = 'MONTHLY',
 }
 
 @Component({
@@ -15,30 +18,75 @@ enum CalendarType {
     templateUrl: './meal-plan-calendar.component.html',
     styleUrls: ['./meal-plan-calendar.component.scss'],
 })
-export class MealPlanCalendarComponent implements OnDestroy {
+export class MealPlanCalendarComponent implements OnInit, OnDestroy {
+    @ViewChild(MonthlyMealPlanComponent)
+    monthlyCalendar: MonthlyMealPlanComponent;
+
     destroyed = new Subject<void>();
 
     monthlyIcon = faCalendarAlt;
     weeklyIcon = faCalendarWeek;
+    printIcon = faPrint;
 
     canShowMonthly = false;
 
-    calendaryTypes = CalendarType;
-    calendarType: CalendarType;
+    calendarTypes = CalendarType;
 
-    constructor(breakpointObserver: BreakpointObserver) {
+    startDate$ = new Subject<dayjs.Dayjs>();
+    endDate$ = new Subject<dayjs.Dayjs>();
+
+    startDate: string | null;
+
+    private internalCalendarType: CalendarType;
+
+    constructor(
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        breakpointObserver: BreakpointObserver
+    ) {
+        activatedRoute.queryParams.subscribe((params) => {
+            if ('type' in params && params.type !== this.calendarType) {
+                this.calendarType = params.types;
+            } else if (!('type' in params)){
+                this.calendarType = this.canShowMonthly ? CalendarType.monthly : CalendarType.weekly;
+            }
+
+            if ('startDate' in params && params.startDate !== this.startDate) {
+                this.startDate = params.startDate;
+            }
+        });
+
         breakpointObserver
             .observe(['(min-width: 768px)'])
             .pipe(takeUntil(this.destroyed))
             .subscribe((state: BreakpointState) => {
-                if (state.matches) {
-                    this.calendarType = CalendarType.monthly;
-                    this.canShowMonthly = true;
-                } else {
-                    this.calendarType = CalendarType.weekly;
-                    this.canShowMonthly = false;
-                }
+                this.canShowMonthly = state.matches;
             });
+    }
+
+    public get calendarType() {
+        return this.internalCalendarType;
+    }
+
+    public set calendarType(type: CalendarType) {
+        console.log(type);
+        this.router.navigate([], {
+            relativeTo: this.activatedRoute,
+            queryParams: { type },
+            queryParamsHandling: 'merge',
+        });
+        this.internalCalendarType = type;
+    }
+
+    public ngOnInit() {
+        this.startDate$.subscribe((date) => {
+            console.log(date.format('YYYY-MM-DD'));
+            this.router.navigate([], {
+                relativeTo: this.activatedRoute,
+                queryParams: { startDate: date.format('YYYY-MM-DD') },
+                queryParamsHandling: 'merge',
+            });
+        });
     }
 
     ngOnDestroy() {
@@ -54,5 +102,15 @@ export class MealPlanCalendarComponent implements OnDestroy {
         if (this.canShowMonthly) {
             this.calendarType = CalendarType.monthly;
         }
+    }
+
+    public print() {
+        this.router
+            .navigate([{ outlets: { print: ['meal-plan', 'print'] } }], {
+                queryParams: { type: this.calendarType },
+            })
+            .then(() => {
+                setTimeout(() => window.print());
+            });
     }
 }

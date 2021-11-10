@@ -13,6 +13,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecipesModule } from '../recipes/recipes.module';
 import { MonthlyMealPlanComponent } from './monthly-meal-plan/monthly-meal-plan.component';
+import { MealPlanCalendarPrintComponent } from './meal-plan-calendar-print/meal-plan-calendar-print.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { MonthlyMealPlanComponent } from './monthly-meal-plan/monthly-meal-plan.
         MealPlanCalendarComponent,
         EditDailyMealPlanModalComponent,
         WeeklyMealPlanComponent,
+        MealPlanCalendarPrintComponent,
     ],
     imports: [
         NgbModule,

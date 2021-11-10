@@ -1,5 +1,5 @@
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,12 @@ import { MealState, MealPlanState, mealPlanSelectorGenerator, addRecipeToMeal } 
     templateUrl: './weekly-meal-plan.component.html',
     styleUrls: ['./weekly-meal-plan.component.scss'],
 })
-export class WeeklyMealPlanComponent {
+export class WeeklyMealPlanComponent implements OnInit {
+    @Output()
+    startDateUpdated = new EventEmitter<dayjs.Dayjs>();
+    @Output()
+    endDateUpdated = new EventEmitter<dayjs.Dayjs>();
+
     public meal$: Observable<MealState>;
     public mealPlan$: Observable<{ [key: string]: any }>;
 
@@ -68,6 +73,13 @@ export class WeeklyMealPlanComponent {
                     this.mealsToDisplay = 1;
                 }
             });
+    }
+
+    public ngOnInit() {
+        this.dates$.subscribe((dates) => {
+            this.startDateUpdated.emit(dates[0]);
+            this.endDateUpdated.emit(dates[dates.length - 1]);
+        });
     }
 
     public get dates$() {

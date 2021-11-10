@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,14 @@ import { mealPlanSelectorGenerator, MealPlanState, MealState } from '../store';
     styleUrls: ['./monthly-meal-plan.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class MonthlyMealPlanComponent implements OnInit {
+export class MonthlyMealPlanComponent {
+    @Output()
+    startDateUpdated = new EventEmitter<dayjs.Dayjs>();
+    @Output()
+    endDateUpdated = new EventEmitter<dayjs.Dayjs>();
+    @Input()
+    startDate: string | null;
+
     mealPlan$: Observable<MealPlanState>;
 
     public startOfMonth = dayjs().startOf('month');
@@ -42,8 +49,6 @@ export class MonthlyMealPlanComponent implements OnInit {
 
         this.meals$ = store.select('meal');
     }
-
-    ngOnInit(): void {}
 
     onDrop(date: string, event: any) {
         const modal = this.modalService.open(EditDailyMealPlanModalComponent, { size: 'lg' });

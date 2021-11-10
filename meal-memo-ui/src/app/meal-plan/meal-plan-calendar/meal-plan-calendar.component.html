@@ -1,10 +1,41 @@
-<div class="position-absolute bottom-0 end-0 m-1" style="z-index: 1000" *ngIf="canShowMonthly">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary" (click)="showMonthly()"><fa-icon [icon]="monthlyIcon"></fa-icon></button>
-        <button type="button" class="btn btn-primary" (click)="showWeekly()"><fa-icon [icon]="weeklyIcon"></fa-icon></button>
+<div
+    class="position-absolute bottom-0 end-0 m-1"
+    style="z-index: 1000"
+    *ngIf="canShowMonthly">
+    <div
+        class="btn-toolbar"
+        role="toolbar"
+        aria-label="Toolbar with button groups">
+        <div class="btn-group me-1" role="group" aria-label="Basic example">
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="showMonthly()">
+                <fa-icon [icon]="monthlyIcon"></fa-icon>
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="showWeekly()">
+                <fa-icon [icon]="weeklyIcon"></fa-icon>
+            </button>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary" (click)="print()">
+                <fa-icon [icon]="printIcon"></fa-icon>
+            </button>
+        </div>
     </div>
 </div>
 
-<app-monthly-meal-plan *ngIf="calendarType === calendaryTypes.monthly"> </app-monthly-meal-plan>
+<app-monthly-meal-plan
+    [startDate]="startDate"
+    (startDateUpdated)="startDate$.next($event)"
+    (endDateUpdated)="endDate$.next($event)"
+    *ngIf="calendarType === calendarTypes.monthly">
+</app-monthly-meal-plan>
 
-<app-weekly-meal-plan *ngIf="calendarType === calendaryTypes.weekly"></app-weekly-meal-plan>
+<app-weekly-meal-plan
+    (startDateUpdated)="startDate$.next($event)"
+    (endDateUpdated)="endDate$.next($event)"
+    *ngIf="calendarType === calendarTypes.weekly"></app-weekly-meal-plan>

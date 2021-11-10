@@ -8,9 +8,11 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipePrintComponent } from './recipes/recipe-print/recipe-print.component';
+import { MealPlanCalendarPrintComponent } from './meal-plan/meal-plan-calendar-print/meal-plan-calendar-print.component';
 
 const routes: Routes = [
     { path: 'meal-plan', component: MealPlanComponent },
+    { path: 'meal-plan/print', component: MealPlanCalendarPrintComponent, outlet: 'print' },
     { path: 'settings', loadChildren: () => import('./settings/settings.module').then((m) => m.SettingsModule) },
     {
         path: 'recipes',
