@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 /* Importing Bootstrap SCSS file. */
 
 @import '~bootstrap/scss/bootstrap';
@@ -11,7 +10,6 @@ body {
 .clickable {
     cursor: pointer;
 }
-
 
 /* Small devices (landscape phones, 576px and up)*/
 
@@ -42,7 +40,6 @@ body {
     }
 }
 
-
 /* Medium devices (tablets, 768px and up)*/
 
 @media (min-width: 768px) {
@@ -72,7 +69,6 @@ body {
     }
 }
 
-
 /* Large devices (desktops, 992px and up)*/
 
 @media (min-width: 992px) {
@@ -101,7 +97,6 @@ body {
         height: 25% !important;
     }
 }
-
 
 /* Extra large devices (large desktops, 1200px and up)*/
 
@@ -133,12 +128,17 @@ body {
 }
 
 @media print {
-    /* invert the display (show/hide) properties of the main */
-    /* aplication component and the printing component       */
     app-print-page {
         display: block;
     }
+
     .main-content {
         display: none !important;
+    }
+
+    body {
+        -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+        color-adjust: exact !important; /*Firefox*/
+        height: 100%;
     }
 }

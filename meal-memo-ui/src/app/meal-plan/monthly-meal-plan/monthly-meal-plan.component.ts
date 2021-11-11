@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewEncapsulation,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
@@ -51,13 +58,19 @@ export class MonthlyMealPlanComponent {
     }
 
     onDrop(date: string, event: any) {
-        const modal = this.modalService.open(EditDailyMealPlanModalComponent, { size: 'lg' });
+        const modal = this.modalService.open(EditDailyMealPlanModalComponent, {
+            size: 'lg',
+        });
         modal.componentInstance.date = dayjs(date, 'YYYY-MM-DD');
-        modal.componentInstance.recipe = event.data ? JSON.parse(event.data) : {};
+        modal.componentInstance.recipe = event.data
+            ? JSON.parse(event.data)
+            : {};
     }
 
     editMealPlan(date: string) {
-        const modal = this.modalService.open(EditDailyMealPlanModalComponent, { size: 'lg' });
+        const modal = this.modalService.open(EditDailyMealPlanModalComponent, {
+            size: 'lg',
+        });
         const dateObj = dayjs(date, 'YYYY-MM-DD');
         modal.componentInstance.date = dateObj;
         modal.componentInstance.meals = this.meals[date];
@@ -69,7 +82,9 @@ export class MonthlyMealPlanComponent {
             let html = '';
             Object.keys(theseMeals)
                 .map((key) => meals.find((meal) => meal.key === key))
-                .sort((mealA, mealB) => (mealA?.order || 0) - (mealB?.order || 0))
+                .sort(
+                    (mealA, mealB) => (mealA?.order || 0) - (mealB?.order || 0)
+                )
                 .forEach((meal) => {
                     if (meal) {
                         theseMeals[meal.key].forEach((recipe) => {

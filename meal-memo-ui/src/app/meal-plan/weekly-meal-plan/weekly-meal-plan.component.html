@@ -1,34 +1,62 @@
-<div class="container h-100 w-100 m-0 mw-100 overflow-auto" *ngIf="date$ | async as date">
-    <div class="row text-center pb-2" style="max-height: 10%">
+<div
+    class="container h-100 w-100 m-0 mw-100 overflow-auto"
+    *ngIf="date$ | async as date">
+    <div
+        class="row text-center pb-2"
+        style="max-height: 10%"
+        *ngIf="displayControls">
         <div class="col-3"></div>
         <div class="col-6">
-            <button (click)="setDateTo(date.subtract(1, 'd'))" type="button" class="btn btn-outline-primary btn-sm">
+            <button
+                (click)="setDateTo(date.subtract(1, 'd'))"
+                type="button"
+                class="btn btn-outline-primary btn-sm">
                 <
             </button>
-            <button (click)="setDateTo(getNewDate())" type="button" class="btn btn-outline-primary btn-sm">
+            <button
+                (click)="setDateTo(getNewDate())"
+                type="button"
+                class="btn btn-outline-primary btn-sm">
                 TODAY
             </button>
-            <button (click)="setDateTo(date.add(1, 'd'))" type="button" class="btn btn-outline-primary btn-sm">
+            <button
+                (click)="setDateTo(date.add(1, 'd'))"
+                type="button"
+                class="btn btn-outline-primary btn-sm">
                 >
             </button>
         </div>
         <div class="col-3"></div>
     </div>
     <ng-container *ngIf="dates$ | async as dates">
-        <div class="row" style="max-height: 5%">
+        <div class="row" style="max-height: 8%">
             <div [ngClass]="getColClass()"></div>
-            <div *ngFor="let date of dates" [ngClass]="getColClass(true)" class="text-center border">
+            <div
+                *ngFor="let date of dates"
+                [ngClass]="getColClass(true)"
+                class="text-center border">
+                {{ date.format('dddd') }} <br/>
                 {{ date.format('MM/DD/YYYY') }}
             </div>
         </div>
         <ng-container *ngIf="meals$ | async as meals">
             <div class="row" *ngFor="let meal of meals">
-                <div [ngClass]="getColClass()" class="meal-header border" [style.background]="meal.color">
+                <div
+                    [ngClass]="getColClass()"
+                    class="meal-header border"
+                    [style.background]="meal.color">
                     {{ meal.name }}
                 </div>
 
                 <ng-container *ngIf="mealPlan$ | async as mealPlan">
-                    <div *ngFor="let date of dates" [dndDropzone]="[]" (dndDrop)="onDrop(meal, date, $event)" (click)="editMealPlan(date, mealPlan)" [ngClass]="getColClass(true)" class="border" [innerHtml]="getCellHtml(meal, mealPlan, date)"></div>
+                    <div
+                        *ngFor="let date of dates"
+                        [dndDropzone]="[]"
+                        (dndDrop)="onDrop(meal, date, $event)"
+                        (click)="editMealPlan(date, mealPlan)"
+                        [ngClass]="getColClass(true)"
+                        class="border"
+                        [innerHtml]="getCellHtml(meal, mealPlan, date)"></div>
                 </ng-container>
             </div>
         </ng-container>

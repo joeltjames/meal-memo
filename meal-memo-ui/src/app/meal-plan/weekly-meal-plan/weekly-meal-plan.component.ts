@@ -36,11 +36,15 @@ export class WeeklyMealPlanComponent implements OnInit, OnChanges {
     endDateUpdated = new EventEmitter<dayjs.Dayjs>();
     @Input()
     startDate: string | null;
+    @Input()
+    displayControls = true;
+    @Input()
+    dynamicMealsToDisplay = true;
+    @Input()
+    mealsToDisplay = 1;
 
     public meals$: Observable<MealState>;
     public mealPlan$: Observable<{ [key: string]: any }>;
-
-    mealsToDisplay = 1;
 
     dateSubject$ = new BehaviorSubject<dayjs.Dayjs>(dayjs());
     date$ = this.dateSubject$.asObservable().pipe(distinctUntilChanged());
@@ -69,32 +73,34 @@ export class WeeklyMealPlanComponent implements OnInit, OnChanges {
             this.endDateUpdated.emit(dates[dates.length - 1]);
         });
 
-        const breakpointMap: { [breakpoint: string]: number } = {
-            '(min-width: 375px)': 2,
-            '(min-width: 500px)': 3,
-            '(min-width: 700px)': 4,
-            '(min-width: 900px)': 5,
-            '(min-width: 1100px)': 6,
-            '(min-width: 1300px)': 7,
-        };
-        const breakpoints = Object.keys(breakpointMap);
-        breakpointObserver
-            .observe(breakpoints)
-            // .pipe(takeUntil(this.destroyed))
-            .subscribe((state: BreakpointState) => {
-                let found = false;
-                for (let i = breakpoints.length - 1; i >= 0; i--) {
-                    const breakpoint = breakpoints[i];
-                    if (state.breakpoints[breakpoint]) {
-                        this.mealsToDisplay = breakpointMap[breakpoint];
-                        found = true;
-                        break;
+        if (this.dynamicMealsToDisplay) {
+            const breakpointMap: { [breakpoint: string]: number } = {
+                '(min-width: 375px)': 2,
+                '(min-width: 500px)': 3,
+                '(min-width: 700px)': 4,
+                '(min-width: 900px)': 5,
+                '(min-width: 1100px)': 6,
+                '(min-width: 1300px)': 7,
+            };
+            const breakpoints = Object.keys(breakpointMap);
+            breakpointObserver
+                .observe(breakpoints)
+                // .pipe(takeUntil(this.destroyed))
+                .subscribe((state: BreakpointState) => {
+                    let found = false;
+                    for (let i = breakpoints.length - 1; i >= 0; i--) {
+                        const breakpoint = breakpoints[i];
+                        if (state.breakpoints[breakpoint]) {
+                            this.mealsToDisplay = breakpointMap[breakpoint];
+                            found = true;
+                            break;
+                        }
                     }
-                }
-                if (!found) {
-                    this.mealsToDisplay = 1;
-                }
-            });
+                    if (!found) {
+                        this.mealsToDisplay = 1;
+                    }
+                });
+        }
 
         this.mealPlan$ = this.date$.pipe(
             switchMap((date) =>
@@ -179,13 +185,6 @@ export class WeeklyMealPlanComponent implements OnInit, OnChanges {
     }
 
     getColClass(def = false) {
-        // if (this.mealsToDisplay === 1) {
-        //     return 'col';
-        // } else if (this.mealsToDisplay === 2) {
-        //     return 'col-4';
-        // } else if (this.mealsToDisplay === 3) {
-        //     return 'col-3';
-        // }
         const ceil = Math.ceil(12 / (this.mealsToDisplay + 1));
         const floor = Math.floor(12 / (this.mealsToDisplay + 1));
         if (ceil !== floor && def) {
@@ -204,7 +203,7 @@ export class WeeklyMealPlanComponent implements OnInit, OnChanges {
         if (theseMeals) {
             html += '';
             theseMeals[meal.key]?.forEach((recipe: any) => {
-                html += `<div class="badge meal-badge text-wrap bg-secondary">${recipe.title}</div>`;
+                html += `<div class="m-1 badge meal-badge text-wrap bg-secondary">${recipe.title}</div>`;
             });
             html += '';
         }

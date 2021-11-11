@@ -16,9 +16,19 @@ export class MealPlanCalendarPrintComponent {
     calendaryTypes = CalendarType;
     calendarType: CalendarType;
 
-    constructor(route: ActivatedRoute) {
-        route.queryParams.subscribe((params) => {
-            console.log(params);
+    startDate: string | null;
+
+    constructor(activatedRoute: ActivatedRoute) {
+        activatedRoute.queryParams.subscribe((params) => {
+            if ('type' in params && params.type !== this.calendarType) {
+                this.calendarType = params.type;
+            } else if (!('type' in params)){
+                this.calendarType = this.canShowMonthly ? CalendarType.monthly : CalendarType.weekly;
+            }
+
+            if ('startDate' in params && params.startDate !== this.startDate) {
+                this.startDate = params.startDate;
+            }
         });
     }
 
