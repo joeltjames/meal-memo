@@ -2,10 +2,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { Recipe } from 'src/app/interfaces/recipe';
 import { RecipeState } from '../store/recipe.reducer';
+import { filteredRecipeSelector } from '../store/recipe.selector';
 
 @Component({
     selector: 'app-recipe-search',
@@ -24,14 +25,17 @@ export class RecipeSearchComponent implements OnInit {
 
     stringify = JSON.stringify;
 
-    constructor(store: Store<{ recipe: RecipeState }>) {
-        this.recipes$ = store.select('recipe');
+    searchInputChange$ = new BehaviorSubject<string>('');
 
-        this.recipeSearch.valueChanges.pipe(debounceTime(1000)).subscribe((filterValue) => {
-            this.recipes$ = store
-                .select('recipe')
-                .pipe(map((recipes) => recipes.filter((r) => r.title.includes(filterValue))));
-        });
+    constructor(store: Store<{ recipe: RecipeState }>) {
+        this.recipes$ = this.searchInputChange$.pipe(
+            debounceTime(500),
+            switchMap((filter) => store.select(filteredRecipeSelector(filter)))
+        );
+
+        this.recipeSearch.valueChanges.subscribe((val) =>
+            this.searchInputChange$.next(val)
+        );
     }
 
     ngOnInit(): void {}
