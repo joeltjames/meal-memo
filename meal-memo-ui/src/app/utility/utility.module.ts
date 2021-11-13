@@ -7,7 +7,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DayCellContentDirective } from './calendar/day-cell-content.directive';
 
 @NgModule({
-    declarations: [CalendarComponent, MonthDatePickerComponent, DayCellContentDirective],
+    declarations: [
+        CalendarComponent,
+        MonthDatePickerComponent,
+        DayCellContentDirective,
+    ],
     imports: [CommonModule, NgbModule, ReactiveFormsModule],
     exports: [CalendarComponent],
 })

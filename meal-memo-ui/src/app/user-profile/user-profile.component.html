@@ -1,1 +1,119 @@
-<p>user-profile works!</p>
+<div class="container">
+    <div class="card h-100 my-3 w-75 mx-auto">
+        <div class="card-header">User Profile</div>
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+                <a ngbNavLink>Basic Info</a>
+                <ng-template ngbNavContent>
+                    <div class="form-group">
+                        <label for="name">Username</label>
+                        <input
+                            type="text"
+                            [ngClass]="{
+                                'form-control-plaintext': readonly,
+                                'form-control': !readonly
+                            }"
+                            id="name"
+                            placeholder="Username"
+                            [readonly]="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input
+                            type="text"
+                            [ngClass]="{
+                                'form-control-plaintext': readonly,
+                                'form-control': !readonly
+                            }"
+                            id="name"
+                            [readonly]="readonly"
+                            placeholder="Full Name" />
+                    </div>
+                    <ng-container *ngIf="!readonly">
+                        <div class="form-group">
+                            <label for="name">New Password</label>
+                            <div class="input-group">
+                                <input
+                                    [type]="passwordType"
+                                    [ngClass]="{
+                                        'form-control-plaintext': readonly,
+                                        'form-control': !readonly
+                                    }"
+                                    id="name"
+                                    [readonly]="readonly"
+                                    placeholder="Password" />
+                                <button
+                                    class="btn btn-outline-secondary"
+                                    type="button"
+                                    (click)="invertPassword()">
+                                    <fa-icon [icon]="passwordIcon"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">New Password Confirmation</label>
+                            <div class="input-group">
+                                <input
+                                    [type]="confirmPasswordType"
+                                    [ngClass]="{
+                                        'form-control-plaintext': readonly,
+                                        'form-control': !readonly
+                                    }"
+                                    id="name"
+                                    [readonly]="readonly"
+                                    placeholder="Password Confirmation" />
+                                <button
+                                    class="btn btn-outline-secondary"
+                                    type="button"
+                                    (click)="invertConfirmPassword()">
+                                    <fa-icon
+                                        [icon]="confirmPasswordIcon"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+                <a ngbNavLink>Preferences</a>
+                <ng-template ngbNavContent>
+                    <p>
+                        Exercitation +1 labore velit, blog sartorial PBR
+                        leggings next level wes anderson artisan four loko
+                        farm-to-table craft beer twee. Qui photo booth
+                        letterpress, commodo enim craft beer mlkshk aliquip jean
+                        shorts ullamco ad vinyl cillum PBR. Homo nostrud
+                        organic, assumenda labore aesthetic magna delectus
+                        mollit. Keytar helvetica VHS salvia yr, vero magna velit
+                        sapiente labore stumptown. Vegan fanny pack odio cillum
+                        wes anderson 8-bit, sustainable jean shorts beard ut DIY
+                        ethical culpa terry richardson biodiesel. Art party
+                        scenester stumptown, tumblr butcher vero sint qui
+                        sapiente accusamus tattooed echo park.
+                    </p>
+                </ng-template>
+            </li>
+        </ul>
+        <div class="mt-2 p-3 overflow-auto">
+            <div [ngbNavOutlet]="nav" [style.height]="'66vh'"></div>
+        </div>
+        <div class="card-footer">
+            <button
+                *ngIf="readonly"
+                class="btn btn-outline-primary float-end"
+                (click)="readonly = false">
+                Edit
+            </button>
+            <ng-container *ngIf="!readonly">
+                <div class="float-end">
+                    <button class="btn btn-outline-dark me-2" (click)="reset()">
+                        Cancel
+                    </button>
+                    <button class="btn btn-outline-primary" (click)="save()">
+                        Submit
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
