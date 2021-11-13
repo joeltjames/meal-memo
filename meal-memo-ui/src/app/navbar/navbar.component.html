@@ -1,34 +1,78 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a data-cy="brand" class="navbar-brand" [routerLink]="['/dashboard']"><img height="30px" src="assets/logo.svg" />&nbsp;MealMemo</a>
-    <button class="navbar-toggler" (click)="isMenuCollapsed = !isMenuCollapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a data-cy="brand" class="navbar-brand" [routerLink]="['/dashboard']"
+        ><img height="30px" src="assets/logo.svg" />&nbsp;MealMemo</a
+    >
+    <button
+        class="navbar-toggler"
+        (click)="isMenuCollapsed = !isMenuCollapsed"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div
+        [ngbCollapse]="isMenuCollapsed"
+        class="collapse navbar-collapse"
+        id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" (click)="isMenuCollapsed = true" routerLinkActive="active" data-cy="dashboard" [routerLink]="['/dashboard']">Dashboard</a>
+                <a
+                    class="nav-link"
+                    (click)="isMenuCollapsed = true"
+                    routerLinkActive="active"
+                    data-cy="dashboard"
+                    [routerLink]="['/dashboard']"
+                    >Dashboard</a
+                >
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="isMenuCollapsed = true" routerLinkActive="active" data-cy="recipes" [routerLink]="['/recipes']">Recipes</a>
+                <a
+                    class="nav-link"
+                    (click)="isMenuCollapsed = true"
+                    routerLinkActive="active"
+                    data-cy="recipes"
+                    [routerLink]="['/recipes']"
+                    >Recipes</a
+                >
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="isMenuCollapsed = true" routerLinkActive="active" data-cy="meal-plan" [routerLink]="['/meal-plan']">Meal Plan</a>
+                <a
+                    class="nav-link"
+                    (click)="isMenuCollapsed = true"
+                    routerLinkActive="active"
+                    data-cy="meal-plan"
+                    [routerLink]="['/meal-plan']"
+                    >Meal Plan</a
+                >
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" (click)="isMenuCollapsed = true" routerLinkActive="active" data-cy="shopping-list" [routerLink]="['/shopping-list']">Shopping List</a>
-            </li>
+            </li> -->
         </ul>
         <ul class="navbar-nav ms-auto nav-flex-icons">
             <li class="nav-item">
-                <a class="nav-link" (click)="isMenuCollapsed = true" routerLinkActive="active" data-cy="settings" [routerLink]="['/settings']">
+                <a
+                    class="nav-link"
+                    (click)="isMenuCollapsed = true"
+                    routerLinkActive="active"
+                    data-cy="settings"
+                    [routerLink]="['/settings']">
                     <li class="nav-item dropdown">
                         <fa-icon [icon]="tools" size="lg"></fa-icon>
                     </li>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="isMenuCollapsed = true" routerLinkActive="active" data-cy="profile" [routerLink]="['/profile']">
+                <a
+                    class="nav-link"
+                    (click)="isMenuCollapsed = true"
+                    routerLinkActive="active"
+                    data-cy="profile"
+                    [routerLink]="['/profile']">
                     <li class="nav-item dropdown">
                         <fa-icon [icon]="userCircle" size="lg"></fa-icon>
                     </li>
