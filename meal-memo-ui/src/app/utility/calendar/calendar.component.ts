@@ -77,7 +77,6 @@ export class CalendarComponent implements OnInit, OnChanges {
                 this.currentDate = day;
             }
         }
-        console.log(changes);
     }
 
     public set currentDate(date: dayjs.Dayjs) {

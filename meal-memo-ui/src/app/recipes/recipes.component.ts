@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, interval, Observable, of, Subject } from 'rxjs';
+import {
+    BehaviorSubject,
+    combineLatest,
+    interval,
+    Observable,
+    of,
+    Subject,
+} from 'rxjs';
 import { RecipeState } from './store/recipe.reducer';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
@@ -22,22 +29,23 @@ export class RecipesComponent implements OnInit {
 
     searchInputChange$ = new BehaviorSubject<string>('');
 
-    constructor(private router: Router, private store: Store<{ recipe: RecipeState }>) {}
+    constructor(
+        private router: Router,
+        private store: Store<{ recipe: RecipeState }>
+    ) {}
 
     ngOnInit(): void {
         this.recipes$ = this.searchInputChange$.pipe(
             debounceTime(500),
-            switchMap((filter) => {
-                console.log(filter);
-                return this.store.select(filteredRecipeSelector(filter));
-            })
+            switchMap((filter) =>
+                this.store.select(filteredRecipeSelector(filter))
+            )
         );
 
-        this.recipeSearch.valueChanges.subscribe((val) => this.searchInputChange$.next(val));
+        this.recipeSearch.valueChanges.subscribe((val) =>
+            this.searchInputChange$.next(val)
+        );
     }
 
-
-    openRecipe(recipe: any) {
-        console.log(recipe);
-    }
+    openRecipe(recipe: any) {}
 }

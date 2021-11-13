@@ -18,7 +18,14 @@ export const removeRecipeFromMeal = createAction(
     props<MealRecipeActionProps>()
 );
 
-export const addMeal = createAction('[Meal] Add Meal');
+export interface AddOrUpdateMealProps {
+    toAddOrUpdate: Meal;
+}
+
+export const addOrUpdateMeal = createAction(
+    '[Meal] Add Meal',
+    props<AddOrUpdateMealProps>()
+);
 
 export interface RemoveMealProps {
     toRemove: Meal;

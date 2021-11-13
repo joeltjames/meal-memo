@@ -1,5 +1,5 @@
 export interface Meal {
-    id: number;
+    id?: number;
     order: number;
     key: string;
     color: string;

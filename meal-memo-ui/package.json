@@ -43,6 +43,7 @@
         "ngx-drag-drop": "^2.0.0",
         "ngx-masonry": "^12.0.0",
         "rxjs": "~6.6.0",
+        "slugify": "^1.6.2",
         "tslib": "^2.0.0",
         "zone.js": "~0.11.3"
     },

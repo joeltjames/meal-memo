@@ -131,7 +131,6 @@ export class WeeklyMealPlanComponent implements OnInit, OnChanges {
                 this.setStartDate(startDateChanges.currentValue);
             }
         }
-        console.log(changes);
     }
 
     public ngOnInit() {

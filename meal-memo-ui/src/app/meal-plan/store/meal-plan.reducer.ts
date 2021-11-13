@@ -3,11 +3,12 @@ import { Meal } from 'src/app/interfaces/meal';
 import { Recipe } from 'src/app/interfaces/recipe';
 import { convertDate } from 'src/app/utils';
 import {
-    addMeal,
+    addOrUpdateMeal,
     removeMeal,
     RemoveMealProps,
     reorderMeals,
     ReOrderMealProps,
+    AddOrUpdateMealProps,
 } from './meal-plan.actions';
 import {
     addRecipeToMeal,
@@ -92,7 +93,28 @@ const initialMealState: MealState = [
 
 const internalMealReducer = createReducer(
     initialMealState,
-    on(addMeal, (state: MealState, props: any) => state),
+    on(addOrUpdateMeal, (state: MealState, props: AddOrUpdateMealProps) => {
+        const mutableState = JSON.parse(JSON.stringify(state)) as MealState;
+        const updatedMeal = JSON.parse(JSON.stringify(props.toAddOrUpdate));
+        if (updatedMeal.id != null) {
+            const foundMeal = mutableState.find(
+                (meal) => meal.id === updatedMeal.id
+            );
+            if (foundMeal) {
+                foundMeal.color = updatedMeal.color;
+                foundMeal.name = updatedMeal.name;
+                foundMeal.key = updatedMeal.key;
+                foundMeal.order = updatedMeal.order;
+            } else {
+                updatedMeal.id = mutableState.length;
+                mutableState.push(updatedMeal);
+            }
+        } else {
+            updatedMeal.id = mutableState.length;
+            mutableState.push(updatedMeal);
+        }
+        return mutableState;
+    }),
     on(removeMeal, (state: MealState, props: RemoveMealProps) =>
         state.filter((meal) => meal.id !== props.toRemove.id)
     ),
