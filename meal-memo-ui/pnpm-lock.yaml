@@ -54,7 +54,9 @@ specifiers:
   lint-staged: ^11.2.6
   masonry-layout: ^4.2.2
   moment: ^2.29.1
+  ng-bs-form-builder: ^1.2.1
   ng2-dragula: ^2.1.1
+  ngx-color-picker: ^11.0.0
   ngx-drag-drop: ^2.0.0
   ngx-masonry: ^12.0.0
   pnpm: ^6.20.3
@@ -89,7 +91,9 @@ dependencies:
   dayjs: 1.10.7
   masonry-layout: 4.2.2
   moment: 2.29.1
+  ng-bs-form-builder: 1.2.1_7ecd533fb4e1d83f37106a4598ee9ed0
   ng2-dragula: 2.1.1_@angular+core@11.1.2+rxjs@6.6.7
+  ngx-color-picker: 11.0.0_2f14376bd0cdcbe56a63911167262e3f
   ngx-drag-drop: 2.0.0
   ngx-masonry: 12.0.0_108d32c91340d786ef469dbce31dd252
   rxjs: 6.6.7
@@ -7645,6 +7649,19 @@ packages:
     resolution: {integrity: sha1-yobR/ogoFpsBICCOPchCS524NCw=}
     dev: true
 
+  /ng-bs-form-builder/1.2.1_7ecd533fb4e1d83f37106a4598ee9ed0:
+    resolution: {integrity: sha512-vaw5fcMF0VszXXA4NatZablolpy87qZb12AIyf/6FnL2hideMdK+itNAJHSIc16yc7dOAhRKW9Zpw2IBlJfMgw==}
+    peerDependencies:
+      '@angular/common': ^10.2.0
+      '@angular/core': ^10.2.0
+      '@ng-bootstrap/ng-bootstrap': ^10.0.0
+    dependencies:
+      '@angular/common': 11.1.2_@angular+core@11.1.2+rxjs@6.6.7
+      '@angular/core': 11.1.2_rxjs@6.6.7+zone.js@0.11.4
+      '@ng-bootstrap/ng-bootstrap': 11.0.0-beta.2_1fbf14165814a919cce33e2319099170
+      tslib: 2.3.1
+    dev: false
+
   /ng2-dragula/2.1.1_@angular+core@11.1.2+rxjs@6.6.7:
     resolution: {integrity: sha512-PSo6N2Ja894KDogVLLBI0Hzpylikay7L1hWqp+qQmW+qsNsNT9J/6J2Qim9XwGzK4VQZjAwBJaJjgJ/TijRkLQ==}
     peerDependencies:
@@ -7655,6 +7672,19 @@ packages:
       '@types/dragula': 2.1.36
       dragula: 3.7.3
       rxjs: 6.6.7
+    dev: false
+
+  /ngx-color-picker/11.0.0_2f14376bd0cdcbe56a63911167262e3f:
+    resolution: {integrity: sha512-HyiFNPYLrCyYbFpLvZJaHC43RhjfDdFDij4pnvk9R46iH1scVtO6f2ibBgxRwBKKsT94KYvOH8wF8OrvztWdEw==}
+    peerDependencies:
+      '@angular/common': '>=9.0.0'
+      '@angular/core': '>=9.0.0'
+      '@angular/forms': '>=9.0.0'
+    dependencies:
+      '@angular/common': 11.1.2_@angular+core@11.1.2+rxjs@6.6.7
+      '@angular/core': 11.1.2_rxjs@6.6.7+zone.js@0.11.4
+      '@angular/forms': 11.1.2_7f3778833f6558af41fbc1c1b66d3f0f
+      tslib: 2.3.1
     dev: false
 
   /ngx-drag-drop/2.0.0:

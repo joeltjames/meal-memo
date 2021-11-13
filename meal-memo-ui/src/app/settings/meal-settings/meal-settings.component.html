@@ -1,1 +1,27 @@
-<p>meal-settings works!</p>
+<div class="card shadow" style="width: 18rem">
+    <div class="card-header">Meal Settings</div>
+    <div class="card-body">
+        <span>Meals:</span>
+        <div class="list-group" [dragula]="MEALS" [(dragulaModel)]="meals">
+            <div
+                class="list-group-item meal clickable"
+                *ngFor="let meal of meals"
+                (click)="editMeal(meal)"
+                [style.background]="meal.color">
+                {{ meal.name }}
+                <fa-icon
+                    [icon]="removeIcon"
+                    (click)="removeMeal(meal)"
+                    class="remove-icon text-danger clickable"></fa-icon>
+            </div>
+        </div>
+        <div class="list-group">
+            <div
+                class="list-group-item list-group-item-action clickable"
+                (click)="addMeal()">
+                Add New Meal
+                <fa-icon [icon]="addIcon" class="text-success"></fa-icon>
+            </div>
+        </div>
+    </div>
+</div>

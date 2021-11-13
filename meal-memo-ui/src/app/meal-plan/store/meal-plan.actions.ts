@@ -17,3 +17,21 @@ export const removeRecipeFromMeal = createAction(
     '[Meal Plan] Remove Recipe From Meal Plan',
     props<MealRecipeActionProps>()
 );
+
+export const addMeal = createAction('[Meal] Add Meal');
+
+export interface RemoveMealProps {
+    toRemove: Meal;
+}
+export const removeMeal = createAction(
+    '[Meal] Remove Meal',
+    props<RemoveMealProps>()
+);
+
+export interface ReOrderMealProps {
+    updatedOrder: Meal[];
+}
+export const reorderMeals = createAction(
+    '[Meal] Re-Order Meal',
+    props<ReOrderMealProps>()
+);

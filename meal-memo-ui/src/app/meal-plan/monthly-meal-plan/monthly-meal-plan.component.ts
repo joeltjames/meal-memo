@@ -13,7 +13,12 @@ import * as dayjs from 'dayjs';
 import { Observable } from 'rxjs';
 import { Meal } from 'src/app/interfaces/meal';
 import { EditDailyMealPlanModalComponent } from '../edit-daily-meal-plan-modal/edit-daily-meal-plan-modal.component';
-import { mealPlanSelectorGenerator, MealPlanState, MealState } from '../store';
+import {
+    mealPlanSelectorGenerator,
+    MealPlanState,
+    mealSelector,
+    MealState,
+} from '../store';
 
 @Component({
     selector: 'app-monthly-meal-plan',
@@ -54,7 +59,7 @@ export class MonthlyMealPlanComponent {
             this.meals = mp;
         });
 
-        this.meals$ = store.select('meal');
+        this.meals$ = store.select(mealSelector);
     }
 
     onDrop(date: string, event: any) {

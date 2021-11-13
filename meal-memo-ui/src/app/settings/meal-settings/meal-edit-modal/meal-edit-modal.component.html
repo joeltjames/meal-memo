@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h4 class="modal-title" *ngIf="!meal">Create A New Meal</h4>
+    <h4 class="modal-title" *ngIf="meal">Edit {{ meal.name }}</h4>
+    <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="mealForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                placeholder="Meal Name" />
+        </div>
+        <div class="form-group">
+            <label for="color">Color</label>
+            <input
+                id="color"
+                class="form-control meal"
+                formControlName="color"
+                aria-describedby="colorHelp"
+                cpAlphaChannel="disabled"
+                [style.background]="mealForm.get('color')?.value"
+                [cpPresetColors]="presetColors"
+                formControlName="color"
+                (colorPickerChange)="mealForm.get('color')?.setValue($event)"
+                [value]="mealForm.get('color')?.value"
+                [colorPicker]="mealForm.get('color')?.value" />
+            <small id="colorHelp" class="form-text text-muted"
+                >Click to change color!</small
+            >
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="activeModal.close('Close click')">
+        Close
+    </button>
+</div>

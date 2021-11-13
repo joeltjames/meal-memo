@@ -5,10 +5,18 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { addRecipeToMeal, removeRecipeFromMeal } from '../store/meal-plan.actions';
+import {
+    addRecipeToMeal,
+    removeRecipeFromMeal,
+} from '../store/meal-plan.actions';
 import { Meal } from 'src/app/interfaces/meal';
 import * as dayjs from 'dayjs';
-import { mealPlanSelectorGenerator, MealPlanState, mealSelector, MealState } from '../store';
+import {
+    mealPlanSelectorGenerator,
+    MealPlanState,
+    mealSelector,
+    MealState,
+} from '../store';
 import { map } from 'rxjs/operators';
 @Component({
     selector: 'app-edit-daily-meal-plan-modal',
@@ -41,10 +49,13 @@ export class EditDailyMealPlanModalComponent implements OnInit {
 
     ngOnInit(): void {
         this.mealPlan$ = this.store.select(
-            mealPlanSelectorGenerator(this.date.format('YYYY-MM-DD'), this.date.add(1, 'd').format('YYYY-MM-DD'))
+            mealPlanSelectorGenerator(
+                this.date.format('YYYY-MM-DD'),
+                this.date.add(1, 'd').format('YYYY-MM-DD')
+            )
         );
 
-        this.meal$ = this.store.select('meal');
+        this.meal$ = this.store.select(mealSelector);
 
         this.dateStr = this.date.format('YYYY-MM-DD');
     }
@@ -74,18 +85,28 @@ export class EditDailyMealPlanModalComponent implements OnInit {
         }
         obs?.subscribe((recipe) => {
             if (recipe) {
-                this.store.dispatch(addRecipeToMeal({ meal, recipe, date: this.date.toDate() }));
+                this.store.dispatch(
+                    addRecipeToMeal({ meal, recipe, date: this.date.toDate() })
+                );
             }
         });
     }
 
     public removeRecipe(meal: Meal, recipe: Recipe) {
-        this.store.dispatch(removeRecipeFromMeal({ meal, recipe, date: this.date.toDate() }));
+        this.store.dispatch(
+            removeRecipeFromMeal({ meal, recipe, date: this.date.toDate() })
+        );
     }
 
     public onSave() {
         this.toAdd.forEach((toAdd) => {
-            this.store.dispatch(addRecipeToMeal({ meal: toAdd.meal, recipe: toAdd.recipe, date: this.date.toDate() }));
+            this.store.dispatch(
+                addRecipeToMeal({
+                    meal: toAdd.meal,
+                    recipe: toAdd.recipe,
+                    date: this.date.toDate(),
+                })
+            );
         });
 
         this.activeModal.close('save');

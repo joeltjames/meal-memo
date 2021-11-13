@@ -22,6 +22,7 @@ import {
     MealPlanState,
     mealPlanSelectorGenerator,
     addRecipeToMeal,
+    mealSelector,
 } from '../store';
 
 @Component({
@@ -55,7 +56,7 @@ export class WeeklyMealPlanComponent implements OnInit, OnChanges {
         private store: Store<{ mealPlan: MealPlanState; meal: MealState }>,
         breakpointObserver: BreakpointObserver
     ) {
-        this.meals$ = store.select('meal');
+        this.meals$ = store.select(mealSelector);
 
         this.mealPlan$ = this.date$.pipe(
             switchMap((date) =>

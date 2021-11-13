@@ -1,0 +1,13 @@
+.meal {
+    color: white;
+    text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black,
+        0 -0.05em black, -0.05em -0.05em black, -0.05em 0.05em black,
+        0.05em -0.05em black, 0.05em 0.05em black;
+}
+
+.remove-icon {
+    svg {
+        filter: drop-shadow(1px 1px 0px white) drop-shadow(-1px 1px 0px white)
+            drop-shadow(1px -1px 0px white) drop-shadow(-1px -1px 0px white);
+    }
+}
