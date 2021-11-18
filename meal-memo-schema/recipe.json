@@ -1,0 +1,282 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "id": 0,
+      "title": "Chicken and White Bean Enchiladas with Creamy Salsa Verde",
+      "slug": "chicken-and-white-bean-enchiladas-with-creamy-salsa-verde",
+      "yields": "8 serving(s)",
+      "ingredients": [
+        "1 tsp olive oil",
+        "1/4 cup minced white onion",
+        "2 cloves garlic (minced)",
+        "4.5 oz can chopped green chiles",
+        "15.5 oz can Navy beans (or Cannellini beans)",
+        "8 oz cooked shredded chicken breast",
+        "1/4 cup water",
+        "1 chicken bullion",
+        "1 teaspoon ground cumin",
+        "1 teaspoon butter",
+        "1/2 cup chopped white onion",
+        "2 tbsp flour",
+        "1 cup reduced sodium chicken broth",
+        "7 oz can chopped green chile",
+        "2 jalapeños (chopped (I used jarred))",
+        "kosher salt",
+        "1/2 cup light sour cream",
+        "3/4 cup reduced fat Mexican cheese",
+        "8 8-inch flour tortillas",
+        "chopped fresh cilantro or scallions (or both!)"
+      ],
+      "instructions": [
+        "Preheat oven to 375°.",
+        "For the Filling",
+        "In a medium pan, heat olive oil on low. Add onions, garlic and saute until soft, about 2-3 minutes.",
+        "Add green chiles, beans, water, bullion, and cumin. Mix well and cover. Simmer on low 15 minutes.",
+        "Remove cover, add chicken and cook an additional 5 minutes, or until it thickens and liquid boils down. Set aside.",
+        "For the Creamy Salsa Verde Sauce",
+        "In a large nonstick pan, melt the butter over medium heat. Add onion and cook, stirring occasionally, until the onion softens and starts to turn translucent, about 3-4 minutes.",
+        "Add flour and stir well. Cook for 1 minute, stirring constantly. Slowly whisk in the chicken broth. Whisk until the sauce becomes smooth.",
+        "Cook over medium heat until the sauce boils and thickens, about 4-5 minutes. Add green chiles, jalepeños, and salt to taste.",
+        "Cook another minute then remove from the heat. Stir in the sour cream.",
+        "To assemble",
+        "Spread about 1/4 cup of the enchilada sauce on the bottom of a 9×13″ baking dish. Fill each tortilla with 1/3 cup of the chicken/white bean filling.",
+        "Roll the tortillas and place seam side down in the prepared baking dish. Continue filling remainder of the tortillas.",
+        "Pour the enchilada sauce over the top of the enchiladas. Top with cheese.",
+        "Cover with aluminum and bake 20-30 minutes, until the enchiladas are hot and the cheese is melted. Remove from oven and top with fresh cilantro or scallions."
+      ],
+      "image": "https://www.skinnytaste.com/wp-content/uploads/2010/06/Chicken-and-White-Bean-Enchiladas-with-Creamy-Salsa-Verde-1.jpg",
+      "host": "skinnytaste.com",
+      "nutrients": {
+        "servingSize": "1 enchilada",
+        "calories": "231 kcal",
+        "carbohydrateContent": "24 g",
+        "proteinContent": "20 g",
+        "fatContent": "8 g",
+        "cholesterolContent": "30 mg",
+        "sodiumContent": "840 mg",
+        "fiberContent": "9 g",
+        "sugarContent": "2 g"
+      },
+      "url": "https://www.skinnytaste.com/chicken-and-white-bean-enchiladas-with/"
+    }
+  ],
+  "required": [
+    "id",
+    "title",
+    "slug",
+    "yields",
+    "ingredients",
+    "instructions",
+    "image",
+    "host",
+    "nutrients",
+    "url"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The id schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [0]
+    },
+    "title": {
+      "$id": "#/properties/title",
+      "type": "string",
+      "title": "The title schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["Chicken and White Bean Enchiladas with Creamy Salsa Verde"]
+    },
+    "slug": {
+      "$id": "#/properties/slug",
+      "type": "string",
+      "title": "The slug schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["chicken-and-white-bean-enchiladas-with-creamy-salsa-verde"]
+    },
+    "yields": {
+      "$id": "#/properties/yields",
+      "type": "string",
+      "title": "The yields schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["8 serving(s)"]
+    },
+    "ingredients": {
+      "$id": "#/properties/ingredients",
+      "type": "array",
+      "title": "The ingredients schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [["1 tsp olive oil", "1/4 cup minced white onion"]],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/ingredients/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/ingredients/items/anyOf/0",
+            "type": "string",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": ["1 tsp olive oil", "1/4 cup minced white onion"]
+          }
+        ]
+      }
+    },
+    "instructions": {
+      "$id": "#/properties/instructions",
+      "type": "array",
+      "title": "The instructions schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [["Preheat oven to 375°.", "For the Filling"]],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/instructions/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/instructions/items/anyOf/0",
+            "type": "string",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": ["Preheat oven to 375°.", "For the Filling"]
+          }
+        ]
+      }
+    },
+    "image": {
+      "$id": "#/properties/image",
+      "type": "string",
+      "title": "The image schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://www.skinnytaste.com/wp-content/uploads/2010/06/Chicken-and-White-Bean-Enchiladas-with-Creamy-Salsa-Verde-1.jpg"
+      ]
+    },
+    "host": {
+      "$id": "#/properties/host",
+      "type": "string",
+      "title": "The host schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["skinnytaste.com"]
+    },
+    "nutrients": {
+      "$id": "#/properties/nutrients",
+      "type": "object",
+      "title": "The nutrients schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "servingSize": "1 enchilada",
+          "calories": "231 kcal",
+          "carbohydrateContent": "24 g",
+          "proteinContent": "20 g",
+          "fatContent": "8 g",
+          "cholesterolContent": "30 mg",
+          "sodiumContent": "840 mg",
+          "fiberContent": "9 g",
+          "sugarContent": "2 g"
+        }
+      ],
+      "required": ["calories"],
+      "properties": {
+        "servingSize": {
+          "$id": "#/properties/nutrients/properties/servingSize",
+          "type": "string",
+          "title": "The servingSize schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["1 enchilada"]
+        },
+        "calories": {
+          "$id": "#/properties/nutrients/properties/calories",
+          "type": "string",
+          "title": "The calories schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["231 kcal"]
+        },
+        "carbohydrateContent": {
+          "$id": "#/properties/nutrients/properties/carbohydrateContent",
+          "type": "string",
+          "title": "The carbohydrateContent schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["24 g"]
+        },
+        "proteinContent": {
+          "$id": "#/properties/nutrients/properties/proteinContent",
+          "type": "string",
+          "title": "The proteinContent schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["20 g"]
+        },
+        "fatContent": {
+          "$id": "#/properties/nutrients/properties/fatContent",
+          "type": "string",
+          "title": "The fatContent schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["8 g"]
+        },
+        "cholesterolContent": {
+          "$id": "#/properties/nutrients/properties/cholesterolContent",
+          "type": "string",
+          "title": "The cholesterolContent schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["30 mg"]
+        },
+        "sodiumContent": {
+          "$id": "#/properties/nutrients/properties/sodiumContent",
+          "type": "string",
+          "title": "The sodiumContent schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["840 mg"]
+        },
+        "fiberContent": {
+          "$id": "#/properties/nutrients/properties/fiberContent",
+          "type": "string",
+          "title": "The fiberContent schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["9 g"]
+        },
+        "sugarContent": {
+          "$id": "#/properties/nutrients/properties/sugarContent",
+          "type": "string",
+          "title": "The sugarContent schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["2 g"]
+        }
+      }
+    },
+    "url": {
+      "$id": "#/properties/url",
+      "type": "string",
+      "title": "The url schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "https://www.skinnytaste.com/chicken-and-white-bean-enchiladas-with/"
+      ]
+    }
+  }
+}

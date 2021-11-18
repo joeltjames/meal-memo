@@ -77,25 +77,22 @@
             <li [ngbNavItem]="2">
                 <a ngbNavLink>Preferences</a>
                 <ng-template ngbNavContent>
-                    <p>
-                        Exercitation +1 labore velit, blog sartorial PBR
-                        leggings next level wes anderson artisan four loko
-                        farm-to-table craft beer twee. Qui photo booth
-                        letterpress, commodo enim craft beer mlkshk aliquip jean
-                        shorts ullamco ad vinyl cillum PBR. Homo nostrud
-                        organic, assumenda labore aesthetic magna delectus
-                        mollit. Keytar helvetica VHS salvia yr, vero magna velit
-                        sapiente labore stumptown. Vegan fanny pack odio cillum
-                        wes anderson 8-bit, sustainable jean shorts beard ut DIY
-                        ethical culpa terry richardson biodiesel. Art party
-                        scenester stumptown, tumblr butcher vero sint qui
-                        sapiente accusamus tattooed echo park.
-                    </p>
+                    <div class="form-group">
+                        <label for="default-grid">Meal Plan Default View</label>
+                        <select
+                            id="default-grid"
+                            class="form-select"
+                            [disabled]="readonly"
+                            aria-label="Default select example">
+                            <option value="MONTHLY">Monthly</option>
+                            <option value="WEEKLY">Weekly</option>
+                        </select>
+                    </div>
                 </ng-template>
             </li>
         </ul>
-        <div class="mt-2 p-3 overflow-auto">
-            <div [ngbNavOutlet]="nav" [style.height]="'66vh'"></div>
+        <div class="mt-2 p-3 overflow-auto" [style.height]="'60vh'">
+            <div [ngbNavOutlet]="nav"></div>
         </div>
         <div class="card-footer">
             <button

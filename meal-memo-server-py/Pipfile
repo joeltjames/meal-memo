@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 recipe-scrapers = "*"
 python-slugify = "*"
+flask = "*"
+flask-rest-jsonapi = "*"
+flask-sqlalchemy = "*"
+marshmallow-jsonapi = "*"
 
 [dev-packages]
 autopep8 = "*"
