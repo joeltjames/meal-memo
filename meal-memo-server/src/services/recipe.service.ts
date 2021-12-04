@@ -17,11 +17,12 @@ export default class RecipeService {
         return await RecipeModel.findAll({
             where: {
                 title: {
-                    [Op.or]: filter.map(f => ({[Op.substring]: f}))
+                    [Op.or]: filter.map((f) => ({ [Op.substring]: f })),
                 },
             },
             limit: limit,
-            offset: page * limit
+            offset: page * limit,
+            order: ['title'],
         });
     }
 
