@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@alt3/sequelize-to-json-schemas': ^0.3.56
   '@types/express': ^4.17.13
   '@types/node': ^16.11.7
   '@types/validator': ^13.7.0
@@ -18,14 +19,16 @@ specifiers:
   reflect-metadata: ^0.1.13
   sequelize: ^6.9.0
   sequelize-json-schema: ^2.1.1
+  slugify: ^1.6.2
   sqlite3: ^5.0.2
   ts-node: ^10.4.0
   tsconfig-paths: ^3.11.0
   typedi: ^0.10.0
-  typescript: ^4.4.4
+  typescript: ^4.5.2
   winston: ^3.3.3
 
 dependencies:
+  '@alt3/sequelize-to-json-schemas': 0.3.56
   argon2: 0.28.2
   cors: 2.8.5
   dotenv: 10.0.0
@@ -38,6 +41,7 @@ dependencies:
   reflect-metadata: 0.1.13
   sequelize: 6.9.0_sqlite3@5.0.2
   sequelize-json-schema: 2.1.1_sequelize@6.9.0
+  slugify: 1.6.3
   sqlite3: 5.0.2
   typedi: 0.10.0
   winston: 3.3.3
@@ -48,11 +52,16 @@ devDependencies:
   '@types/validator': 13.7.0
   eslint: 8.2.0
   nodemon: 2.0.15
-  ts-node: 10.4.0_ee928ac548ac44c173bf0d4654ae2c29
+  ts-node: 10.4.0_822df8cc64711c2db8d43ce90a8558a3
   tsconfig-paths: 3.11.0
-  typescript: 4.4.4
+  typescript: 4.5.2
 
 packages:
+
+  /@alt3/sequelize-to-json-schemas/0.3.56:
+    resolution: {integrity: sha512-uCPKtZEn6+svkwrT2UaiJKZ+XAJR5+KpRTqM+l7+mXbUSCad4ySvM5Ng5NUTtht7QtaxERfVCa0V++LOSYmUXQ==}
+    engines: {node: '>=8', npm: '>=3'}
+    dev: false
 
   /@cspotcode/source-map-consumer/0.8.0:
     resolution: {integrity: sha512-41qniHzTU8yAGbCp04ohlmSrZf8bkf/iJsl3V0dRGsQN/5GFfx+LbCSsCpp2gqrqjTVg/K6O8ycoV35JIwAzAg==}
@@ -2452,6 +2461,11 @@ packages:
       is-arrayish: 0.3.2
     dev: false
 
+  /slugify/1.6.3:
+    resolution: {integrity: sha512-1MPyqnIhgiq+/0iDJyqSJHENdnH5MMIlgJIBxmkRMzTNKlS/QsN5dXsB+MdDq4E6w0g9jFA4XOTRkVDjDae/2w==}
+    engines: {node: '>=8.0.0'}
+    dev: false
+
   /sqlite3/5.0.2:
     resolution: {integrity: sha512-1SdTNo+BVU211Xj1csWa8lV6KM0CtucDwRyA0VHl91wEH1Mgh7RxUpI4rVvG7OhHrzCSGaVyW5g8vKvlrk9DJA==}
     requiresBuild: true
@@ -2649,7 +2663,7 @@ packages:
     resolution: {integrity: sha512-XrHUvV5HpdLmIj4uVMxHggLbFSZYIn7HEWsqePZcI50pco+MPqJ50wMGY794X7AOOhxOBAjbkqfAbEe/QMp2Lw==}
     dev: false
 
-  /ts-node/10.4.0_ee928ac548ac44c173bf0d4654ae2c29:
+  /ts-node/10.4.0_822df8cc64711c2db8d43ce90a8558a3:
     resolution: {integrity: sha512-g0FlPvvCXSIO1JDF6S232P5jPYqBkRL9qly81ZgAOSU7rwI0stphCgd2kLiCrU9DjQCrJMWEqcNSjQL02s6d8A==}
     hasBin: true
     peerDependencies:
@@ -2675,7 +2689,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 4.4.4
+      typescript: 4.5.2
       yn: 3.1.1
     dev: true
 
@@ -2730,8 +2744,8 @@ packages:
     resolution: {integrity: sha512-v3UJF8xm68BBj6AF4oQML3ikrfK2c9EmZUyLOfShpJuItAqVBHWP/KtpGinkSsIiP6EZyyb6Z3NXyW9dgS9X1w==}
     dev: false
 
-  /typescript/4.4.4:
-    resolution: {integrity: sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==}
+  /typescript/4.5.2:
+    resolution: {integrity: sha512-5BlMof9H1yGt0P8/WF+wPNw6GfctgGjXp5hkblpyT+8rkASSmkUKMXrxR0Xg8ThVCi/JnHQiKXeBaEwCeQwMFw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true

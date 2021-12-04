@@ -8,6 +8,8 @@ import LoggerInstance from './logger';
 
 export default ({ db }: { db: Sequelize }) => {
     try {
+        Container.set('db', db);
+
         Object.keys(db.models).forEach((key) => {
             const name = `${key.toLowerCase()}Model`;
             Container.set(name, db.models[key]);

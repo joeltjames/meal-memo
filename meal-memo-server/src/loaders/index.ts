@@ -1,4 +1,5 @@
 import expressLoader from './express';
+import expressDevLoader from './express.dev';
 import dependencyInjectorLoader from './dependencyInjector';
 import sequelize from './sequelize';
 // import mongooseLoader from './mongoose';
@@ -22,4 +23,10 @@ export default async ({ expressApp }) => {
     await expressLoader({ app: expressApp });
 
     Logger.info('✌️ Express loaded');
+
+    await expressDevLoader({ app: expressApp });
+
+    Logger.info('✌️ Express Dev Routes loaded');
+
+    return expressApp;
 };

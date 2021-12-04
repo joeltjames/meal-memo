@@ -11,12 +11,14 @@
         "lint": "npm run lint:js ",
         "lint:eslint": "eslint --ignore-path .gitignore --ext .ts",
         "lint:js": "npm run lint:eslint src/",
-        "lint:fix": "npm run lint:js -- --fix"
+        "lint:fix": "npm run lint:js -- --fix",
+        "test": "jest --passWithNoTests"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@alt3/sequelize-to-json-schemas": "^0.3.56",
         "argon2": "^0.28.2",
         "cors": "^2.8.5",
         "dotenv": "^10.0.0",
@@ -31,7 +33,8 @@
         "sequelize-json-schema": "^2.1.1",
         "sqlite3": "^5.0.2",
         "typedi": "^0.10.0",
-        "winston": "^3.3.3"
+        "winston": "^3.3.3",
+        "slugify": "^1.6.2"
     },
     "devDependencies": {
         "@types/express": "^4.17.13",
@@ -41,6 +44,6 @@
         "nodemon": "^2.0.15",
         "ts-node": "^10.4.0",
         "tsconfig-paths": "^3.11.0",
-        "typescript": "^4.4.4"
+        "typescript": "^4.5.2"
     }
 }

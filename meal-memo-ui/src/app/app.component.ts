@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loadRecipes } from './recipes/store/recipe.actions';
 
 @Component({
     selector: 'app-root',
@@ -9,7 +11,9 @@ import { Route, Router } from '@angular/router';
 export class AppComponent implements OnInit {
     title = 'meal-memo-ui';
 
-    constructor() {}
+    constructor(store: Store) {
+        store.dispatch(loadRecipes({}));
+    }
 
     ngOnInit() {}
 }

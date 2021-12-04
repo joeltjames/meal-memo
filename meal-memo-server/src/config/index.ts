@@ -58,6 +58,9 @@ export default {
         prefix: '/api',
     },
 
+    jwtSecret: '',
+    jwtAlgorithm: '',
+
     // /**
     //  * Mailgun email credentials
     //  */
@@ -66,4 +69,6 @@ export default {
     //     apiUsername: process.env.MAILGUN_USERNAME,
     //     domain: process.env.MAILGUN_DOMAIN,
     // },
+
+    development: process.env.NODE_ENV === 'development'
 };

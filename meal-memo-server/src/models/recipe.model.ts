@@ -4,6 +4,7 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 export class RecipeModel extends Model<RecipeAttributes> {
     public id: number;
     public title: string;
+    public slug: string;
 }
 
 export default async (db: Sequelize): Promise<any> => {
@@ -17,6 +18,10 @@ export default async (db: Sequelize): Promise<any> => {
             title: {
                 type: DataTypes.STRING,
                 allowNull: false,
+            },
+            slug: {
+                type: DataTypes.STRING,
+                allowNull: true,
             },
         },
         {

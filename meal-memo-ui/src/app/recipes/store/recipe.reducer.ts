@@ -1,169 +1,14 @@
 /* eslint-disable max-len */
-import { createReducer } from '@ngrx/store';
+import { ngModuleJitUrl } from '.pnpm/@angular+compiler@11.1.2/node_modules/@angular/compiler';
+import { createReducer, on } from '@ngrx/store';
 import { Recipe } from 'src/app/interfaces/recipe';
+import {
+    recipesLoadedSuccess,
+    RecipesLoadedSuccessProps,
+    recipesSearchedSuccess,
+} from './recipe.actions';
 
 let sampleRecipes: Recipe[] = [
-    {
-        id: 0,
-        title: 'Chicken and White Bean Enchiladas with Creamy Salsa Verde',
-        slug: 'chicken-and-white-bean-enchiladas-with-creamy-salsa-verde',
-        yields: '8 serving(s)',
-        ingredients: [
-            '1 tsp olive oil',
-            '1/4 cup minced white onion',
-            '2 cloves garlic (minced)',
-            '4.5 oz can chopped green chiles',
-            '15.5 oz can Navy beans (or Cannellini beans)',
-            '8 oz cooked shredded chicken breast',
-            '1/4 cup water',
-            '1 chicken bullion',
-            '1 teaspoon ground cumin',
-            '1 teaspoon butter',
-            '1/2 cup chopped white onion',
-            '2 tbsp flour',
-            '1 cup reduced sodium chicken broth',
-            '7 oz can chopped green chile',
-            '2 jalapeños (chopped (I used jarred))',
-            'kosher salt',
-            '1/2 cup light sour cream',
-            '3/4 cup reduced fat Mexican cheese',
-            '8 8-inch flour tortillas',
-            'chopped fresh cilantro or scallions (or both!)',
-        ],
-        instructions: [
-            'Preheat oven to 375°.',
-            'For the Filling',
-            'In a medium pan, heat olive oil on low. Add onions, garlic and saute until soft, about 2-3 minutes.',
-            'Add green chiles, beans, water, bullion, and cumin. Mix well and cover. Simmer on low 15 minutes.',
-            'Remove cover, add chicken and cook an additional 5 minutes, or until it thickens and liquid boils down. Set aside.',
-            'For the Creamy Salsa Verde Sauce',
-            'In a large nonstick pan, melt the butter over medium heat. Add onion and cook, stirring occasionally, until the onion softens and starts to turn translucent, about 3-4 minutes.',
-            'Add flour and stir well. Cook for 1 minute, stirring constantly. Slowly whisk in the chicken broth. Whisk until the sauce becomes smooth.',
-            'Cook over medium heat until the sauce boils and thickens, about 4-5 minutes. Add green chiles, jalepeños, and salt to taste.',
-            'Cook another minute then remove from the heat. Stir in the sour cream.',
-            'To assemble',
-            'Spread about 1/4 cup of the enchilada sauce on the bottom of a 9×13″ baking dish. Fill each tortilla with 1/3 cup of the chicken/white bean filling.',
-            'Roll the tortillas and place seam side down in the prepared baking dish. Continue filling remainder of the tortillas.',
-            'Pour the enchilada sauce over the top of the enchiladas. Top with cheese.',
-            'Cover with aluminum and bake 20-30 minutes, until the enchiladas are hot and the cheese is melted. Remove from oven and top with fresh cilantro or scallions.',
-        ],
-        image: 'https://www.skinnytaste.com/wp-content/uploads/2010/06/Chicken-and-White-Bean-Enchiladas-with-Creamy-Salsa-Verde-1.jpg',
-        host: 'skinnytaste.com',
-        nutrients: {
-            servingSize: '1 enchilada',
-            calories: '231 kcal',
-            carbohydrateContent: '24 g',
-            proteinContent: '20 g',
-            fatContent: '8 g',
-            cholesterolContent: '30 mg',
-            sodiumContent: '840 mg',
-            fiberContent: '9 g',
-            sugarContent: '2 g',
-        },
-        url: 'https://www.skinnytaste.com/chicken-and-white-bean-enchiladas-with/',
-    },
-    {
-        id: 1,
-        title: 'Turkey Cuban Sandwich',
-        slug: 'turkey-cuban-sandwich',
-        yields: '1 serving(s)',
-        ingredients: [
-            '1 6 " slice French Bread (fat free)',
-            '3 oz left over turkey breast (heated)',
-            '1 slice of ham',
-            '2 thin slices of Alpine Lace Swiss cheese',
-            '3 slices of pickles',
-            'mustard',
-            'Pam cooking spray',
-        ],
-        instructions: [
-            'Slice the bread open.',
-            'Spread mustard on both sides.',
-            'Place cheese and pickles on the bread.',
-            'Add turkey and top with ham.',
-            'Close your sandwich, spray the sandwich press with buttered flavored Pam and press down until the cheese is melted and the crust is a little crispy.',
-            'Cut the sandwich on the diagonal and enjoy!',
-        ],
-        image: 'https://www.skinnytaste.com/wp-content/uploads/2009/11/turkey-cuban-sandwich2.jpg',
-        host: 'skinnytaste.com',
-        nutrients: { servingSize: '1 sandwich', calories: '321 kcal' },
-        url: 'https://www.skinnytaste.com/skinny-turkey-cuban-sandwich/',
-    },
-    {
-        id: 2,
-        title: 'Spinach and Feta Turkey Burgers',
-        slug: 'spinach-and-feta-turkey-burgers',
-        yields: '8 serving(s)',
-        ingredients: [
-            '2 eggs, beaten',
-            '2 cloves garlic, minced',
-            '4 ounces feta cheese',
-            '1 (10 ounce) box frozen chopped spinach, thawed and squeezed dry',
-            '2 pounds ground turkey',
-        ],
-        instructions: [
-            'Preheat an outdoor grill for medium-high heat and lightly oil grate.',
-            'While the grill is preheating, mix together eggs, garlic, feta cheese, spinach, and turkey in a large bowl until well combined; form into 8 patties.',
-            'Cook on preheated grill until no longer pink in the center, 15 to 20 minutes.',
-        ],
-        image: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2020%2F03%2F20%2F1360550.jpg',
-        host: 'allrecipes.com',
-        nutrients: {
-            calories: '233.4 calories',
-            carbohydrateContent: '2.4 g',
-            cholesterolContent: '142.9 mg',
-            fatContent: '13 g',
-            fiberContent: '1 g',
-            proteinContent: '27.4 g',
-            saturatedFatContent: '4.7 g',
-            sodiumContent: '266.1 mg',
-            sugarContent: '0.9 g',
-        },
-        url: 'https://www.allrecipes.com/recipe/158968/spinach-and-feta-turkey-burgers/',
-    },
-    {
-        id: 3,
-        title: 'Skinny Queso Dip',
-        slug: 'skinny-queso-dip',
-        yields: '11 serving(s)',
-        ingredients: [
-            '1 cup skim milk',
-            '3 tbsp cornstarch',
-            '1 tsp canola oil',
-            '1 cup minced onion',
-            '3 garlic cloves (minced)',
-            '1 poblano pepper (diced)',
-            '1-2 jalapeños (seeded and diced)',
-            '1/2 cup low sodium chicken broth',
-            '10 oz can Rotel tomatoes with chiles (diced and drained)',
-            '1/4 cup fresh cilantro (chopped)',
-            'juice of 1 lime',
-            'salt and black pepper (to taste)',
-            '1/2 tsp ground cumin',
-            '1 tsp ancho chili powder',
-            '1 3/4 cups shredded reduced fat sharp Cheddar (Sargento)',
-        ],
-        instructions: [
-            'In a small bowl, whisk together 1/4 cup of the milk with 3 tbsp of cornstarch to create a slurry; set aside.',
-            'Heat a large saucepan on medium heat; when hot add oil. Add the onions, garlic, poblano, and jalapeno and cook until soft, about 5-7 minutes. Season with salt, to taste.',
-            'Add the chicken broth and the rest of the milk. Bring to a boil and cook for about 3 minutes to reduce slightly.',
-            'Add the slurry (cornstarch mixture) to the pan and stir; simmer a minute until it bubbles and thickens, then reduce heat to low.',
-            'Add the drained tomatoes, cilantro, lime juice, chili powder, cumin, salt, and pepper. Remove from heat and add the cheese; stir until it melts completely. Serve immediately.',
-        ],
-        image: 'https://www.skinnytaste.com/wp-content/uploads/2013/01/Skinny-queso-dip.jpg',
-        host: 'skinnytaste.com',
-        nutrients: {
-            servingSize: '1 /4 cup',
-            calories: '92.5 kcal',
-            carbohydrateContent: '7 g',
-            proteinContent: '6.5 g',
-            fatContent: '4.5 g',
-            sodiumContent: '143 mg',
-            fiberContent: '1 g',
-            sugarContent: '2 g',
-        },
-        url: 'https://www.skinnytaste.com/skinny-queso-dip/',
-    },
     {
         id: 4,
         title: 'Skinny Chocolate Chip Buttermilk Scones',
@@ -174,8 +19,8 @@ let sampleRecipes: Recipe[] = [
             '1/4 cup sugar',
             '2 tsp vanilla extract',
             '1 large egg',
-            "1 cup all purpose flour (Bob's Red Mill)",
-            "1 cup white whole wheat flour (Bob's Red Mill)",
+            '1 cup all purpose flour',
+            '1 cup white whole wheat flour',
             '1 tbsp baking powder',
             '1/2 tsp salt',
             '3 tbsp chilled butter (must be cold cut into small pieces)',
@@ -217,10 +62,37 @@ sampleRecipes = sampleRecipes.map((r) => {
     r.info = 'This is some sample info!!';
     return r;
 });
-export type RecipeState = Recipe[];
+export type RecipeState = { all: Recipe[]; filtered?: Recipe[] };
 
-const initialRecipeState: Recipe[] = sampleRecipes;
+const initialRecipeState: RecipeState = { all: sampleRecipes };
 
-const internalRecipeReducer = createReducer(initialRecipeState);
+const internalRecipeReducer = createReducer(
+    initialRecipeState,
+    on(
+        recipesLoadedSuccess,
+        (state: RecipeState, props: RecipesLoadedSuccessProps) => {
+            const mutableState = JSON.parse(
+                JSON.stringify(state)
+            ) as RecipeState;
+            mutableState.all.push(...props.recipes);
+            mutableState.all = mutableState.all.filter(
+                (recipe, index, list) =>
+                    list.findIndex((r) => r.id === recipe.id) === index
+            );
+            return mutableState;
+        }
+    ),
+    on(
+        recipesSearchedSuccess,
+        (state: RecipeState, props: RecipesLoadedSuccessProps) => {
+            const mutableState = JSON.parse(
+                JSON.stringify(state)
+            ) as RecipeState;
+            mutableState.filtered = props.recipes;
+            return mutableState;
+        }
+    )
+);
 
-export const recipeReducer = (state: any, action: any) => internalRecipeReducer(state, action);
+export const recipeReducer = (state: any, action: any) =>
+    internalRecipeReducer(state, action);

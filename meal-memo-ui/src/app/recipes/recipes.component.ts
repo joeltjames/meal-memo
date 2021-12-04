@@ -14,6 +14,8 @@ import { FormControl } from '@angular/forms';
 import { debounce, debounceTime, skip, switchMap, tap } from 'rxjs/operators';
 import { filteredRecipeSelector } from './store/recipe.selector';
 import { Router, Route } from '@angular/router';
+import { Recipe } from '../interfaces/recipe';
+import { searchRecipes } from './store/recipe.actions';
 
 @Component({
     selector: 'app-recipes',
@@ -23,7 +25,7 @@ import { Router, Route } from '@angular/router';
 export class RecipesComponent implements OnInit {
     recipeSearch = new FormControl('');
 
-    recipes$: Observable<RecipeState>;
+    recipes$: Observable<Recipe[]>;
 
     searchIcon = faSearch;
 
@@ -35,16 +37,13 @@ export class RecipesComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.recipes$ = this.searchInputChange$.pipe(
-            debounceTime(500),
-            switchMap((filter) =>
-                this.store.select(filteredRecipeSelector(filter))
-            )
-        );
+        this.recipes$ = this.store.select(filteredRecipeSelector);
 
-        this.recipeSearch.valueChanges.subscribe((val) =>
-            this.searchInputChange$.next(val)
-        );
+        this.recipeSearch.valueChanges
+            .pipe(debounceTime(500))
+            .subscribe((filter) =>
+                this.store.dispatch(searchRecipes({ filter }))
+            );
     }
 
     openRecipe(recipe: any) {}

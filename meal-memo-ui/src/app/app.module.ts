@@ -22,6 +22,9 @@ import { RecipesModule } from './recipes/recipes.module';
 import { MealPlanModule } from './meal-plan/meal-plan.module';
 import { DragulaModule } from 'ng2-dragula';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { EffectsModule } from '@ngrx/effects';
+import { RecipeEffects } from './recipes/store/recipe.effects';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
     declarations: [
         AppComponent,
@@ -33,6 +36,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        HttpClientModule,
         AppRoutingModule,
         NgbModule,
         FontAwesomeModule,
@@ -45,6 +49,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
             },
             {}
         ),
+        EffectsModule.forRoot([RecipeEffects]),
         UtilityModule,
         LayoutModule,
         RecipesModule,
