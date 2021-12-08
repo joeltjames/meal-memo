@@ -1,6 +1,7 @@
 <div class="d-flex flex-column overflow-hidden min-vh-100 vh-100 main-content">
     <app-navbar></app-navbar>
-    <main role="main" class="flex-grow-1 overflow-auto">
+    <main role="main" class="flex-grow-1" style="overflow-y: auto">
+        <app-toast></app-toast>
         <router-outlet></router-outlet>
     </main>
 </div>

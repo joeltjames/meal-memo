@@ -25,6 +25,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { EffectsModule } from '@ngrx/effects';
 import { RecipeEffects } from './recipes/store/recipe.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastComponent } from './toast/toast.component';
+import { ToastService } from './toast/toast.service';
 @NgModule({
     declarations: [
         AppComponent,
@@ -32,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
         DashboardComponent,
         ShoppingListComponent,
         UserProfileComponent,
+        ToastComponent,
     ],
     imports: [
         BrowserModule,
@@ -56,7 +59,7 @@ import { HttpClientModule } from '@angular/common/http';
         MealPlanModule,
         ColorPickerModule,
     ],
-    providers: [],
+    providers: [ToastService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

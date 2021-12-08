@@ -1,0 +1,12 @@
+<div style="position: absolute; top: 60px; right: 0; z-index: 500000">
+    <ng-container *ngFor="let toast of toasts$ | async">
+        <ngb-toast
+            *ngIf="toast.visible"
+            [header]="toast.header"
+            [autohide]="false"
+            (hidden)="toast.close()"
+            class="m-2">
+            <div [innerHtml]="getHtml(toast.message)"></div>
+        </ngb-toast>
+    </ng-container>
+</div>

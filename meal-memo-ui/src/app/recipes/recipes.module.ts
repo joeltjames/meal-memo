@@ -14,9 +14,10 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipePrintComponent } from './recipe-print/recipe-print.component';
+import { CreateRecipeModalComponent } from './create-recipe-modal/create-recipe-modal.component';
 
 @NgModule({
-    declarations: [RecipesComponent, RecipeSearchComponent, RecipeDetailComponent, RecipePrintComponent],
+    declarations: [RecipesComponent, RecipeSearchComponent, RecipeDetailComponent, RecipePrintComponent, CreateRecipeModalComponent],
     imports: [
         CommonModule,
         NgbModule,

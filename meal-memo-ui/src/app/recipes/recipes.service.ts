@@ -10,7 +10,13 @@ import { Recipe } from '../interfaces/recipe';
 export class RecipesService {
     constructor(private http: HttpClient) {}
 
-    getRecipes({ filter, page, limit }: { filter?: string; page?: number; limit?: number; } = {}): Observable<Recipe[]> {
+    getRecipes({
+        filter,
+        page,
+        limit,
+    }: { filter?: string; page?: number; limit?: number } = {}): Observable<
+        Recipe[]
+    > {
         const queryParams: { [key: string]: string } = {};
         if (filter) {
             queryParams.filter = filter;
@@ -24,5 +30,14 @@ export class RecipesService {
         return this.http.get<Recipe[]>('http://localhost:3000/api/recipes', {
             params: queryParams,
         });
+    }
+
+    importRecipe({ url }: { url: string }) {
+        return this.http.post<Recipe>(
+            'http://localhost:3000/api/recipes/import',
+            {
+                url,
+            }
+        );
     }
 }

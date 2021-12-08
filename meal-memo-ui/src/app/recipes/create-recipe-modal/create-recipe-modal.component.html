@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h4 class="modal-title">Create New Recipe</h4>
+    <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <div class="mb-3">
+        <label for="importUrl" class="form-label">Import From URL</label>
+        <input
+            type="text"
+            class="form-control"
+            id="importUrl"
+            [formControl]="importUrl" />
+    </div>
+    <!-- <div class="strike">
+        <span>OR</span>
+    </div> -->
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="activeModal.close('Close click')">
+        Close
+    </button>
+    <button type="button" class="btn btn-outline-primary" (click)="add()">
+        <ng-container *ngIf="import"> Import </ng-container>
+        <ng-container *ngIf="!import"> Add </ng-container>
+    </button>
+</div>

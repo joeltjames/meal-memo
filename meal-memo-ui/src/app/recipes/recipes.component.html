@@ -1,20 +1,41 @@
+<div class="position-absolute bottom-0 end-0 pe-3 pb-3">
+    <button
+        type="button"
+        class="btn btn-success rounded-circle"
+        (click)="createRecipe()">
+        <fa-icon [icon]="addIcon"></fa-icon>
+    </button>
+</div>
 <div>
     <div class="row p-3">
         <div class="col-3"></div>
         <div class="col-6">
             <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="addon-wrapping"><fa-icon [icon]="searchIcon" size="lg"></fa-icon
+                <span class="input-group-text" id="addon-wrapping"
+                    ><fa-icon [icon]="searchIcon" size="lg"></fa-icon
                 ></span>
-                <input [formControl]="recipeSearch" type="text" class="form-control" placeholder="Search for a recipe..." aria-label="Username" aria-describedby="addon-wrapping" />
+                <input
+                    [formControl]="recipeSearch"
+                    type="text"
+                    class="form-control"
+                    placeholder="Search for a recipe..."
+                    aria-label="Username"
+                    aria-describedby="addon-wrapping" />
             </div>
         </div>
         <div class="col-3"></div>
     </div>
     <div class="container" *ngIf="recipes$">
         <ngx-masonry>
-            <div ngxMasonryItem class="masonry-item card m-2" *ngFor="let recipe of recipes$ | async">
+            <div
+                ngxMasonryItem
+                class="masonry-item card m-2"
+                *ngFor="let recipe of recipes$ | async">
                 <div class="card-body clickable" [routerLink]="[recipe.slug]">
-                    <img [src]="recipe.image" class="card-img-top" *ngIf="recipe.image" />
+                    <img
+                        [src]="recipe.image"
+                        class="card-img-top"
+                        *ngIf="recipe.image" />
                     <h5 class="card-title">{{ recipe.title }}</h5>
                     <span> {{ recipe.tags?.join(',') }}</span>
                 </div>

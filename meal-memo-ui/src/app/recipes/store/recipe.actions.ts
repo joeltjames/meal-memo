@@ -25,7 +25,6 @@ export const recipesSearchedSuccess = createAction(
     props<RecipesLoadedSuccessProps>()
 );
 
-
 export interface SearchRecipeProps extends LoadRecipesProps {
     filter: string;
 }
@@ -33,5 +32,22 @@ export interface SearchRecipeProps extends LoadRecipesProps {
 export const searchRecipes = createAction(
     '[Recipes] Search Recipes',
     props<SearchRecipeProps>()
+);
+
+export interface ImportRecipeProps {
+    url: string;
+}
+
+export const importRecipe = createAction(
+    '[Recipes] Import Recipe',
+    props<ImportRecipeProps>()
+);
+
+export interface ImportRecipeResultProps {
+    recipe: Recipe;
+}
+export const recipeImportSuccess = createAction(
+    '[Recipes] Recipe Import Success',
+    props<ImportRecipeResultProps>()
 );
 
