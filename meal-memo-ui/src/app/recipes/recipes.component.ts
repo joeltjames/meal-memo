@@ -48,11 +48,13 @@ export class RecipesComponent implements OnInit {
             .subscribe((filter) =>
                 this.store.dispatch(searchRecipes({ filter }))
             );
+
+        this.store.dispatch(searchRecipes({ filter: '' }));
     }
 
     openRecipe(recipe: any) {}
 
     createRecipe() {
-        this.modalService.open(CreateRecipeModalComponent, {size: 'lg'});
+        this.modalService.open(CreateRecipeModalComponent, { size: 'lg' });
     }
 }

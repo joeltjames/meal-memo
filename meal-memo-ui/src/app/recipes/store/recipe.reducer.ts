@@ -10,6 +10,8 @@ import {
     recipesLoadedSuccess,
     RecipesLoadedSuccessProps,
     recipesSearchedSuccess,
+    SearchRecipeProps,
+    searchRecipes,
 } from './recipe.actions';
 
 let sampleRecipes: Recipe[] = [
@@ -69,6 +71,7 @@ sampleRecipes = sampleRecipes.map((r) => {
 export type RecipeState = {
     all: Recipe[];
     filtered?: Recipe[];
+    currentFilterCriteria?: string;
     importInProgress: boolean;
     lastImported?: Recipe;
 };
@@ -110,6 +113,11 @@ const internalRecipeReducer = createReducer(
         delete mutableState.lastImported;
         return mutableState;
     }),
+    on(searchRecipes, (state: RecipeState, props: SearchRecipeProps) => {
+        const mutableState = JSON.parse(JSON.stringify(state)) as RecipeState;
+        mutableState.currentFilterCriteria = props.filter;
+        return mutableState;
+    }),
     on(
         recipeImportSuccess,
         (state: RecipeState, props: ImportRecipeResultProps) => {
@@ -118,8 +126,15 @@ const internalRecipeReducer = createReducer(
             ) as RecipeState;
             mutableState.importInProgress = false;
             mutableState.lastImported = props.recipe;
-            mutableState.all.unshift(props.recipe);
-            mutableState.filtered?.unshift(props.recipe);
+            mutableState.all.push(props.recipe);
+            if (
+                !state.currentFilterCriteria ||
+                props.recipe.title
+                    .toLowerCase()
+                    .includes(state.currentFilterCriteria?.toLowerCase())
+            ) {
+                mutableState.filtered?.push(props.recipe);
+            }
             return mutableState;
         }
     )

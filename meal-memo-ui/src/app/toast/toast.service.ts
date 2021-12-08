@@ -15,8 +15,9 @@ export class ToastService {
     }
 
     public createToast(toast: ToastMessage) {
+        const oldClose = toast.onClose;
         toast.onClose = () => {
-            toast.onClose();
+            oldClose();
             const index = this.toasts.findIndex((t) => t.uuid === toast.uuid);
             if (index > -1) {
                 this.toasts.splice(index, 1);
