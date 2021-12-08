@@ -57,4 +57,8 @@ export class RecipesComponent implements OnInit {
     createRecipe() {
         this.modalService.open(CreateRecipeModalComponent, { size: 'lg' });
     }
+
+    trackByFn(index: number, recipe: Recipe) {
+        return recipe.slug;
+    }
 }

@@ -25,21 +25,22 @@
         </div>
         <div class="col-3"></div>
     </div>
-    <div class="container" *ngIf="recipes$">
-        <ngx-masonry>
-            <div
-                ngxMasonryItem
-                class="masonry-item card m-2"
-                *ngFor="let recipe of recipes$ | async">
-                <div class="card-body clickable" [routerLink]="[recipe.slug]">
-                    <img
-                        [src]="recipe.image"
-                        class="card-img-top"
-                        *ngIf="recipe.image" />
-                    <h5 class="card-title">{{ recipe.title }}</h5>
-                    <span> {{ recipe.tags?.join(',') }}</span>
+    <div class="container" *ngIf="recipes$ | async as recipes">
+        <ngx-masonry [options]="{ columnWidth: 1 }">
+            <ng-container *ngFor="let recipe of recipes; trackBy: trackByFn">
+                <div ngxMasonryItem class="masonry-item card m-2">
+                    <div
+                        class="card-body clickable"
+                        [routerLink]="[recipe.slug]">
+                        <img
+                            [src]="recipe.image"
+                            class="card-img-top"
+                            *ngIf="recipe.image" />
+                        <h5 class="card-title">{{ recipe.title }}</h5>
+                        <span> {{ recipe.tags?.join(',') }}</span>
+                    </div>
                 </div>
-            </div>
+            </ng-container>
         </ngx-masonry>
     </div>
 </div>
