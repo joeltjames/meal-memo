@@ -10,14 +10,13 @@ export default async (app: Router) => {
     const { validate } = new Validator({ unknownFormats: ['int32'] });
 
     const recipeService = Container.get(RecipeService);
-    const recipeSchema = recipeService.getRecipeSchema();
+    // const recipeSchema = recipeService.getRecipeSchema();
 
-    route.get('/schema', (_: Request, res: Response) => {
-        res.json(recipeSchema).status(200).end();
-    });
+    // route.get('/schema', (_: Request, res: Response) => {
+    //     res.json(recipeSchema).status(200).end();
+    // });
 
     route.get('', async (req: Request, res: Response) => {
-        console.log(req.query);
         let filter: string[] = [];
         if (req.query.filter) {
             if (isArrayOfStrings(req.query.filter)) {
@@ -48,14 +47,24 @@ export default async (app: Router) => {
     });
 
     route.post(
+        '/import',
+        async (req: Request, res: Response) => {
+            const recipeService = Container.get(RecipeService);
+            const recipe = await recipeService.importRecipe(req.body.url);
+            res.json(recipe).status(200).end();
+        }
+    );
+
+    route.post(
         '',
-        validate({ body: recipeSchema }),
+        // validate({ body: recipeSchema }),
         async (req: Request, res: Response) => {
             const recipeService = Container.get(RecipeService);
             const recipe = await recipeService.createRecipe(req.body);
             res.json(recipe).status(200).end();
         }
     );
+    
 
     route.get('/:recipeId', async (req: Request, res: Response) => {
         const recipe = await recipeService.getRecipe(
@@ -66,7 +75,7 @@ export default async (app: Router) => {
 
     route.put(
         '/:recipeId',
-        validate({ body: recipeSchema }),
+        // validate({ body: recipeSchema }),
         async (req: Request, res: Response) => {
             const recipeService = Container.get(RecipeService);
             const recipeAttr = req.body;

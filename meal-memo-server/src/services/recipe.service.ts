@@ -3,17 +3,22 @@ import { Service, Inject } from 'typedi';
 //     EventDispatcher,
 //     EventDispatcherInterface,
 // } from '@/decorators/eventDispatcher';
-import { RecipeModel } from '@/models';
+import { IngredientModel, NutrientModel, RecipeModel } from '@/models';
 import { RecipeAttributes } from '@/interfaces/recipe.interface';
-import { generateSchema } from '@/utils';
+import { generateSchema, parseRecipe } from '@/utils';
 import slugify from 'slugify';
 import { Op } from 'sequelize';
+import { Product, User } from '@/models/recipe.model';
 
 @Service()
 export default class RecipeService {
     constructor(@Inject('logger') private logger) {}
 
-    async getRecipes(filter?: string[], page = 0, limit = 50): Promise<any> {
+    async getRecipes(
+        filter?: string[],
+        page = 0,
+        limit = 50
+    ): Promise<RecipeModel[]> {
         return await RecipeModel.findAll({
             where: {
                 title: {
@@ -24,6 +29,19 @@ export default class RecipeService {
             offset: page * limit,
             order: ['title'],
         });
+    }
+
+    async importRecipe(url: string): Promise<RecipeModel> {
+        try {
+            const recipe = await parseRecipe(url);
+            recipe.slug = slugify(recipe.title, { lower: true, strict: true });
+            console.log(recipe);
+            return await RecipeModel.create(recipe, {
+                include: { all: true, nested: true },
+            });
+        } catch {
+            return null;
+        }
     }
 
     async getRecipe(id: number): Promise<any> {
@@ -46,6 +64,7 @@ export default class RecipeService {
     }
 
     getRecipeSchema() {
-        return generateSchema(RecipeModel);
+        // return generateSchema(RecipeModel);
+        return {};
     }
 }

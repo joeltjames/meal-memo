@@ -1,6 +1,6 @@
-import recipe, { RecipeModel } from './recipe.model';
-import meal from './meal.model';
+import recipe, { IngredientModel, NutrientModel, RecipeModel } from './recipe.model';
+import meal, { MealModel } from './meal.model';
 
-export { RecipeModel };
+export { RecipeModel, IngredientModel, MealModel, NutrientModel };
 
-export default [recipe, meal];
+export const models = [recipe, meal];

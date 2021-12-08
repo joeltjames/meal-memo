@@ -20,7 +20,6 @@ export default ({ app }: { app: Application }) => {
                         toClear.includes(model.tableName)
                 )
                 .map((model) => {
-                    console.log(model.name);
                     Logger.info(`Clearing '${model.tableName}' table`);
                     model.destroy({ truncate: true, restartIdentity: true });
                     cleared.push(model.tableName);

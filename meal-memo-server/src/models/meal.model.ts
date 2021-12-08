@@ -1,13 +1,13 @@
 import { MealAttributes } from '@/interfaces/meal.interface';
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
-class Meal extends Model<MealAttributes> {
+export class MealModel extends Model<MealAttributes> {
     public id: number;
     public name: string;
 }
 
 export default async (db: Sequelize): Promise<any> => {
-    return Meal.init(
+    return MealModel.init(
         {
             id: {
                 type: DataTypes.INTEGER.UNSIGNED,

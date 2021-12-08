@@ -4,7 +4,8 @@ import dependencyInjectorLoader from './dependencyInjector';
 import sequelize from './sequelize';
 // import mongooseLoader from './mongoose';
 // import jobsLoader from './jobs';
-import models from '@/models';
+import { models, relations } from '@/models';
+``;
 import Logger from './logger';
 //We have to import at least all the events once so they can be triggered
 import './events';
@@ -12,9 +13,11 @@ import './events';
 export default async ({ expressApp }) => {
     const db = await sequelize();
 
-    models.map(async (model) => await model(db));
+    for (let i = 0; i < models.length; i++) {
+        await models[i](db);
+    }
 
-    db.sync({ force: true });
+    await db.sync({ force: true });
 
     dependencyInjectorLoader({ db });
 
