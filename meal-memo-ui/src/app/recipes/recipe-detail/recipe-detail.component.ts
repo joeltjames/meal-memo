@@ -22,6 +22,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { sorted } from 'src/app/utils';
 import { formatIngredient } from '../recipe.utils';
+import { FormGroup } from '@angular/forms';
+import { recipeToForm } from './recipe-detail.utils';
 
 @Component({
     selector: 'app-recipe-detail',
@@ -41,6 +43,8 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
 
     recipe$: Observable<Recipe | undefined>;
 
+    recipeForm: FormGroup;
+
     formatIngredient = formatIngredient;
 
     sorted = sorted;
@@ -55,7 +59,8 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
         this.recipe$ = route.params.pipe(
             map((params) => params.slug),
             tap((slug) => (this.slug = slug)),
-            switchMap((slug) => store.select(recipeBySlugSelector(slug)))
+            switchMap((slug) => store.select(recipeBySlugSelector(slug))),
+            tap((recipe) => (this.recipeForm = recipeToForm(recipe)))
         );
     }
 
