@@ -10,14 +10,25 @@ export const recipeToForm = (recipe: Recipe | undefined) =>
         description: new FormControl(recipe?.info),
         ingredients: new FormArray(
             [...(recipe?.ingredients || [])]
-                ?.sort((a, b) => a.id - b.id)
+                ?.sort((a, b) => a?.order - b?.order)
                 .map(
                     (ing) =>
                         new FormGroup({
                             quantity: new FormControl(ing.quantity),
                             unitOfMeasure: new FormControl(ing.unitOfMeasure),
                             description: new FormControl(ing.description),
-                            header: new FormControl(ing.isHeader)
+                            header: new FormControl(ing.isHeader),
+                        })
+                )
+        ),
+        instructions: new FormArray(
+            [...(recipe?.instructions || [])]
+                ?.sort((a, b) => a.id - b.id)
+                .map(
+                    (ins) =>
+                        new FormGroup({
+                            description: new FormControl(ins.text),
+                            header: new FormControl(ins.isHeader),
                         })
                 )
         ),

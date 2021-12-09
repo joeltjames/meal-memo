@@ -17,6 +17,7 @@ export interface Recipe extends Identifiable {
 export interface Instruction extends Identifiable {
     text: string;
     isHeader: boolean;
+    order: number;
 }
 export interface Ingredient extends Identifiable {
     quantity?: number;
@@ -24,6 +25,7 @@ export interface Ingredient extends Identifiable {
     unitOfMeasure?: string;
     description: string;
     isHeader?: boolean;
+    order: number;
 }
 export interface Nutrients extends Identifiable {
     servingSize?: string | null;

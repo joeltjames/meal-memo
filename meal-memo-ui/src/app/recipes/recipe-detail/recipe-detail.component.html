@@ -180,7 +180,7 @@
                             <div class="col-1"></div>
                         </div>
                         <div
-                            [dragula]="handles"
+                            [dragula]="ingredientsHandles"
                             [(dragulaModel)]="ingredientsFormArray.controls">
                             <div
                                 *ngFor="
@@ -246,25 +246,50 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-7">
+                    <div class="col-7" formArrayName="instructions">
                         <h2>Instructions</h2>
-                        <ol>
-                            <ng-container
+                        <div
+                            [dragula]="instructionsHandles"
+                            [(dragulaModel)]="instructionsFormArray.controls">
+                            <div
                                 *ngFor="
-                                    let instruction of sorted(
-                                        recipe.instructions
-                                    )
+                                    let instructionForm of instructionsFormArray.controls;
+                                    let i = index
                                 ">
                                 <div
-                                    class="fw-bold text-capitalize fs-5"
-                                    *ngIf="instruction.isHeader">
-                                    {{ instruction.text }}
+                                    [formGroupName]="i"
+                                    class="row gx-3 gy-2 align-items-center">
+                                    <div
+                                        class="col-1"
+                                        *ngIf="!instructionForm.value.header">
+                                        {{ i + 1 }}.
+                                    </div>
+                                    <div class="col align-top h-100">
+                                        <textarea
+                                            *ngIf="!readonly"
+                                            autosize
+                                            name="description"
+                                            class="col form-control"
+                                            formControlName="description"></textarea>
+                                        <span *ngIf="readonly">{{
+                                            instructionForm.value.description
+                                        }}</span>
+                                    </div>
+                                    <div
+                                        class="col-1 text-center"
+                                        *ngIf="!readonly">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            formControlName="header"
+                                            id="header" />
+                                    </div>
+                                    <span class="col-1 handle" *ngIf="!readonly"
+                                        ><fa-icon [icon]="orderIcon"></fa-icon
+                                    ></span>
                                 </div>
-                                <li *ngIf="!instruction.isHeader">
-                                    {{ instruction.text }}
-                                </li>
-                            </ng-container>
-                        </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
