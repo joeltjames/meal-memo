@@ -27,6 +27,12 @@ interface PythonRecipe {
     url: string;
 }
 
+const uomMapping = {
+    teaspoon: 'tsp',
+    ounce: 'oz',
+    tablespoon: 'tbsp',
+};
+
 export function parseRecipe(url: string): Promise<RecipeAttributes> {
     return new Promise((resolve, reject) => {
         const pythonProcess = spawn('pipenv', [
@@ -67,9 +73,25 @@ export function parseRecipe(url: string): Promise<RecipeAttributes> {
                             (a: Ingredient[], b: Ingredient[]) => a.concat(b),
                             []
                         )
-                        .map((ing: Ingredient) => {
-                            delete ing.isGroupHeader;
-                            return ing as IngredientAttributes;
+                        .map((ing: Ingredient, index: number) => {
+                            console.log(
+                                ing.unitOfMeasure,
+                                Object.keys(uomMapping),
+                                ing.unitOfMeasure in uomMapping
+                            );
+                            if (ing.unitOfMeasure in uomMapping) {
+                                ing.unitOfMeasure =
+                                    uomMapping[ing.unitOfMeasure];
+                            }
+                            console.log(ing.unitOfMeasure);
+                            return {
+                                quantity: ing.quantity,
+                                quantity2: ing.quantity2,
+                                description: ing.description,
+                                unitOfMeasure: ing.unitOfMeasure,
+                                order: index,
+                                isHeader: ing.isGroupHeader,
+                            };
                         }),
                     instructions: json.recipe.instructions.map((str) => ({
                         text: str,

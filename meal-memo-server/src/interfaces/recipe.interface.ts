@@ -24,6 +24,8 @@ export interface IngredientAttributes {
     quantity2?: number;
     unitOfMeasure?: string;
     description: string;
+    order: number;
+    isHeader?: boolean;
 }
 
 export interface NutrientAttributes {

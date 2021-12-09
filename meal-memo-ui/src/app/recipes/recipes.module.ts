@@ -17,6 +17,7 @@ import { RecipePrintComponent } from './recipe-print/recipe-print.component';
 import { RecipeMenuComponent } from './recipe-menu/recipe-menu.component';
 import { ImportRecipeModalComponent } from './import-recipe-modal/import-recipe-modal.component';
 import { AutosizeModule } from 'ngx-autosize';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { AutosizeModule } from 'ngx-autosize';
         FontAwesomeModule,
         NgxMasonryModule,
         AutosizeModule,
+        DragulaModule,
     ],
     exports: [RecipeSearchComponent],
 })

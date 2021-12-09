@@ -101,6 +101,8 @@ export default async (sequelize: Sequelize): Promise<any> => {
             description: {
                 type: DataTypes.TEXT({ length: 'long' }),
             },
+            isHeader: DataTypes.BOOLEAN,
+            order: DataTypes.INTEGER.UNSIGNED,
         },
         {
             sequelize,

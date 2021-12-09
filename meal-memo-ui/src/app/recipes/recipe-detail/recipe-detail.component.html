@@ -166,18 +166,87 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4 border-end">
+                    <div
+                        class="col-5 border-end container"
+                        formArrayName="ingredients">
                         <h2>Ingredients</h2>
-                        <ul>
-                            <li
+                        <div class="row" *ngIf="!readonly">
+                            <div class="col-2">Qty</div>
+                            <div class="col-2">Units</div>
+                            <div class="col">Description</div>
+                            <div class="col-1 text-center">
+                                <fa-icon [icon]="headingIcon"></fa-icon>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div
+                            [dragula]="handles"
+                            [(dragulaModel)]="ingredientsFormArray.controls">
+                            <div
                                 *ngFor="
-                                    let ingredient of sorted(recipe.ingredients)
+                                    let ingredientForm of ingredientsFormArray.controls;
+                                    let i = index
                                 ">
-                                {{ formatIngredient(ingredient) }}
-                            </li>
-                        </ul>
+                                <div
+                                    [formGroupName]="i"
+                                    class="row gx-3 gy-2 align-items-center">
+                                    <ng-container
+                                        *ngIf="!ingredientForm.value.header">
+                                        <div class="col-2 align-top h-100">
+                                            <input
+                                                type="text"
+                                                name="quantity"
+                                                class="col"
+                                                [readonly]="readonly"
+                                                [ngClass]="{
+                                                    'form-control-plaintext readonly':
+                                                        readonly,
+                                                    'form-control': !readonly
+                                                }"
+                                                formControlName="quantity" />
+                                        </div>
+                                        <div class="col-2 align-top h-100">
+                                            <input
+                                                type="text"
+                                                name="unitOfMeasure"
+                                                class="col"
+                                                [readonly]="readonly"
+                                                [ngClass]="{
+                                                    'form-control-plaintext readonly':
+                                                        readonly,
+                                                    'form-control': !readonly
+                                                }"
+                                                formControlName="unitOfMeasure" />
+                                        </div>
+                                    </ng-container>
+                                    <div class="col align-top h-100">
+                                        <textarea
+                                            *ngIf="!readonly"
+                                            autosize
+                                            name="description"
+                                            class="col form-control"
+                                            formControlName="description"></textarea>
+                                        <span *ngIf="readonly">{{
+                                            ingredientForm.value.description
+                                        }}</span>
+                                    </div>
+                                    <div
+                                        class="col-1 text-center"
+                                        *ngIf="!readonly">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            formControlName="header"
+                                            id="header" />
+                                    </div>
+                                    <span class="col-1 handle" *ngIf="!readonly"
+                                        >+</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-8">
+                    <div class="col-7">
                         <h2>Instructions</h2>
                         <ol>
                             <ng-container

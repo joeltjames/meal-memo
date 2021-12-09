@@ -23,6 +23,7 @@ export interface Ingredient extends Identifiable {
     quantity2?: number;
     unitOfMeasure?: string;
     description: string;
+    isHeader?: boolean;
 }
 export interface Nutrients extends Identifiable {
     servingSize?: string | null;
