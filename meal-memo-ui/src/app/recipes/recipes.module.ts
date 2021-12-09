@@ -14,10 +14,19 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipePrintComponent } from './recipe-print/recipe-print.component';
-import { CreateRecipeModalComponent } from './create-recipe-modal/create-recipe-modal.component';
+import { RecipeMenuComponent } from './recipe-menu/recipe-menu.component';
+import { ImportRecipeModalComponent } from './import-recipe-modal/import-recipe-modal.component';
+import { AutosizeModule } from 'ngx-autosize';
 
 @NgModule({
-    declarations: [RecipesComponent, RecipeSearchComponent, RecipeDetailComponent, RecipePrintComponent, CreateRecipeModalComponent],
+    declarations: [
+        RecipesComponent,
+        RecipeSearchComponent,
+        RecipeDetailComponent,
+        RecipePrintComponent,
+        RecipeMenuComponent,
+        ImportRecipeModalComponent,
+    ],
     imports: [
         CommonModule,
         NgbModule,
@@ -28,6 +37,7 @@ import { CreateRecipeModalComponent } from './create-recipe-modal/create-recipe-
         DndModule,
         FontAwesomeModule,
         NgxMasonryModule,
+        AutosizeModule,
     ],
     exports: [RecipeSearchComponent],
 })

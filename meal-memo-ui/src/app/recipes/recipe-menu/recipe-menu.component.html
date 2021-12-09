@@ -1,0 +1,17 @@
+<div
+    class="position-absolute bottom-0 end-0 pe-3 pb-3"
+    (mouseleave)="show = false">
+    <div class="mb-2 text-center" *ngIf="show">
+        <button type="button" class="btn btn-primary animate rounded-circle" (click)="importRecipe()">
+            <fa-icon [icon]="importIcon"></fa-icon>
+        </button>
+    </div>
+    <div>
+        <button
+            type="button"
+            class="btn btn-success btn-lg rounded-circle"
+            (mouseenter)="show = true">
+            <fa-icon [icon]="addIcon"></fa-icon>
+        </button>
+    </div>
+</div>

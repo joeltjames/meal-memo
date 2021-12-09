@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Recipe } from 'src/app/interfaces/recipe';
+import { sorted } from 'src/app/utils';
+import { formatIngredient } from '../recipe.utils';
 import { RecipeState } from '../store/recipe.reducer';
 import { recipeBySlugSelector } from '../store/recipe.selector';
 
@@ -16,6 +18,9 @@ import { recipeBySlugSelector } from '../store/recipe.selector';
 })
 export class RecipePrintComponent implements OnInit {
     recipe$: Observable<Recipe | undefined>;
+
+    formatIngredient = formatIngredient;
+    sorted = sorted;
 
     constructor(
         private locationStrategy: LocationStrategy,
@@ -49,6 +54,10 @@ export class RecipePrintComponent implements OnInit {
     }
 
     getUrl(recipe: Recipe) {
-        return window.location.origin + this.locationStrategy.getBaseHref() + `recipes/${recipe.slug}`;
+        return (
+            window.location.origin +
+            this.locationStrategy.getBaseHref() +
+            `recipes/${recipe.slug}`
+        );
     }
 }

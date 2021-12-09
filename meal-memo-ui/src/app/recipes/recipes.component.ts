@@ -2,22 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
     BehaviorSubject,
-    combineLatest,
-    interval,
     Observable,
-    of,
-    Subject,
 } from 'rxjs';
 import { RecipeState } from './store/recipe.reducer';
-import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
-import { debounce, debounceTime, skip, switchMap, tap } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { filteredRecipeSelector } from './store/recipe.selector';
-import { Router, Route } from '@angular/router';
+import { Router } from '@angular/router';
 import { Recipe } from '../interfaces/recipe';
 import { searchRecipes } from './store/recipe.actions';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CreateRecipeModalComponent } from './create-recipe-modal/create-recipe-modal.component';
 
 @Component({
     selector: 'app-recipes',
@@ -30,14 +24,12 @@ export class RecipesComponent implements OnInit {
     recipes$: Observable<Recipe[]>;
 
     searchIcon = faSearch;
-    addIcon = faPlus;
 
     searchInputChange$ = new BehaviorSubject<string>('');
 
     constructor(
         private router: Router,
         private store: Store<{ recipe: RecipeState }>,
-        private modalService: NgbModal
     ) {}
 
     ngOnInit(): void {
@@ -53,10 +45,6 @@ export class RecipesComponent implements OnInit {
     }
 
     openRecipe(recipe: any) {}
-
-    createRecipe() {
-        this.modalService.open(CreateRecipeModalComponent, { size: 'lg' });
-    }
 
     trackByFn(index: number, recipe: Recipe) {
         return recipe.slug;

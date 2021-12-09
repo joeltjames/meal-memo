@@ -58,6 +58,7 @@ specifiers:
   moment: ^2.29.1
   ng-bs-form-builder: ^1.2.1
   ng2-dragula: ^2.1.1
+  ngx-autosize: ^1.8.4
   ngx-color-picker: ^11.0.0
   ngx-drag-drop: ^2.0.0
   ngx-masonry: ^12.0.0
@@ -98,6 +99,7 @@ dependencies:
   moment: 2.29.1
   ng-bs-form-builder: 1.2.1_7ecd533fb4e1d83f37106a4598ee9ed0
   ng2-dragula: 2.1.1_@angular+core@11.1.2+rxjs@6.6.7
+  ngx-autosize: 1.8.4_d1935859c607dd70773339e960c525be
   ngx-color-picker: 11.0.0_2f14376bd0cdcbe56a63911167262e3f
   ngx-drag-drop: 2.0.0
   ngx-masonry: 12.0.0_108d32c91340d786ef469dbce31dd252
@@ -7697,6 +7699,17 @@ packages:
       '@types/dragula': 2.1.36
       dragula: 3.7.3
       rxjs: 6.6.7
+    dev: false
+
+  /ngx-autosize/1.8.4_d1935859c607dd70773339e960c525be:
+    resolution: {integrity: sha512-eswPninzx2H1AyZrSNS36wMd4eLg9Hce5Utc23J3dAGher/PNC+6X9MBTqsOnQGbQk7wV1dhlZZH3252VwB05A==}
+    peerDependencies:
+      '@angular/common': '>5.0.0'
+      '@angular/core': '>5.0.0'
+    dependencies:
+      '@angular/common': 11.1.2_@angular+core@11.1.2+rxjs@6.6.7
+      '@angular/core': 11.1.2_rxjs@6.6.7+zone.js@0.11.4
+      tslib: 1.14.1
     dev: false
 
   /ngx-color-picker/11.0.0_2f14376bd0cdcbe56a63911167262e3f:

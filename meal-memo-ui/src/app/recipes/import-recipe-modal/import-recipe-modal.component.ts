@@ -6,11 +6,11 @@ import { importRecipe } from '../store/recipe.actions';
 import { RecipeState } from '../store/recipe.reducer';
 
 @Component({
-    selector: 'app-create-recipe-modal',
-    templateUrl: './create-recipe-modal.component.html',
-    styleUrls: ['./create-recipe-modal.component.scss'],
+    selector: 'app-import-recipe-modal',
+    templateUrl: './import-recipe-modal.component.html',
+    styleUrls: ['./import-recipe-modal.component.scss'],
 })
-export class CreateRecipeModalComponent implements OnInit {
+export class ImportRecipeModalComponent implements OnInit {
     importUrl = new FormControl(
         'https://www.skinnytaste.com/chicken-and-white-bean-enchiladas-with/'
     );

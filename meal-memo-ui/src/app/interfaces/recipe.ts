@@ -1,18 +1,30 @@
-export interface Recipe {
-    id: number;
+import { Identifiable } from '../utils';
+
+export interface Recipe extends Identifiable {
     info?: string;
     title: string;
     slug: string;
     yields: string;
     tags?: string[];
-    ingredients?: string[] | null;
-    instructions?: string[] | null;
+    ingredients?: Ingredient[];
+    instructions?: Instruction[];
     image: string;
     host: string;
     nutrients: Nutrients;
     url: string;
+    fresh?: boolean;
 }
-export interface Nutrients {
+export interface Instruction extends Identifiable {
+    text: string;
+    isHeader: boolean;
+}
+export interface Ingredient extends Identifiable {
+    quantity?: number;
+    quantity2?: number;
+    unitOfMeasure?: string;
+    description: string;
+}
+export interface Nutrients extends Identifiable {
     servingSize?: string | null;
     calories: string;
     carbohydrateContent?: string | null;

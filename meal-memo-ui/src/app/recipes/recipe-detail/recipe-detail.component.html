@@ -2,29 +2,190 @@
     <div class="card h-100 my-3" *ngIf="recipe$ | async as recipe">
         <div class="card-body overflow-auto" style="max-height: 90vh">
             <div class="position-absolute top-0 start-100">
-                <button (click)="print()" class="btn btn-outline-primary"><fa-icon [icon]="printIcon"></fa-icon></button>
+                <div class="row ms-1 mb-1" *ngIf="readonly">
+                    <button
+                        (click)="edit()"
+                        class="btn btn-outline-primary"
+                        placement="top"
+                        container="body"
+                        ngbTooltip="Edit recipe">
+                        <fa-icon [icon]="editIcon"></fa-icon>
+                    </button>
+                </div>
+                <div class="row ms-1 mb-1" *ngIf="!readonly">
+                    <button
+                        (click)="save()"
+                        class="btn btn-outline-success"
+                        placement="top"
+                        container="body"
+                        ngbTooltip="Save changes and exit">
+                        <fa-icon [icon]="saveIcon"></fa-icon>
+                    </button>
+                </div>
+                <div class="row ms-1 mb-1" *ngIf="!readonly">
+                    <button
+                        (click)="stopEdit()"
+                        class="btn btn-outline-dark"
+                        placement="top"
+                        container="body"
+                        ngbTooltip="Exit without saving">
+                        <fa-icon [icon]="closeIcon"></fa-icon>
+                    </button>
+                </div>
+                <div class="row ms-1 mb-1">
+                    <button
+                        class="btn btn-outline-danger"
+                        placement="top"
+                        container="body"
+                        ngbTooltip="Delete recipe">
+                        <fa-icon [icon]="deleteIcon"></fa-icon>
+                    </button>
+                </div>
+                <div class="row ms-1">
+                    <button
+                        (click)="print()"
+                        class="btn btn-outline-secondary"
+                        placement="top"
+                        container="body"
+                        ngbTooltip="Print recipe">
+                        <fa-icon [icon]="printIcon"></fa-icon>
+                    </button>
+                </div>
             </div>
-            <div class="row border-bottom">
-                <img class="col-4 p-3 pt-0" [src]="recipe.image" *ngIf="recipe.image" style="height: auto" />
+            <div class="row border-bottom mbn">
+                <img
+                    class="col-4 p-3 pt-0"
+                    [src]="recipe.image"
+                    *ngIf="recipe.image"
+                    style="height: auto" />
                 <div class="col">
-                    <h1>{{ recipe.title }}</h1>
-                    <p>
-                        <small [innerHtml]="getDetailHtml(recipe)"></small>
-                    </p>
-                    <p>{{ recipe.info }}</p>
+                    <div class="row mb-1">
+                        <label for="title" class="form-label" *ngIf="!readonly"
+                            >Title</label
+                        >
+                        <textarea
+                            autosize
+                            #titleHeight
+                            [readonly]="readonly"
+                            class="h1 overflow-hidden"
+                            rows="1"
+                            [style.height]="
+                                readonly
+                                    ? titleHeight.scrollHeight + 'px'
+                                    : null
+                            "
+                            [ngClass]="{
+                                'form-control-plaintext readonly': readonly,
+                                'form-control': !readonly
+                            }"
+                            id="title"
+                            [value]="recipe.title"></textarea>
+                    </div>
+                    <div
+                        class="row mb-1"
+                        [ngClass]="{
+                            small: readonly
+                        }">
+                        <div class="col">
+                            <label
+                                for="calories"
+                                class="form-label"
+                                *ngIf="!readonly"
+                                >Calories</label
+                            >
+                            <input
+                                type="text"
+                                [readonly]="readonly"
+                                [ngClass]="{
+                                    'form-control-plaintext readonly': readonly,
+                                    'form-control': !readonly
+                                }"
+                                id="calories"
+                                [value]="recipe.nutrients.calories" />
+                        </div>
+                        <div class="col">
+                            <label
+                                for="servingSize"
+                                class="form-label"
+                                *ngIf="!readonly"
+                                >Serving Size</label
+                            >
+                            <input
+                                type="text"
+                                [readonly]="readonly"
+                                [ngClass]="{
+                                    'form-control-plaintext readonly': readonly,
+                                    'form-control': !readonly
+                                }"
+                                id="servingSize"
+                                [value]="recipe.nutrients.servingSize" />
+                        </div>
+                        <div class="col">
+                            <label
+                                for="yields"
+                                class="form-label"
+                                *ngIf="!readonly"
+                                >Yields</label
+                            >
+                            <input
+                                type="text"
+                                [readonly]="readonly"
+                                [ngClass]="{
+                                    'form-control-plaintext readonly': readonly,
+                                    'form-control': !readonly
+                                }"
+                                id="yields"
+                                [value]="recipe.yields" />
+                        </div>
+                        <!-- <small [innerHtml]="getDetailHtml(recipe)"></small> -->
+                    </div>
+                    <div class="row mb-1">
+                        <label
+                            for="description"
+                            class="form-label"
+                            *ngIf="!readonly"
+                            >Description</label
+                        >
+                        <textarea
+                            autosize
+                            [readonly]="readonly"
+                            [ngClass]="{
+                                'form-control-plaintext readonly': readonly,
+                                'form-control': !readonly
+                            }"
+                            id="description"
+                            [value]="recipe.info || ''"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-4 border-end">
                     <h2>Ingredients</h2>
                     <ul>
-                        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+                        <li
+                            *ngFor="
+                                let ingredient of sorted(recipe.ingredients)
+                            ">
+                            {{ formatIngredient(ingredient) }}
+                        </li>
                     </ul>
                 </div>
                 <div class="col-8">
                     <h2>Instructions</h2>
                     <ol>
-                        <li *ngFor="let instruction of recipe.instructions">{{ instruction }}</li>
+                        <ng-container
+                            *ngFor="
+                                let instruction of sorted(recipe.instructions)
+                            ">
+                            <div
+                                class="fw-bold text-capitalize fs-5"
+                                *ngIf="instruction.isHeader">
+                                {{ instruction.text }}
+                            </div>
+                            <li *ngIf="!instruction.isHeader">
+                                {{ instruction.text }}
+                            </li>
+                        </ng-container>
                     </ol>
                 </div>
             </div>

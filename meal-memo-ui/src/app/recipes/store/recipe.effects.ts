@@ -68,13 +68,19 @@ export class RecipeEffects {
                     })
                     .pipe(
                         tap((recipe) => {
-                            this.toastService.createToast(
-                                new ToastMessage(
-                                    `Successfully Imported <a href="recipes/${recipe.slug}">${recipe.title}</a>`,
-                                    '',
-                                    false
-                                )
-                            );
+                            if (recipe.fresh) {
+                                this.toastService.createToast(
+                                    new ToastMessage(
+                                        `Successfully imported at <a href="recipes/${recipe.slug}">${recipe.title}</a>`
+                                    )
+                                );
+                            } else {
+                                this.toastService.createToast(
+                                    new ToastMessage(
+                                        `Recipe already imported at <a href="recipes/${recipe.slug}">${recipe.title}</a>`
+                                    )
+                                );
+                            }
                             data.toast.close();
                         }),
                         map((recipe) => recipeImportSuccess({ recipe })),

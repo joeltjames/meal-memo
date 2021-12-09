@@ -3,17 +3,28 @@
         <div style="width: 40vw; height: auto">
             <img class="rounded img-fluid" [src]="recipe.image" />
         </div>
-        <div class="w-100 text-center" [innerHtml]="getServingInfo(recipe)"></div>
+        <div
+            class="w-100 text-center"
+            [innerHtml]="getServingInfo(recipe)"></div>
         <div class="w-100 text-center">Yields: {{ recipe.yields }}</div>
     </div>
     <h4>{{ recipe.title }}</h4>
     <h5>Ingredients</h5>
     <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+        <li *ngFor="let ingredient of sorted(recipe.ingredients)">
+            {{ formatIngredient(ingredient) }}
+        </li>
     </ul>
     <h5>Instructions</h5>
     <ol>
-        <li *ngFor="let step of recipe.instructions">{{ step }}</li>
+        <ng-container *ngFor="let instruction of sorted(recipe.instructions)">
+            <div class="fw-bold text-capitalize" *ngIf="instruction.isHeader">
+                {{ instruction.text }}
+            </div>
+            <li *ngIf="!instruction.isHeader">
+                {{ instruction.text }}
+            </li>
+        </ng-container>
     </ol>
     <p></p>
     <p>

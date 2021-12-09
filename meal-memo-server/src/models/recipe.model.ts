@@ -9,7 +9,15 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 export class Product extends Model {}
 export class User extends Model {}
 export class Address extends Model {}
-export class RecipeModel extends Model<RecipeAttributes> {}
+export class RecipeModel extends Model<RecipeAttributes> {
+    fresh = false;
+
+    toJSON() {
+        const json = super.toJSON();
+        json['fresh'] = this.fresh;
+        return json;
+    }
+}
 export class NutrientModel extends Model<NutrientAttributes> {}
 export class IngredientModel extends Model<IngredientAttributes> {}
 export class InstructionModel extends Model<InstructionAttributes> {}
@@ -116,7 +124,7 @@ export default async (sequelize: Sequelize): Promise<any> => {
             image: DataTypes.TEXT({ length: 'long' }),
             totalTime: DataTypes.INTEGER.UNSIGNED,
             yields: DataTypes.TEXT({ length: 'long' }),
-            url: DataTypes.TEXT({ length: 'long' }),
+            url: { type: DataTypes.TEXT({ length: 'long' }), unique: true },
         },
         {
             sequelize,

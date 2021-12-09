@@ -7,7 +7,7 @@ import { isArrayOfStrings } from '@/utils';
 const route = Router();
 
 export default async (app: Router) => {
-    const { validate } = new Validator({ unknownFormats: ['int32'] });
+    // const { validate } = new Validator({ unknownFormats: ['int32'] });
 
     const recipeService = Container.get(RecipeService);
     // const recipeSchema = recipeService.getRecipeSchema();
@@ -43,17 +43,16 @@ export default async (app: Router) => {
         }
         const recipeService = Container.get(RecipeService);
         const recipes = await recipeService.getRecipes(filter, page, limit);
-        res.json(recipes || []).status(200).end();
+        res.json(recipes || [])
+            .status(200)
+            .end();
     });
 
-    route.post(
-        '/import',
-        async (req: Request, res: Response) => {
-            const recipeService = Container.get(RecipeService);
-            const recipe = await recipeService.importRecipe(req.body.url);
-            res.json(recipe).status(200).end();
-        }
-    );
+    route.post('/import', async (req: Request, res: Response) => {
+        const recipeService = Container.get(RecipeService);
+        const recipe = await recipeService.importRecipe(req.body.url);
+        res.json(recipe).status(200).end();
+    });
 
     route.post(
         '',
@@ -64,7 +63,6 @@ export default async (app: Router) => {
             res.json(recipe).status(200).end();
         }
     );
-    
 
     route.get('/:recipeId', async (req: Request, res: Response) => {
         const recipe = await recipeService.getRecipe(

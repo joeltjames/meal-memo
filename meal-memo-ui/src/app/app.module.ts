@@ -27,6 +27,8 @@ import { RecipeEffects } from './recipes/store/recipe.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from './toast/toast.component';
 import { ToastService } from './toast/toast.service';
+import { AutosizeModule } from 'ngx-autosize';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -58,6 +60,7 @@ import { ToastService } from './toast/toast.service';
         RecipesModule,
         MealPlanModule,
         ColorPickerModule,
+        AutosizeModule,
     ],
     providers: [ToastService],
     bootstrap: [AppComponent],
