@@ -18,6 +18,7 @@ import {
     faHeading,
     faPrint,
     faSave,
+    faSort,
     faTimes,
     faTrash,
 } from '@fortawesome/free-solid-svg-icons';
@@ -41,6 +42,7 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
     saveIcon = faSave;
     closeIcon = faTimes;
     headingIcon = faHeading;
+    orderIcon = faSort;
 
     readonly = true;
 
